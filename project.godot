@@ -61,6 +61,13 @@ grab={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="default"
+3d_physics/layer_2="player"
+3d_physics/layer_3="enemy"
+3d_physics/layer_4="grab"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
