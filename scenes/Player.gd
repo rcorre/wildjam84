@@ -10,6 +10,8 @@ const MOUSE_SENSITIVITY := Vector2(0.0015, 0.0020)
 # How quickly the held object snaps to your hands
 const GRAB_SNAP := 8.0
 
+const THROW_FORCE := 10.0
+
 @onready var camera: Camera3D = $Camera3D
 @onready var grab_ray: RayCast3D = $Camera3D/RayCast3D
 @onready var grab_point: Node3D = $Camera3D/GrabPoint
@@ -33,6 +35,7 @@ func interact() -> void:
 	grab()
 
 func grab() -> void:
+	assert(not held_object, "Cannot grab if holding")
 	var col := grab_ray.get_collider() as Throwable
 	if not col:
 		return
@@ -43,9 +46,11 @@ func grab() -> void:
 	held_object.freeze = true
 
 func throw() -> void:
-	#TODO
-	pass
-
+	assert(held_object, "Cannot throw if not holding")
+	prints("throwing", held_object)
+	held_object.freeze = false
+	held_object.apply_central_impulse(-camera.global_transform.basis.z * THROW_FORCE)
+	held_object = null
 
 func _physics_process(delta: float) -> void:
 	rotation.y = look.x
