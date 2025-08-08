@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://ksrgiopp2i6f"]
+
+[ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_elqb8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_elqb8"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_rvslj"]
+sky_material = SubResource("ProceduralSkyMaterial_elqb8")
+
+[sub_resource type="Environment" id="Environment_0bbpv"]
+background_mode = 2
+sky = SubResource("Sky_rvslj")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_elqb8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rvslj"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_elqb8"]
+size = Vector2(100, 100)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_qnwvq"]
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0bbpv")
+
+[node name="Player" parent="." instance=ExtResource("1_elqb8")]
+
+[node name="Box" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473411, 1.08758, 4.00725)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+shape = SubResource("BoxShape3D_elqb8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
+mesh = SubResource("BoxMesh_rvslj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="FloorMesh" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_elqb8")
+skeleton = NodePath("../..")
+
+[node name="FloorShape" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_qnwvq")
