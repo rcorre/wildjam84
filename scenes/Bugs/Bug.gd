@@ -13,7 +13,6 @@ extends CharacterBody3D
 @onready var walk_sound: AudioStreamPlayer3D = $WalkSound
 @onready var splat_sound: AudioStreamPlayer3D = $SplatSound
 @onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var wall_raycast: RayCast3D = $WallRaycast
 
 var current_direction: Vector3 = Vector3.ZERO
 
@@ -28,14 +27,6 @@ func _physics_process(_delta: float) -> void:
 	if health <= 0:
 		return
 
-	var col := wall_raycast.get_collider()
-	if col and (not col is Throwable):
-		var wall_normal = wall_raycast.get_collision_normal()
-		up_direction = wall_normal
-		# TODO: this just works for walking up wallks,
-		# not going to adjacent walls or ceilings
-		rotation.x = -PI / 2.0
-
 	move_and_slide()
 
 func move(timer: Timer) -> void:
@@ -43,7 +34,7 @@ func move(timer: Timer) -> void:
 		return
 	timer.start(randf_range(min_move_secs, max_move_secs))
 	if randf() < move_chance:
-		rotation.y = randf_range(0, PI * 2)
+		rotate_object_local(Vector3.UP, randf_range(0, PI * 2))
 		velocity = speed * basis.z
 		anim.play("Walk")
 		walk_sound.playing = true
