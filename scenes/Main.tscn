@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ksrgiopp2i6f"]
+[gd_scene load_steps=11 format=3 uid="uid://ksrgiopp2i6f"]
 
 [ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://ccpx4vbvil350" path="res://scenes/BreakableWall1.tscn" id="3_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmv485f177oai" path="res://scenes/Bugs/Spider.tscn" id="4_rarhs"]
 [ext_resource type="PackedScene" uid="uid://kb0bb5wcxb0c" path="res://scenes/Props/Table.tscn" id="4_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://ddjk6kcab4ces" path="res://scenes/Props/Bottle.tscn" id="5_vcsgt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_elqb8"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -50,9 +51,6 @@ transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -0.531
 [node name="BreakableWall4" parent="." instance=ExtResource("3_0bbpv")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, -6.62549, 0.43)
 
-[node name="Table" parent="." instance=ExtResource("4_vcsgt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-
 [node name="Bugs" type="Node3D" parent="."]
 
 [node name="Spider" parent="Bugs" instance=ExtResource("4_rarhs")]
@@ -63,3 +61,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.989
 
 [node name="Spider3" parent="Bugs" instance=ExtResource("4_rarhs")]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 0, 1, -1, 4.37114e-08, -4.37114e-08, 5.69049, 1, 4.4359)
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="Table" parent="Props" instance=ExtResource("4_vcsgt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Bottle" parent="Props" instance=ExtResource("5_vcsgt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16256, 4)

@@ -7,8 +7,14 @@ var is_throwing := false
 
 func _ready() -> void:
 	body_entered.connect(self._on_body_entered)
-	contact_monitor = true
-	max_contacts_reported = 1
+	sleeping_state_changed.connect(_on_sleep)
+	max_contacts_reported = 4
+
+func _on_sleep():
+	if sleeping:
+		# Object has come to rest, no longer need accurate collisions
+		continuous_cd = false
+		contact_monitor = false
 
 func _override_material(mat: StandardMaterial3D):
 	# give it a partially transparent material so we can see through it while holding
@@ -28,6 +34,10 @@ func throw(force: Vector3) -> void:
 	self.freeze = false
 	self.apply_central_impulse(force)
 	_override_material(null)
+
+	# Detect collisions more accurately when thrown
+	continuous_cd = true
+	contact_monitor = true
 
 func _on_body_entered(body: Node) -> void:
 	# don't break stuff on bounces
