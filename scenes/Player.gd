@@ -47,9 +47,7 @@ func grab() -> void:
 
 func throw() -> void:
 	assert(held_object, "Cannot throw if not holding")
-	prints("throwing", held_object)
-	held_object.freeze = false
-	held_object.apply_central_impulse(-camera.global_transform.basis.z * THROW_FORCE)
+	held_object.throw(-camera.global_transform.basis.z * THROW_FORCE)
 	held_object = null
 
 func _physics_process(delta: float) -> void:

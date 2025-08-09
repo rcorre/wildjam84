@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ksrgiopp2i6f"]
+[gd_scene load_steps=11 format=3 uid="uid://ksrgiopp2i6f"]
 
 [ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_elqb8"]
 [ext_resource type="Script" uid="uid://bpga36wuj1lly" path="res://scenes/Throwable.gd" id="2_rvslj"]
+[ext_resource type="PackedScene" uid="uid://ccpx4vbvil350" path="res://scenes/BreakableWall1.tscn" id="3_0bbpv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_elqb8"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -33,6 +34,8 @@ environment = SubResource("Environment_0bbpv")
 
 [node name="Box" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473411, 1.08758, 4.00725)
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("2_rvslj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
@@ -49,3 +52,15 @@ skeleton = NodePath("../..")
 
 [node name="FloorShape" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_qnwvq")
+
+[node name="BreakableWall1" parent="." instance=ExtResource("3_0bbpv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.62549, 10)
+
+[node name="BreakableWall2" parent="." instance=ExtResource("3_0bbpv")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.52659, -6.62549, 1.00725)
+
+[node name="BreakableWall3" parent="." instance=ExtResource("3_0bbpv")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -0.531961, -6.62549, -8.57236)
+
+[node name="BreakableWall4" parent="." instance=ExtResource("3_0bbpv")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, -6.62549, 0.43)
