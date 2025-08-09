@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ksrgiopp2i6f"]
+[gd_scene load_steps=12 format=3 uid="uid://ksrgiopp2i6f"]
 
 [ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://ccpx4vbvil350" path="res://scenes/BreakableWall1.tscn" id="3_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmv485f177oai" path="res://scenes/Bugs/Spider.tscn" id="4_rarhs"]
 [ext_resource type="PackedScene" uid="uid://kb0bb5wcxb0c" path="res://scenes/Props/Table.tscn" id="4_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://ddjk6kcab4ces" path="res://scenes/Props/Bottle.tscn" id="5_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://bxfp5uuvgq48u" path="res://scenes/Props/Chair.tscn" id="6_c01mt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_elqb8"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -69,3 +70,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
 [node name="Bottle" parent="Props" instance=ExtResource("5_vcsgt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16256, 4)
+
+[node name="Chair" parent="." instance=ExtResource("6_c01mt")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.2764e-07, 0, 2.6039)
