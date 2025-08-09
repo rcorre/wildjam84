@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Player
 
 const GRAVITY := 9.8
 const ACCEL := 3.0
@@ -10,7 +11,8 @@ const MOUSE_SENSITIVITY := Vector2(0.0015, 0.0020)
 # How quickly the held object snaps to your hands
 const GRAB_SNAP := 8.0
 
-const THROW_FORCE := 10.0
+const MAX_THROW_FORCE := 50.0
+const MAX_THROW_SECS := 2.0
 
 @onready var camera: Camera3D = $Camera3D
 @onready var grab_ray: RayCast3D = $Camera3D/RayCast3D
@@ -18,6 +20,7 @@ const THROW_FORCE := 10.0
 
 var look: Vector2
 var held_object: Throwable
+var throw_charge := 0.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -27,12 +30,7 @@ func _unhandled_input(ev: InputEvent):
 	if mouse:
 		look -= mouse.relative * MOUSE_SENSITIVITY
 		look.x = wrapf(look.x, -PI, PI)
-		look.y = clamp(look.y, -PI / 3.0, PI / 3.0)
-
-func interact() -> void:
-	if held_object:
-		return throw()
-	grab()
+		look.y = clamp(look.y, -PI / 2.0, PI / 2.0)
 
 func grab() -> void:
 	assert(not held_object, "Cannot grab if holding")
@@ -41,21 +39,26 @@ func grab() -> void:
 		return
 	prints("grabbed", col)
 	held_object = col
-
-	# this disables rigid physics so we can move the object like it's kinematic
-	held_object.freeze = true
+	held_object.grab()
 
 func throw() -> void:
 	assert(held_object, "Cannot throw if not holding")
-	held_object.throw(-camera.global_transform.basis.z * THROW_FORCE)
+	var force: float = lerp(0.0, MAX_THROW_FORCE, throw_charge)
+	prints("throwing", held_object, "with force", force)
+	held_object.throw(-camera.global_transform.basis.z * force)
 	held_object = null
+	throw_charge = 0
 
 func _physics_process(delta: float) -> void:
 	rotation.y = look.x
 	camera.rotation.x = look.y
 
-	if Input.is_action_just_pressed("grab"):
-		interact()
+	if not held_object and Input.is_action_just_released("grab"):
+		grab()
+	elif held_object and Input.is_action_pressed("grab"):
+		throw_charge = min(1.0, throw_charge + (delta / MAX_THROW_SECS))
+	elif held_object and Input.is_action_just_released("grab") and throw_charge > 0.0:
+		throw()
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_SPEED
@@ -68,5 +71,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if held_object:
+		# jiggle the object as we charge up a throw
+		var point := grab_point.global_transform
+		point.origin.z += sin(Time.get_ticks_msec() / 20.0) * throw_charge * 0.5
+		point.origin.x += cos(Time.get_ticks_msec() / 20.0) * throw_charge * 0.5
+
 		# move object toward your hands
-		held_object.global_transform = held_object.global_transform.interpolate_with(grab_point.global_transform, delta * GRAB_SNAP)
+		held_object.global_transform = held_object.global_transform.interpolate_with(point, delta * GRAB_SNAP)

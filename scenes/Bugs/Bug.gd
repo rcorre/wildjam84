@@ -8,7 +8,7 @@ extends CharacterBody3D
 @export var max_move_secs := 2.0
 
 # chance to move vs standing still
-@export var move_chance := 1.5
+@export var move_chance := 0.5
 
 @onready var walk_sound: AudioStreamPlayer3D = $WalkSound
 @onready var splat_sound: AudioStreamPlayer3D = $SplatSound
@@ -44,7 +44,7 @@ func move(timer: Timer) -> void:
 		return
 	timer.start(randf_range(min_move_secs, max_move_secs))
 	if randf() < move_chance:
-		rotation.y = randf_range(0, 0)
+		rotation.y = randf_range(0, PI * 2)
 		velocity = speed * basis.z
 		anim.play("Walk")
 		walk_sound.playing = true

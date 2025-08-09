@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://kb0bb5wcxb0c"]
+
+[ext_resource type="PackedScene" uid="uid://cwnx22urf7um1" path="res://assets/models/props/Table.glb" id="1_tf4yn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tf4yn"]
+size = Vector3(2.08392, 0.175342, 1.42087)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2woq5"]
+size = Vector3(0.231, 1, 0.225)
+
+[node name="Table" instance=ExtResource("1_tf4yn")]
+mass = 4.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0157166, 1.07538, 0.00993371)
+shape = SubResource("BoxShape3D_tf4yn")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.872299, 0.5, -0.532608)
+shape = SubResource("BoxShape3D_2woq5")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.874023, 0.5, 0.548286)
+shape = SubResource("BoxShape3D_2woq5")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.863307, 0.5, 0.526064)
+shape = SubResource("BoxShape3D_2woq5")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.930594, 0.5, -0.58046)
+shape = SubResource("BoxShape3D_2woq5")

@@ -1,15 +1,30 @@
 class_name Throwable extends RigidBody3D
 
+const HELD_ITEM_MATERIAL := preload("res://assets/materials/HeldItemMaterial.tres")
+
 var is_throwing := false
 
 func _ready() -> void:
 	body_entered.connect(self._on_body_entered)
+
+func _override_material(mat: StandardMaterial3D):
+	# give it a partially transparent material so we can see through it while holding
+	for c in get_children():
+		var mesh := c as MeshInstance3D
+		if mesh:
+			mesh.material_override = mat
+
+func grab() -> void:
+	# this disables rigid physics so we can move the object like it's kinematic
+	freeze = true
+	_override_material(HELD_ITEM_MATERIAL)
 
 func throw(force: Vector3) -> void:
 	prints("throwing", self)
 	is_throwing = true
 	self.freeze = false
 	self.apply_central_impulse(force)
+	_override_material(null)
 
 func _on_body_entered(body: Node) -> void:
 	# don't break stuff on bounces
