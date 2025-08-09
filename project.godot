@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="wildjam84"
-run/main_scene="uid://ksrgiopp2i6f"
+run/main_scene="uid://mp0481s15wtf"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Settings="*res://settings/Settings.gd"
+Bindings="*res://bindings/Bindings.gd"
 
 [debug]
 
