@@ -8,11 +8,12 @@ extends CharacterBody3D
 @export var max_move_secs := 2.0
 
 # chance to move vs standing still
-@export var move_chance := 0.5
+@export var move_chance := 1.5
 
 @onready var walk_sound: AudioStreamPlayer3D = $WalkSound
 @onready var splat_sound: AudioStreamPlayer3D = $SplatSound
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var wall_raycast: RayCast3D = $WallRaycast
 
 var current_direction: Vector3 = Vector3.ZERO
 
@@ -27,14 +28,23 @@ func _physics_process(_delta: float) -> void:
 	if health <= 0:
 		return
 
+	if wall_raycast.is_colliding():
+		var wall_normal = wall_raycast.get_collision_normal()
+		up_direction = wall_normal
+		# TODO: this just works for walking up wallks,
+		# not going to adjacent walls or ceilings
+		rotation.x = -PI / 2.0
+	else:
+		up_direction = Vector3.UP
+
 	move_and_slide()
 
 func move(timer: Timer) -> void:
 	if health <= 0:
 		return
 	timer.start(randf_range(min_move_secs, max_move_secs))
-	if randf() > move_chance:
-		rotation.y = randf_range(0, 2*PI)
+	if randf() < move_chance:
+		rotation.y = randf_range(0, 0)
 		velocity = speed * basis.z
 		anim.play("Walk")
 		walk_sound.playing = true
