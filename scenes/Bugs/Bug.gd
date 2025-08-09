@@ -28,14 +28,13 @@ func _physics_process(_delta: float) -> void:
 	if health <= 0:
 		return
 
-	if wall_raycast.is_colliding():
+	var col := wall_raycast.get_collider()
+	if col and (not col is Throwable):
 		var wall_normal = wall_raycast.get_collision_normal()
 		up_direction = wall_normal
 		# TODO: this just works for walking up wallks,
 		# not going to adjacent walls or ceilings
 		rotation.x = -PI / 2.0
-	else:
-		up_direction = Vector3.UP
 
 	move_and_slide()
 
