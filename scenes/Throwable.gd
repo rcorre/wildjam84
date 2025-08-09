@@ -1,11 +1,14 @@
 class_name Throwable extends RigidBody3D
 
+const DAMAGE_MULTIPLIER := 8.0
 const HELD_ITEM_MATERIAL := preload("res://assets/materials/HeldItemMaterial.tres")
 
 var is_throwing := false
 
 func _ready() -> void:
 	body_entered.connect(self._on_body_entered)
+	contact_monitor = true
+	max_contacts_reported = 1
 
 func _override_material(mat: StandardMaterial3D):
 	# give it a partially transparent material so we can see through it while holding
@@ -34,5 +37,6 @@ func _on_body_entered(body: Node) -> void:
 
 	prints("collided with something", body)
 	if body.has_method("hit"):
-		# todo: base damage on throwable object weight
-		body.call("hit", self.position, 50)
+		var damage := linear_velocity.length() * mass * DAMAGE_MULTIPLIER
+		prints(self, "hit", body, "for", damage)
+		body.call("hit", self.position, damage)

@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://bw4rruf5dkba" path="res://assets/sounds/splat.wav" id="3_sdwer"]
 [ext_resource type="AudioStream" uid="uid://cvvekbvqp1efp" path="res://assets/sounds/spider_walk.wav" id="4_dwmdf"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_sdwer"]
-radius = 0.185053
+[sub_resource type="BoxShape3D" id="BoxShape3D_dwmdf"]
+size = Vector3(0.264404, 1, 1)
 
 [node name="Spider" instance=ExtResource("1_hhqfg")]
 floor_stop_on_slope = false
@@ -66,8 +66,8 @@ pitch_scale = 1.5
 
 [node name="WallRaycast" type="RayCast3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.116806, 0)
-target_position = Vector3(0, 0, 0.5)
+target_position = Vector3(0, 0, 0.6)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="5"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0180664, 0.196312, 0)
-shape = SubResource("SphereShape3D_sdwer")
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0180664, 0.129051, 0)
+shape = SubResource("BoxShape3D_dwmdf")

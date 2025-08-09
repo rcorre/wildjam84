@@ -7,6 +7,10 @@
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
+wall_min_slide_angle = 3.14159
+floor_stop_on_slope = false
+floor_block_on_wall = false
+floor_max_angle = 3.14159
 script = ExtResource("1_p0vlq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
