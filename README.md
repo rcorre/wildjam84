@@ -7,8 +7,11 @@ Entry for Godot Wild Jam 84
 
 ## GDC Royalty Free Sound Effects Archive
 
-https://sonniss.com/gameaudiogdc/
+The following sounds were used as-is or modified from sou in the [GDC Royalty Free Sound Effects Archive](https://sonniss.com/gameaudiogdc/):
 
-- Bug splat sound
-- Spider walk sound (modified bicycle chain)
-- Breathing
+- breathing.wav
+- glass_hit.wav
+- spider_walk.wav
+- splat.wav
+- wood_break.wav
+- wood_hit.wav

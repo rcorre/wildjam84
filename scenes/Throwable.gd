@@ -3,6 +3,8 @@ class_name Throwable extends RigidBody3D
 const DAMAGE_MULTIPLIER := 8.0
 const HELD_ITEM_MATERIAL := preload("res://assets/materials/HeldItemMaterial.tres")
 
+@onready var hit_sound: AudioStreamPlayer3D = $HitSound
+
 var is_throwing := false
 
 func _ready() -> void:
@@ -45,7 +47,8 @@ func _on_body_entered(body: Node) -> void:
 		return
 	is_throwing = false
 
-	prints("collided with something", body)
+	hit_sound.play()
+
 	if body.has_method("hit"):
 		var damage := linear_velocity.length() * mass * DAMAGE_MULTIPLIER
 		prints(self, "hit", body, "for", damage)
