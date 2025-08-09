@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmv485f177oai"]
+[gd_scene load_steps=9 format=3 uid="uid://dmv485f177oai"]
 
 [ext_resource type="PackedScene" uid="uid://cjttwapnf87ix" path="res://assets/models/Spider.glb" id="1_hhqfg"]
 [ext_resource type="Script" uid="uid://bsx4vw80jdvnk" path="res://scenes/Bugs/Bug.gd" id="2_54sod"]
@@ -7,6 +7,19 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dwmdf"]
 size = Vector3(0.264404, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwmdf"]
+albedo_color = Color(0.485565, 0.789398, 0.263196, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_aybe7"]
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Curve" id="Curve_bitvr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Spider" instance=ExtResource("1_hhqfg")]
 floor_stop_on_slope = false
@@ -71,3 +84,19 @@ target_position = Vector3(0, 0, 0.6)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="5"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0180664, 0.129051, 0)
 shape = SubResource("BoxShape3D_dwmdf")
+
+[node name="SplatParticles" type="CPUParticles3D" parent="." index="6"]
+material_override = SubResource("StandardMaterial3D_dwmdf")
+emitting = false
+amount = 64
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.7
+mesh = SubResource("SphereMesh_aybe7")
+direction = Vector3(0, 1, 0)
+spread = 98.26
+initial_velocity_min = 3.0
+initial_velocity_max = 8.0
+damping_min = 1.0
+damping_max = 1.0
+scale_amount_curve = SubResource("Curve_bitvr")

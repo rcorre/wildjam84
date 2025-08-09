@@ -10,8 +10,11 @@ extends CharacterBody3D
 # chance to move vs standing still
 @export var move_chance := 0.5
 
+@onready var mesh: Node3D = $Armature/Skeleton3D/Mesh
+
 @onready var walk_sound: AudioStreamPlayer3D = $WalkSound
 @onready var splat_sound: AudioStreamPlayer3D = $SplatSound
+@onready var splat_particles: CPUParticles3D = $SplatParticles
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
 var current_direction: Vector3 = Vector3.ZERO
@@ -45,8 +48,12 @@ func move(timer: Timer) -> void:
 
 func hit(_from: Vector3, damage: int) -> void:
 	if health <= 0:
-		splat_sound.play()
 		return
 	health -= damage
-	anim.play("Die")
-	get_tree().create_timer(10.0).timeout.connect(queue_free)
+	if health <= 0:
+		get_tree().create_timer(3.0).timeout.connect(queue_free)
+		splat_sound.play()
+		splat_particles.emitting = true
+		collision_layer = 0
+		collision_mask = 0
+		mesh.visible = false
