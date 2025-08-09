@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://mp0481s15wtf"]
 
-[ext_resource type="Theme" path="res://gui_theme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://b8f2iha75br4n" path="res://gui_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://cr5y1ms2bo6f8" path="res://menus/title/QuitButton.gd" id="2"]
 [ext_resource type="Script" uid="uid://cgdryyskj7wur" path="res://menus/title/PlayButton.gd" id="3_cduky"]
 [ext_resource type="Script" uid="uid://8o8gv1btlokx" path="res://menus/title/Title.gd" id="4"]

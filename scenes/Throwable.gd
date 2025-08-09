@@ -18,6 +18,6 @@ func _on_body_entered(body: Node) -> void:
 	is_throwing = false
 
 	prints("collided with something", body)
-	if is_instance_of(body, Breakable):
+	if body.has_method("hit"):
 		# todo: base damage on throwable object weight
-		(body as Breakable).hit(self.position, 50)
+		body.call("hit", self.position, 50)

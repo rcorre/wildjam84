@@ -33,6 +33,10 @@ gdscript/warnings/assert_always_false=0
 naming/scene_name_casing=1
 naming/script_name_casing=1
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 forward={
