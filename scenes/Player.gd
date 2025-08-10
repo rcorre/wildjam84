@@ -8,6 +8,12 @@ const SPEED := 6.0
 const JUMP_SPEED := 5.0
 const MOUSE_SENSITIVITY := Vector2(0.0015, 0.0020)
 
+# Panic reduction per second
+const PANIC_RECOVERY_RATE := 0.1
+
+# Panic gain per second
+const PANIC_RATE := 0.1
+
 # How quickly the held object snaps to your hands
 const GRAB_SNAP := 8.0
 
@@ -17,10 +23,15 @@ const MAX_THROW_SECS := 2.0
 @onready var camera: Camera3D = $Camera3D
 @onready var grab_ray: RayCast3D = $Camera3D/RayCast3D
 @onready var grab_point: Node3D = $Camera3D/GrabPoint
+@onready var bug_detector: Area3D = $BugDetector
+@onready var panic_sound: AudioStreamPlayer3D = $PanicSound
 
 var look: Vector2
 var held_object: Throwable
 var throw_charge := 0.0
+
+# 0..1, game over at 1
+var panic: float
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -78,3 +89,13 @@ func _physics_process(delta: float) -> void:
 
 		# move object toward your hands
 		held_object.global_transform = held_object.global_transform.interpolate_with(point, delta * GRAB_SNAP)
+
+	var nearby_bugs := bug_detector.get_overlapping_bodies().size()
+	if nearby_bugs == 0:
+		panic = move_toward(panic, 0.0, delta * PANIC_RECOVERY_RATE)
+	else:
+		# Use sqrt, so two bugs is more panic, but not twice as much
+		var rate := delta * PANIC_RECOVERY_RATE * sqrt(nearby_bugs)
+		panic = move_toward(panic, 1.0, rate)
+
+	panic_sound.volume_db = lerp(-80.0, 20.0, panic)

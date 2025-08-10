@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt8d8bapujifn"]
+[gd_scene load_steps=6 format=3 uid="uid://dt8d8bapujifn"]
 
 [ext_resource type="Script" uid="uid://ci3bsr3u4a6ap" path="res://scenes/Player.gd" id="1_p0vlq"]
 [ext_resource type="PackedScene" uid="uid://dbvdj2r2ypich" path="res://scenes/HUD/HUD.tscn" id="2_v6fml"]
+[ext_resource type="AudioStream" uid="uid://bnb1e8jfxp318" path="res://assets/sounds/breathing.wav" id="3_3li8b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5q5h1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v6fml"]
+radius = 5.0
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
@@ -29,3 +33,15 @@ debug_shape_custom_color = Color(0, 0, 0, 0)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.57361e-07, 0, -1.8)
 
 [node name="HUD" parent="." instance=ExtResource("2_v6fml")]
+
+[node name="BugDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BugDetector"]
+shape = SubResource("SphereShape3D_v6fml")
+
+[node name="PanicSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_3li8b")
+autoplay = true

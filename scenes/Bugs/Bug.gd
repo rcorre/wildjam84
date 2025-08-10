@@ -26,6 +26,9 @@ func _ready() -> void:
 	timer.timeout.connect(move.bind(timer))
 	move(timer)
 
+	# 3 is "enemy", no easy way to get this programatically
+	set_collision_layer_value(3, true)
+
 func _physics_process(_delta: float) -> void:
 	if health <= 0:
 		return
