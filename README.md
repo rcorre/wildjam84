@@ -23,3 +23,8 @@ The following textures were used as-is or modified from [Poly Haven](https://pol
 
 ## Godot Destruction Plugin
 Some code was copied from the [Godot Destruction Plugin](https://github.com/Jummit/godot-destruction-plugin/)
+
+## Kenney
+
+- [Kenney Furniture Kit](https://kenney.nl/assets/furniture-kit) (CC0)
+
