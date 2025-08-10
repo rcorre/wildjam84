@@ -67,6 +67,13 @@ func throw() -> void:
 	held_object = null
 	throw_charge = 0
 
+func drop() -> void:
+	assert(held_object, "Cannot throw if not holding")
+	prints("dropping", held_object)
+	held_object.drop()
+	held_object = null
+	throw_charge = 0
+
 func _physics_process(delta: float) -> void:
 	if panic >= 1.0:
 		# "fall" backwards
@@ -78,6 +85,8 @@ func _physics_process(delta: float) -> void:
 
 	if not held_object and Input.is_action_just_released("grab"):
 		grab()
+	elif held_object and Input.is_action_pressed("drop"):
+		drop()
 	elif held_object and Input.is_action_pressed("grab"):
 		throw_charge = min(
 			1.0,

@@ -15,5 +15,7 @@ func _process(delta: float) -> void:
 	tunnel_vision.modulate.a = player.panic
 	if player.panic >= 1.0:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		if player.held_object:
+			player.drop()
 		game_over.visible = true
 		game_over.modulate.a = move_toward(game_over.modulate.a, 1.0, delta)

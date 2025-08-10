@@ -79,6 +79,12 @@ func throw(force: Vector3) -> void:
 	continuous_cd = true
 	contact_monitor = true
 
+func drop() -> void:
+	prints("dropping", self)
+	is_throwing = false
+	self.freeze = false
+	_override_material(null)
+
 func _on_body_entered(body: Node) -> void:
 	# don't break stuff on bounces
 	if not is_throwing:
