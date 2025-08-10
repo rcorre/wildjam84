@@ -42,7 +42,7 @@ func _build_that_wall(direction: String) -> void:
 	wall.translate(position_offset)
 	wall.rotate(Vector3.UP, rotation_offset)
 	if (_coin_flip()):
-		wall.rotate(position_offset, PI)
+		wall.rotate(position_offset.normalized(), PI)
 
 func _ready() -> void:
 	assert(walls.size() > 0)
