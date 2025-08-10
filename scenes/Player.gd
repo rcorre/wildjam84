@@ -79,7 +79,10 @@ func _physics_process(delta: float) -> void:
 	if not held_object and Input.is_action_just_released("grab"):
 		grab()
 	elif held_object and Input.is_action_pressed("grab"):
-		throw_charge = min(1.0, throw_charge + (delta / MAX_THROW_SECS))
+		throw_charge = min(
+			1.0,
+			throw_charge + lerpf((delta / MAX_THROW_SECS) / 8, (delta / MAX_THROW_SECS) * 2, 1 - throw_charge),
+		)
 	elif held_object and Input.is_action_just_released("grab") and throw_charge > 0.0:
 		throw()
 
