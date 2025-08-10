@@ -12,7 +12,7 @@ const MOUSE_SENSITIVITY := Vector2(0.0015, 0.0020)
 const PANIC_RECOVERY_RATE := 0.1
 
 # Panic gain per second
-const PANIC_RATE := 0.1
+const PANIC_RATE := 0.15
 
 # How quickly the held object snaps to your hands
 const GRAB_SNAP := 8.0
@@ -35,6 +35,7 @@ var panic: float
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	add_to_group("player")
 
 func _unhandled_input(ev: InputEvent):
 	var mouse := ev as InputEventMouseMotion
@@ -61,6 +62,11 @@ func throw() -> void:
 	throw_charge = 0
 
 func _physics_process(delta: float) -> void:
+	if panic >= 1.0:
+		# "fall" backwards
+		rotation.x = move_toward(rotation.x, -PI / 2.0, delta * 2.0)
+		return
+
 	rotation.y = look.x
 	camera.rotation.x = look.y
 

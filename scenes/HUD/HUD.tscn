@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbvdj2r2ypich"]
+[gd_scene load_steps=5 format=3 uid="uid://dbvdj2r2ypich"]
 
 [ext_resource type="Script" uid="uid://cicfc6y2x4tfk" path="res://scenes/HUD/HUD.gd" id="1_rr8ot"]
+[ext_resource type="Script" uid="uid://bslf2hewg2fky" path="res://scenes/HUD/TryAgainButton.gd" id="2_o38oh"]
 
 [sub_resource type="Gradient" id="Gradient_rr8ot"]
 colors = PackedColorArray(0.170853, 0.170853, 0.170853, 0, 0, 0, 0, 1)
@@ -57,3 +58,47 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_o38oh")
+
+[node name="GameOver" type="ColorRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.279271, 0.279271, 0.279271, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_right = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Don't Panic!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Oh, you already did"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TryAgainButton" type="Button" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Try again?"
+script = ExtResource("2_o38oh")
