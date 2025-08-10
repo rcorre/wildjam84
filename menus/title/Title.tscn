@@ -34,7 +34,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_biyrv")
 theme_override_font_sizes/font_size = 32
-text = "Bug Yeeter"
+text = "Creeter Yeeter"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -45,12 +45,14 @@ theme_override_styles/separator = SubResource("StyleBoxLine_cduky")
 [node name="PlayButton" type="Button" parent="TitleMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("3_cduky")
 
 [node name="OptionsButton" type="Button" parent="TitleMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
 text = "Options"
 script = ExtResource("5_wq6wg")
 tab = 1
@@ -58,6 +60,7 @@ tab = 1
 [node name="QuitButton" type="Button" parent="TitleMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
 text = "Quit"
 script = ExtResource("2")
 
