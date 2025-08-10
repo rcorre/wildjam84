@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://ksrgiopp2i6f"]
 
 [ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_elqb8"]
-[ext_resource type="PackedScene" uid="uid://ccpx4vbvil350" path="res://scenes/BreakableWall1.tscn" id="3_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://ccpx4vbvil350" path="res://scenes/Level/BreakableWall1.tscn" id="3_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmv485f177oai" path="res://scenes/Bugs/Spider.tscn" id="4_rarhs"]
 [ext_resource type="PackedScene" uid="uid://kb0bb5wcxb0c" path="res://scenes/Props/Table.tscn" id="4_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://ddjk6kcab4ces" path="res://scenes/Props/Bottle.tscn" id="5_vcsgt"]

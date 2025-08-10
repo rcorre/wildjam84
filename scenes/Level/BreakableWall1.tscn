@@ -1,7 +1,7 @@
 [gd_scene load_steps=67 format=4 uid="uid://ccpx4vbvil350"]
 
-[ext_resource type="Script" uid="uid://ciu1oh24vj5nd" path="res://scenes/Breakable.gd" id="1_ee8mk"]
-[ext_resource type="Script" uid="uid://mw78d3wys4bi" path="res://scenes/BreakableCollection.gd" id="1_u1qa5"]
+[ext_resource type="Script" uid="uid://ciu1oh24vj5nd" path="res://scenes/Level/Breakable.gd" id="1_ee8mk"]
+[ext_resource type="Script" uid="uid://mw78d3wys4bi" path="res://scenes/Level/BreakableCollection.gd" id="1_u1qa5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hgkik"]
 resource_name = "Material"

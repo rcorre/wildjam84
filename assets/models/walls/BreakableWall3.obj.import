@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cp3p7imq4whfs"
-path="res://.godot/imported/BreakableWall2.obj-7c2f67799f4bd09584193641126cf494.scn"
+uid="uid://u2ll5420g72s"
+path="res://.godot/imported/BreakableWall3.obj-0ba148ac9d3abc75847bbbb58b2a7b91.scn"
 
 [deps]
 
-source_file="res://models/BreakableWall2.obj"
-dest_files=["res://.godot/imported/BreakableWall2.obj-7c2f67799f4bd09584193641126cf494.scn"]
+source_file="res://assets/models/walls/BreakableWall3.obj"
+dest_files=["res://.godot/imported/BreakableWall3.obj-0ba148ac9d3abc75847bbbb58b2a7b91.scn"]
 
 [params]
 
