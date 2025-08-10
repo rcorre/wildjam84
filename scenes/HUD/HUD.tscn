@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bslf2hewg2fky" path="res://scenes/HUD/TryAgainButton.gd" id="2_o38oh"]
 
 [sub_resource type="Gradient" id="Gradient_rr8ot"]
+offsets = PackedFloat32Array(0, 0.553884)
 colors = PackedColorArray(0.170853, 0.170853, 0.170853, 0, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_o38oh"]
