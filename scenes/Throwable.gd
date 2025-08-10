@@ -36,6 +36,20 @@ func _ready() -> void:
 	stream.random_volume_offset_db = 5.0
 	stream.add_stream(0, HIT_SOUNDS[item_material] as AudioStream)
 
+	# I don't want to manually create a scene from each of the Kenney GLBs
+	# Instead, create a collider programatically
+	# all the kenney furniture assets have a mesh child named something(Clone)
+	var mi = find_child("*(Clone)") as MeshInstance3D
+	if not mi:
+		push_error("No mesh mi found in ", self)
+		print_tree_pretty()
+		return
+
+	# Could try create_multiple_convex_collisions if we want more precise shapes
+	var col := CollisionShape3D.new()
+	col.shape = mi.mesh.create_convex_shape()
+	add_child(col)
+
 func _on_sleep():
 	if sleeping:
 		# Object has come to rest, no longer need accurate collisions
