@@ -24,6 +24,12 @@ const MAX_THROW_SECS := 2.0
 @onready var grab_ray: RayCast3D = $Camera3D/RayCast3D
 @onready var grab_point: Node3D = $Camera3D/GrabPoint
 @onready var bug_detector: Area3D = $BugDetector
+# I'm sorry
+@onready var bug_detector_radius: float = (
+	(
+		bug_detector.get_node("CollisionShape3D") as CollisionShape3D
+	).shape as SphereShape3D
+).radius
 @onready var panic_sound: AudioStreamPlayer3D = $PanicSound
 
 var look: Vector2
@@ -96,12 +102,20 @@ func _physics_process(delta: float) -> void:
 		# move object toward your hands
 		held_object.global_transform = held_object.global_transform.interpolate_with(point, delta * GRAB_SNAP)
 
-	var nearby_bugs := bug_detector.get_overlapping_bodies().size()
-	if nearby_bugs == 0:
+	var nearby_bugs := bug_detector.get_overlapping_bodies()
+	if nearby_bugs.size() == 0:
 		panic = move_toward(panic, 0.0, delta * PANIC_RECOVERY_RATE)
 	else:
+		# more panic the closer you are to the bug
+		var closest_distance := INF
+		for bug in nearby_bugs:
+			closest_distance = min((bug.position - self.position).length(), closest_distance)
+		var proximity_factor := lerpf(0.5, 2, 1 - (closest_distance / bug_detector_radius))
+
 		# Use sqrt, so two bugs is more panic, but not twice as much
-		var rate := delta * PANIC_RECOVERY_RATE * sqrt(nearby_bugs)
+		var quantity_factor := sqrt(nearby_bugs.size())
+
+		var rate := delta * PANIC_RATE * proximity_factor * quantity_factor
 		panic = move_toward(panic, 1.0, rate)
 
 	panic_sound.volume_db = lerp(-80.0, 20.0, panic)
