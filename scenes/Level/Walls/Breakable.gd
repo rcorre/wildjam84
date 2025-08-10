@@ -1,5 +1,4 @@
 class_name Breakable extends RigidBody3D
-# stole a lot of this from https://github.com/Jummit/godot-destruction-plugin/
 
 @export_group("Animation")
 ## How many seconds until the shards fade away.
@@ -9,9 +8,18 @@ class_name Breakable extends RigidBody3D
 ## How long the animation lasts before the shard is removed.
 @export_range(0.0, 30.0) var animation_length := 5.0
 
-var health := 100
+var health := 1
+
+func _notify_collection_of_break() -> void:
+	# this should be a signal but I was finding it cumbersome to accomplish what I'm trying to do
+	var parent = self.get_parent()
+	while parent and not is_instance_of(parent, BreakableCollection):
+		parent = parent.get_parent()
+	if parent: 
+		(parent as BreakableCollection).on_break()
 
 func _break(impulse: Vector3) -> void:
+	self._notify_collection_of_break()
 	var tween := get_tree().create_tween()
 	tween.set_parallel(true)
 
@@ -44,16 +52,6 @@ func _break(impulse: Vector3) -> void:
 
 	# destroy object
 	tween.tween_callback(self.queue_free).set_delay(animation_length)
-
-func _join_collection() -> void:
-	var parent = self.get_parent()
-	while parent and not is_instance_of(parent, BreakableCollection):
-		parent = parent.get_parent()
-	if parent:
-		(parent as BreakableCollection).register(self)
-
-func _ready() -> void:
-	self._join_collection()
 
 func hit(from: Vector3, damage: int) -> void:
 	if health <= 0:

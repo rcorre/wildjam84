@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Settings="*res://settings/Settings.gd"
 Bindings="*res://bindings/Bindings.gd"
+Constants="*res://global/Constants.gd"
 
 [debug]
 

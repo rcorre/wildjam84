@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://4io3pfnvb7d1"
-path="res://.godot/imported/BreakableWall4.obj-35a9329a88c56d16d496446ee542881b.scn"
+uid="uid://dcfeoeb11rbyx"
+path="res://.godot/imported/BreakableWall1.glb-c7911070f35a995e1f2e8de406329e46.scn"
 
 [deps]
 
-source_file="res://assets/models/walls/BreakableWall4.obj"
-dest_files=["res://.godot/imported/BreakableWall4.obj-35a9329a88c56d16d496446ee542881b.scn"]
+source_file="res://assets/models/walls/BreakableWall1.glb"
+dest_files=["res://.godot/imported/BreakableWall1.glb-c7911070f35a995e1f2e8de406329e46.scn"]
 
 [params]
 
@@ -33,3 +33,5 @@ animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={}
+gltf/naming_version=1
+gltf/embedded_image_handling=1
