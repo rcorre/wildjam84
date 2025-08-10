@@ -45,9 +45,13 @@ func _ready() -> void:
 		print_tree_pretty()
 		return
 
-	# Could try create_multiple_convex_collisions if we want more precise shapes
+	# Using rect for now to make it stable, convex was unstable
 	var col := CollisionShape3D.new()
-	col.shape = mi.mesh.create_convex_shape()
+	var box := BoxShape3D.new()
+	print(name, mi.get_aabb())
+	box.size = mi.get_aabb().size
+	col.position = mi.get_aabb().position + box.size / 2.0
+	col.shape = box
 	add_child(col)
 
 func _on_sleep():
