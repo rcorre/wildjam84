@@ -1,0 +1,68 @@
+[gd_scene load_steps=14 format=3 uid="uid://c1b2hoorv03px"]
+
+[ext_resource type="PackedScene" uid="uid://b16x8iuvphqc0" path="res://assets/models/furniture/bookcaseOpen.glb" id="1_24eda"]
+[ext_resource type="PackedScene" uid="uid://baffn6pa3mlrq" path="res://assets/models/furniture/cabinetTelevision.glb" id="2_rvyfk"]
+[ext_resource type="PackedScene" uid="uid://bj7ces5xnjfta" path="res://assets/models/furniture/coatRackStanding.glb" id="3_ut3ki"]
+[ext_resource type="PackedScene" uid="uid://c4ry7peuctyxl" path="res://assets/models/furniture/loungeChair.glb" id="4_pyv30"]
+[ext_resource type="PackedScene" uid="uid://bpf3hnpj21dcl" path="res://assets/models/furniture/loungeChairRelax.glb" id="5_jenam"]
+[ext_resource type="PackedScene" uid="uid://dmgukvni8wjpe" path="res://assets/models/furniture/loungeSofa.glb" id="6_aqr7d"]
+[ext_resource type="PackedScene" uid="uid://hljh8mdowx1u" path="res://assets/models/furniture/loungeSofaCorner.glb" id="7_qtpb3"]
+[ext_resource type="PackedScene" uid="uid://uiiww5n1g3mb" path="res://assets/models/furniture/loungeSofaOttoman.glb" id="8_n7nb3"]
+[ext_resource type="PackedScene" uid="uid://c8hfwps7hb0d2" path="res://assets/models/furniture/sideTable.glb" id="9_6bodl"]
+[ext_resource type="PackedScene" uid="uid://knkarabaypf2" path="res://assets/models/furniture/speaker.glb" id="10_j0tpb"]
+[ext_resource type="PackedScene" uid="uid://b33o1jj8rct82" path="res://assets/models/furniture/tableCoffeeSquare.glb" id="11_d56p7"]
+[ext_resource type="PackedScene" uid="uid://cg7m24dgiv0v1" path="res://assets/models/furniture/televisionModern.glb" id="12_qlp8u"]
+[ext_resource type="PackedScene" uid="uid://djr5j7jkl6ipd" path="res://assets/models/furniture/lampRoundFloor.glb" id="13_nfv1r"]
+
+[node name="LivingRoom1" type="Node3D"]
+
+[node name="bookcaseOpen" parent="." instance=ExtResource("1_24eda")]
+transform = Transform3D(0.987325, 0, -1.12924, 0, 1.5, 0, 1.12924, 0, 0.987325, -5.05703, 0, 4.51264)
+
+[node name="cabinetTelevision" parent="." instance=ExtResource("2_rvyfk")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.54033, 0, 0.301304)
+
+[node name="coatRackStanding" parent="." instance=ExtResource("3_ut3ki")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -5.02881, 0, -4.92123)
+
+[node name="loungeChair" parent="." instance=ExtResource("4_pyv30")]
+transform = Transform3D(0.468701, 0, 1.42489, 0, 1.5, 0, -1.42489, 0, 0.468701, -1.75309, 0, -2.1164)
+
+[node name="loungeChairRelax" parent="." instance=ExtResource("5_jenam")]
+transform = Transform3D(1.40619, 0, 0.522146, 0, 1.5, 0, -0.522146, 0, 1.40619, -0.162846, 0, -3.80717)
+
+[node name="loungeSofa" parent="." instance=ExtResource("6_aqr7d")]
+transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -5.10242, 0, 3.17141)
+
+[node name="loungeSofaCorner" parent="." instance=ExtResource("7_qtpb3")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 3, 0, -3.1795)
+
+[node name="loungeSofaOttoman" parent="." instance=ExtResource("8_n7nb3")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.18871, 0, -2.3204)
+
+[node name="sideTable" parent="." instance=ExtResource("9_6bodl")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3, 0, 5.22105)
+
+[node name="speaker" parent="." instance=ExtResource("10_j0tpb")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 4.13452, 0, 0.238094)
+
+[node name="speaker2" parent="." instance=ExtResource("10_j0tpb")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0.335533, 0, 0.238094)
+
+[node name="tableCoffeeSquare" parent="." instance=ExtResource("11_d56p7")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 3.59024, 0, -2.3933)
+
+[node name="televisionModern" parent="." instance=ExtResource("12_qlp8u")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 2.00467, 0.984404, 0.332862)
+
+[node name="lampRoundFloor" parent="." instance=ExtResource("13_nfv1r")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.87908, -0.0149872, 0.0192828)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lampRoundFloor"]
+transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.143753, 1.14971, 0.0575016)
+
+[node name="lampRoundFloor2" parent="." instance=ExtResource("13_nfv1r")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.84223, -0.0149872, -5.39703)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lampRoundFloor2"]
+transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.143753, 1.14971, 0.0575016)

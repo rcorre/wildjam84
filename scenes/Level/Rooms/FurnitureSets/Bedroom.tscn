@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=3 uid="uid://dq32mrx7dfa67"]
+
+[ext_resource type="PackedScene" uid="uid://cmm4tpckt25px" path="res://assets/models/furniture/bedDouble.glb" id="1_1f8yo"]
+[ext_resource type="PackedScene" uid="uid://cdyd7ld76vkp4" path="res://assets/models/furniture/cabinetBedDrawer.glb" id="2_0yegk"]
+[ext_resource type="PackedScene" uid="uid://c4ry7peuctyxl" path="res://assets/models/furniture/loungeChair.glb" id="3_os4ba"]
+[ext_resource type="PackedScene" uid="uid://b0p7gho0lfycl" path="res://assets/models/furniture/pottedPlant.glb" id="4_v7sgi"]
+[ext_resource type="PackedScene" uid="uid://bjpqh46dap2dy" path="res://assets/models/furniture/lampRoundTable.glb" id="5_kko3n"]
+[ext_resource type="PackedScene" uid="uid://bwtuimko672o0" path="res://assets/models/furniture/bookcaseClosedWide.glb" id="6_gyysw"]
+[ext_resource type="PackedScene" uid="uid://co68nwr0u4vqo" path="res://assets/models/furniture/desk.glb" id="7_qp0nd"]
+[ext_resource type="PackedScene" uid="uid://cm3giwmll17dd" path="res://assets/models/furniture/chairDesk.glb" id="8_ng382"]
+[ext_resource type="PackedScene" uid="uid://djr5j7jkl6ipd" path="res://assets/models/furniture/lampRoundFloor.glb" id="9_h2nfe"]
+[ext_resource type="PackedScene" uid="uid://cw8ggsyyod0s7" path="res://assets/models/furniture/computerScreen.glb" id="10_vjhrt"]
+
+[node name="Bedroom1" type="Node3D"]
+
+[node name="bedDouble" parent="." instance=ExtResource("1_1f8yo")]
+transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -2.84409, 0.445171, -3.44705)
+
+[node name="cabinetBedDrawer" parent="." instance=ExtResource("2_0yegk")]
+transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -5.48653, 0.445171, -2.61887)
+
+[node name="loungeChair" parent="." instance=ExtResource("3_os4ba")]
+transform = Transform3D(-1.11582, 0, 1.00247, 0, 1.5, 0, -1.00247, 0, -1.11582, -3.39771, 0.445171, 4.1217)
+
+[node name="pottedPlant" parent="." instance=ExtResource("4_v7sgi")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.23846, 0.445171, 2.68459)
+
+[node name="lampRoundTable" parent="." instance=ExtResource("5_kko3n")]
+transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -5.61852, 1.23999, -2.83528)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lampRoundTable"]
+transform = Transform3D(0.666667, 0, -1.77636e-15, 0, 0.666667, 0, 1.77636e-15, 0, 0.666667, -0.142911, 0, 0.0704768)
+
+[node name="bookcaseClosedWide" parent="." instance=ExtResource("6_gyysw")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, -0.253598, 0.445171, 5.46761)
+
+[node name="bookcaseClosedWide2" parent="." instance=ExtResource("6_gyysw")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 2.59762, 0.445171, 5.48612)
+
+[node name="desk" parent="." instance=ExtResource("7_qp0nd")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 3.28576, 0.445171, -4.99302)
+
+[node name="chairDesk" parent="." instance=ExtResource("8_ng382")]
+transform = Transform3D(-1.31469, 0, -0.722218, 0, 1.5, 0, 0.722218, 0, -1.31469, 4.1004, 0.445171, -3.88216)
+
+[node name="lampRoundFloor" parent="." instance=ExtResource("9_h2nfe")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.87908, 0.445171, 3.59765)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lampRoundFloor"]
+transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.143753, 1.14971, 0.0575016)
+
+[node name="lampRoundTable2" parent="." instance=ExtResource("5_kko3n")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4.46136, 1.60241, -5.35213)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lampRoundTable2"]
+transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.13595, 0, 0.0738492)
+
+[node name="computerScreen" parent="." instance=ExtResource("10_vjhrt")]
+transform = Transform3D(1.1037, 0, 1.0158, 0, 1.5, 0, -1.0158, 0, 1.1037, 3.13461, 1.60331, -5.44746)
