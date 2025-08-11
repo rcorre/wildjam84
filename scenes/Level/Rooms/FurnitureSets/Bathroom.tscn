@@ -15,42 +15,54 @@
 
 [node name="bathroomCabinetDrawer" parent="." instance=ExtResource("1_10k2d")]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 4.85716, 0.270445, 0.846984)
+item_size = 3
 
 [node name="bathtub" parent="." instance=ExtResource("2_j8kmq")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.33075, 0.445171, -4.32068)
+item_size = 4
 
 [node name="bookcaseClosedDoors" parent="." instance=ExtResource("3_63hja")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -5.14787, 0.445171, 5.41309)
+item_size = 3
 
 [node name="bookcaseOpenLow" parent="." instance=ExtResource("4_wbqi7")]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -5.44781, 0.445171, -0.626373)
+item_size = 2
 
 [node name="dryer" parent="." instance=ExtResource("5_pjhhb")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 4.02091, 0.445171, 5.05556)
+item_size = 4
 
 [node name="lampSquareFloor" parent="." instance=ExtResource("6_sntp0")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3.28815, 0.445171, 5.31436)
+item_size = 2
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lampSquareFloor"]
 transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.134071, 0.663986, 0.0579767)
 
 [node name="lampSquareFloor2" parent="." instance=ExtResource("6_sntp0")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.63573, 0.445171, 2.62538)
+item_size = 2
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lampSquareFloor2"]
 transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.131022, 0.637159, 0.0663347)
 
 [node name="toaster" parent="." instance=ExtResource("7_81vqm")]
 transform = Transform3D(1.28291, 0, -0.777264, 0, 1.5, 0, 0.777264, 0, 1.28291, -0.349203, 1.68905, -5.06101)
+item_size = 1
 
 [node name="washer" parent="." instance=ExtResource("8_8xei1")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 2.2838, 0.445171, 5.03624)
+item_size = 4
 
 [node name="toiletSquare" parent="." instance=ExtResource("9_ig4d2")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.49199, 0, -4.63087)
+item_size = 3
 
 [node name="toiletSquare2" parent="." instance=ExtResource("9_ig4d2")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 5.6782, 0, -0.832164)
+item_size = 3
 
 [node name="showerRound" parent="." instance=ExtResource("10_857tm")]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -4.37081, 0, -4.3004)
+item_size = 4

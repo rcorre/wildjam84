@@ -1,5 +1,6 @@
 class_name Throwable extends RigidBody3D
 
+# const DAMAGE_MULTIPLIER := 8.0
 const DAMAGE_MULTIPLIER := 8.0
 const HELD_ITEM_MATERIAL := preload("res://assets/materials/HeldItemMaterial.tres")
 
@@ -10,12 +11,21 @@ enum ItemMaterial {
 	Glass
 }
 
+enum ItemSize {
+	Tiny,
+	Small,
+	Medium,
+	Large,
+	VeryLarge,
+}
+
 const HIT_SOUNDS := {
 	ItemMaterial.Wood: preload("res://assets/sounds/wood_hit.wav"),
 	ItemMaterial.Glass: preload("res://assets/sounds/glass_hit.wav"),
 }
 
 @export var item_material: ItemMaterial
+@export var item_size : ItemSize
 
 var hit_player: AudioStreamPlayer3D
 var hit_count := 0.0
@@ -24,6 +34,9 @@ func _ready() -> void:
 	body_entered.connect(self._on_body_entered)
 	sleeping_state_changed.connect(_on_sleep)
 	max_contacts_reported = 4
+
+	# set mass based on size
+	self.mass = _get_mass()
 
 	# Add a stream player for impact noises based on the material
 	# Use a randomizer so sounds aren't too repetitive
@@ -58,6 +71,15 @@ func _on_sleep():
 		# Object has come to rest, no longer need accurate collisions
 		continuous_cd = false
 		contact_monitor = false
+
+func _get_mass():
+	match item_size:
+		ItemSize.Tiny: return 5
+		ItemSize.Small: return 10
+		ItemSize.Medium: return 25
+		ItemSize.Large: return 50
+		ItemSize.VeryLarge: return 100
+	return 1
 
 func _override_material(mat: StandardMaterial3D):
 	# give it a partially transparent material so we can see through it while holding

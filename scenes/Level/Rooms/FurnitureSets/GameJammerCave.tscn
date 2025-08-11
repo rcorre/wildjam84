@@ -17,12 +17,15 @@
 
 [node name="bear" parent="." instance=ExtResource("1_n61ve")]
 transform = Transform3D(0.776073, -0.322341, 1.2425, -0.602874, 1.1903, 0.685359, -1.13325, -0.853974, 0.486288, -3.75844, 0, -0.073891)
+item_size = 2
 
 [node name="bear2" parent="." instance=ExtResource("1_n61ve")]
 transform = Transform3D(1.5, 0, 0, 0, 1.07943, -1.04155, 0, 1.04155, 1.07943, -2.7, 0, 0.568735)
+item_size = 2
 
 [node name="bear3" parent="." instance=ExtResource("1_n61ve")]
 transform = Transform3D(1.5, 0, 0, 0, 0.239951, 1.48068, 0, -1.48068, 0.239951, -2.35978, 0, -0.79212)
+item_size = 2
 
 [node name="cardboardBoxClosed" parent="." instance=ExtResource("2_n1mun")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -5.25883, 0, -3.53185)
@@ -38,27 +41,35 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.39129, 0, -5.16086)
 
 [node name="computerKeyboard" parent="." instance=ExtResource("4_g4moj")]
 transform = Transform3D(-1.02099, 0, 1.0989, 0, 1.5, 0, -1.0989, 0, -1.02099, 3.54089, 0, -3.27019)
+item_size = 1
 
 [node name="computerMouse" parent="." instance=ExtResource("5_jtgjp")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 3.36874, 0, -4.14365)
 
 [node name="kitchenFridgeSmall" parent="." instance=ExtResource("6_4fwsu")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.794688, 0, -5.15028)
+item_size = 3
 
 [node name="laptop" parent="." instance=ExtResource("7_kbkgx")]
 transform = Transform3D(-0.881339, 0, 1.21377, 0, 1.5, 0, -1.21377, 0, -0.881339, 3.06745, 0, -2.66481)
+item_size = 1
 
 [node name="pillowBlueLong" parent="." instance=ExtResource("8_3koxr")]
 transform = Transform3D(0.785979, -1.24124, 0.302582, 0, -0.355257, -1.45732, 1.27759, 0.763617, -0.18615, 4.51284, 0, -3.84167)
+item_size = 1
 
 [node name="radio" parent="." instance=ExtResource("9_3jrj6")]
 transform = Transform3D(-0.0467236, 0, 1.49927, 0, 1.5, 0, -1.49927, 0, -0.0467236, 1.28212, 0, -2.38827)
+item_size = 1
 
 [node name="speakerSmall" parent="." instance=ExtResource("10_xa5ox")]
 transform = Transform3D(-1.44512, 0, 0.402043, 0, 1.5, 0, -0.402043, 0, -1.44512, 3.81775, 0, -1.93944)
+item_size = 2
 
 [node name="toaster" parent="." instance=ExtResource("11_hpdb4")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.813515, 0, -1.01638)
+item_size = 1
 
 [node name="toiletSquare" parent="." instance=ExtResource("12_fvrka")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.31583, 0, -4.95175)
+item_size = 3

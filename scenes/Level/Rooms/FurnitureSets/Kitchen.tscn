@@ -20,57 +20,76 @@
 
 [node name="kitchenBar" parent="." instance=ExtResource("1_u7goo")]
 transform = Transform3D(-1.21299e-07, 0, 1.5, 0, 1.5, 0, -2.775, 0, -6.55671e-08, 2.1676, 0.445171, 1.03129)
+item_size = 3
 
 [node name="kitchenBlender" parent="." instance=ExtResource("2_wjco8")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.28367, 1.73301, -0.721122)
+item_size = 1
 
 [node name="kitchenCabinet" parent="." instance=ExtResource("3_pmrw7")]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 4.86818, 0.445171, 1.15433)
+item_size = 3
 
 [node name="kitchenCabinetCornerRound" parent="." instance=ExtResource("4_kr5yc")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4.96307, 0.445171, 3.35458)
+item_size = 3
 
 [node name="kitchenCabinetDrawer" parent="." instance=ExtResource("5_5l2fk")]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 4.87126, 0.445171, -0.445818)
+item_size = 3
 
 [node name="kitchenCoffeeMachine" parent="." instance=ExtResource("6_caxul")]
 transform = Transform3D(0.513055, 0, -1.40953, 0, 1.5, 0, 1.40953, 0, 0.513055, 5.33477, 1.75199, 1.73226)
+item_size = 1
 
 [node name="kitchenMicrowave" parent="." instance=ExtResource("7_poypk")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3.83619, 0.445171, 3.53859)
+item_size = 2
 
 [node name="kitchenSink" parent="." instance=ExtResource("8_tno0e")]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 4.87714, 0.445171, 0.357995)
+item_size = 3
 
 [node name="kitchenStove" parent="." instance=ExtResource("9_wpf56")]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 4.86504, 0.445171, 2.10992)
+item_size = 4
 
 [node name="stoolBar" parent="." instance=ExtResource("10_fp17g")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.31194, 0.445171, 1.11627)
+item_size = 2
 
 [node name="stoolBar2" parent="." instance=ExtResource("10_fp17g")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.27286, 0.445171, 0.000548363)
+item_size = 2
 
 [node name="trashcan" parent="." instance=ExtResource("11_sal3y")]
 transform = Transform3D(-0.20876, 0, -1.4854, 0, 1.5, 0, 1.4854, 0, -0.20876, 4.72101, 0.445171, 4.48106)
+item_size = 2
 
 [node name="bench" parent="." instance=ExtResource("12_7btvt")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, -3.60859, 0.445171, 4.92706)
+item_size = 3
 
 [node name="tableCloth" parent="." instance=ExtResource("13_s4y8g")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.98893, 0.445171, -1.88975)
+item_size = 4
 
 [node name="chairCushion" parent="." instance=ExtResource("14_lhp8r")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.79151, 0.296933, -3.40786)
+item_size = 2
 
 [node name="chairCushion2" parent="." instance=ExtResource("14_lhp8r")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.40274, 0.296933, -3.40786)
+item_size = 2
 
 [node name="chairCushion3" parent="." instance=ExtResource("14_lhp8r")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, -1.40274, 0.296933, -1.07964)
+item_size = 2
 
 [node name="chairCushion4" parent="." instance=ExtResource("14_lhp8r")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, -2.81874, 0.296933, -1.07964)
+item_size = 2
 
 [node name="kitchenFridgeLarge" parent="." instance=ExtResource("15_kb56d")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.6772, 0.296933, -5.12766)
+item_size = 4

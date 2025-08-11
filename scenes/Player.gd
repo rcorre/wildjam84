@@ -20,7 +20,7 @@ const GRAB_SNAP := 8.0
 # Amount of shaking required to throw off bug
 const SHAKE_REQUIRED := 40.0
 
-const MAX_THROW_FORCE := 50.0
+const MAX_THROW_FORCE := 500.0
 const MAX_THROW_SECS := 2.0
 
 @onready var camera: Camera3D = $Camera3D

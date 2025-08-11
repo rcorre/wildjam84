@@ -1,7 +1,7 @@
 class_name Breakable extends RigidBody3D
 
 const CRACK_MATERIAL := preload("res://assets/textures/damaged-grunge-texture-background.jpg")
-const MAX_HEALTH := 100.0
+const MAX_HEALTH := 500.0
 
 @export_group("Animation")
 ## How many seconds until the shards fade away.
@@ -77,7 +77,7 @@ func hit(from: Vector3, damage: int) -> void:
 		return
 
 	# todo: add some kind of visual cracking effect for damage, also general textures
-	health -= min(99, damage)
+	health -= min(MAX_HEALTH / 2, damage)
 	_set_crack_material()
 
 	if health <= 0:

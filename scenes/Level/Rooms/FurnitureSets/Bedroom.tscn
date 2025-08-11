@@ -15,45 +15,57 @@
 
 [node name="bedDouble" parent="." instance=ExtResource("1_1f8yo")]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -2.84409, 0.445171, -3.44705)
+item_size = 4
 
 [node name="cabinetBedDrawer" parent="." instance=ExtResource("2_0yegk")]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -5.48653, 0.445171, -2.61887)
+item_size = 3
 
 [node name="loungeChair" parent="." instance=ExtResource("3_os4ba")]
 transform = Transform3D(-1.11582, 0, 1.00247, 0, 1.5, 0, -1.00247, 0, -1.11582, -3.39771, 0.445171, 4.1217)
+item_size = 3
 
 [node name="pottedPlant" parent="." instance=ExtResource("4_v7sgi")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.23846, 0.445171, 2.68459)
+item_size = 1
 
 [node name="lampRoundTable" parent="." instance=ExtResource("5_kko3n")]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -5.61852, 1.23999, -2.83528)
+item_size = 1
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lampRoundTable"]
 transform = Transform3D(0.666667, 0, -1.77636e-15, 0, 0.666667, 0, 1.77636e-15, 0, 0.666667, -0.142911, 0, 0.0704768)
 
 [node name="bookcaseClosedWide" parent="." instance=ExtResource("6_gyysw")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, -0.253598, 0.445171, 5.46761)
+item_size = 4
 
 [node name="bookcaseClosedWide2" parent="." instance=ExtResource("6_gyysw")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 2.59762, 0.445171, 5.48612)
+item_size = 4
 
 [node name="desk" parent="." instance=ExtResource("7_qp0nd")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 3.28576, 0.445171, -4.99302)
+item_size = 3
 
 [node name="chairDesk" parent="." instance=ExtResource("8_ng382")]
 transform = Transform3D(-1.31469, 0, -0.722218, 0, 1.5, 0, 0.722218, 0, -1.31469, 4.1004, 0.445171, -3.88216)
+item_size = 2
 
 [node name="lampRoundFloor" parent="." instance=ExtResource("9_h2nfe")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.87908, 0.445171, 3.59765)
+item_size = 2
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lampRoundFloor"]
 transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.143753, 1.14971, 0.0575016)
 
 [node name="lampRoundTable2" parent="." instance=ExtResource("5_kko3n")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4.46136, 1.60241, -5.35213)
+item_size = 1
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lampRoundTable2"]
 transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.13595, 0, 0.0738492)
 
 [node name="computerScreen" parent="." instance=ExtResource("10_vjhrt")]
 transform = Transform3D(1.1037, 0, 1.0158, 0, 1.5, 0, -1.0158, 0, 1.1037, 3.13461, 1.60331, -5.44746)
+item_size = 1
