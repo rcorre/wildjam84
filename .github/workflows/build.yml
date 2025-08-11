@@ -3,7 +3,7 @@ on: push
 
 env:
   GODOT_VERSION: 4.4
-  EXPORT_NAME: wildjam84
+  EXPORT_NAME: creeter-yeeter
   PROJECT_PATH: .
 
 jobs:
@@ -118,7 +118,8 @@ jobs:
     needs: [export-mac, export-linux, export-windows, export-web] 
     env:
       ITCHIO_USERNAME: rcorre
-      ITCHIO_GAME: wildjam84
+      # ITCHIO_GAME: wildjam84
+      ITCHIO_GAME: creeter-yeeter
       BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}  
     runs-on: ubuntu-22.04
     container:
