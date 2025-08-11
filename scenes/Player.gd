@@ -17,6 +17,9 @@ const PANIC_RATE := 0.15
 # How quickly the held object snaps to your hands
 const GRAB_SNAP := 8.0
 
+# Amount of shaking required to throw off bug
+const SHAKE_REQUIRED := 40.0
+
 const MAX_THROW_FORCE := 50.0
 const MAX_THROW_SECS := 2.0
 
@@ -38,6 +41,10 @@ var throw_charge := 0.0
 
 # 0..1, game over at 1
 var panic: float
+var face_hugger: Bug
+
+# at 1, successfully shook off bug
+var shake := 0.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -46,9 +53,12 @@ func _ready() -> void:
 func _unhandled_input(ev: InputEvent):
 	var mouse := ev as InputEventMouseMotion
 	if mouse:
-		look -= mouse.relative * MOUSE_SENSITIVITY
+		var motion := mouse.relative * MOUSE_SENSITIVITY
+		look -= motion
 		look.x = wrapf(look.x, -PI, PI)
 		look.y = clamp(look.y, -PI / 2.0, PI / 2.0)
+		if face_hugger:
+			shake += motion.length() / SHAKE_REQUIRED
 
 func grab() -> void:
 	assert(not held_object, "Cannot grab if holding")
@@ -68,7 +78,8 @@ func throw() -> void:
 	throw_charge = 0
 
 func drop() -> void:
-	assert(held_object, "Cannot throw if not holding")
+	if not held_object:
+		return
 	prints("dropping", held_object)
 	held_object.drop()
 	held_object = null
@@ -115,6 +126,12 @@ func _physics_process(delta: float) -> void:
 		held_object.global_transform = held_object.global_transform.interpolate_with(point, delta * GRAB_SNAP)
 
 	apply_panic(delta)
+
+	if face_hugger and shake >= 1.0:
+		prints("Shook off", face_hugger)
+		face_hugger.hit(global_position, 1000)
+		face_hugger = null
+		shake = 0.0
 
 func apply_panic(delta: float) -> void:
 	var visible_bugs: Array[Node3D]

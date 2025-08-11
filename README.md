@@ -28,3 +28,7 @@ Some code was copied from the [Godot Destruction Plugin](https://github.com/Jumm
 
 - [Kenney Furniture Kit](https://kenney.nl/assets/furniture-kit) (CC0)
 
+
+## game-icons.net
+
+- [Mouse Icon](https://game-icons.net/1x1/delapouite/mouse.html)

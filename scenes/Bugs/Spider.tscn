@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmv485f177oai"]
+[gd_scene load_steps=10 format=3 uid="uid://dmv485f177oai"]
 
 [ext_resource type="PackedScene" uid="uid://cjttwapnf87ix" path="res://assets/models/Spider.glb" id="1_hhqfg"]
 [ext_resource type="Script" uid="uid://bsx4vw80jdvnk" path="res://scenes/Bugs/Bug.gd" id="2_54sod"]
@@ -20,6 +20,9 @@ rings = 8
 [sub_resource type="Curve" id="Curve_bitvr"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dwmdf"]
+radius = 5.0
 
 [node name="Spider" instance=ExtResource("1_hhqfg")]
 floor_stop_on_slope = false
@@ -103,3 +106,10 @@ scale_amount_curve = SubResource("Curve_bitvr")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." index="7"]
 aabb = AABB(-0.188965, 0.0520205, -0.353229, 0.37793, 0.251428, 0.479896)
+
+[node name="JumpArea" type="Area3D" parent="." index="8"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="JumpArea" index="0"]
+shape = SubResource("SphereShape3D_dwmdf")

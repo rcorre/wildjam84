@@ -4,6 +4,7 @@ extends Control
 
 @onready var tunnel_vision: Control = $TunnelVision
 @onready var game_over: Control = $GameOver
+@onready var shake_warning: Control = $ShakeWarning
 
 var crosshair_radius := 1.0
 
@@ -27,7 +28,11 @@ func _process(delta: float) -> void:
 	crosshair_radius = lerp(crosshair_radius, target_radius, delta * 12.0)
 	queue_redraw()
 
+	shake_warning.visible = player.face_hugger != null
+
 func _draw() -> void:
 	var center := size / 2.0
 	draw_circle(center, crosshair_radius, Color.WHITE, false, 2.0, true)
-	draw_arc(center, 16.0, 0, 2 * PI * player.throw_charge, 128, Color.GREEN.lerp(Color.RED, player.throw_charge), 4.0, true)
+
+	var charge: float = max(player.throw_charge, player.shake)
+	draw_arc(center, 16.0, 0, 2 * PI * charge, 128, Color.GREEN.lerp(Color.RED, charge), 4.0, true)

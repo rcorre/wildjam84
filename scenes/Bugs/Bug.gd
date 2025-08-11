@@ -1,6 +1,12 @@
 extends CharacterBody3D
 class_name Bug
 
+# Time you can stand near a bug till it jumps on you
+const JUMP_SECS := 3.0
+
+# How fast the jump animation is
+const JUMP_ANIM_SECS := 0.25
+
 @onready var visibility_notifier: VisibleOnScreenNotifier3D = $VisibleOnScreenNotifier3D
 
 @export var health := 50
@@ -19,8 +25,11 @@ class_name Bug
 @onready var splat_sound: AudioStreamPlayer3D = $SplatSound
 @onready var splat_particles: CPUParticles3D = $SplatParticles
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var jump_area: Area3D = $JumpArea
 
 var current_direction: Vector3 = Vector3.ZERO
+var jump_charge := 0.0
+var face_hugging: Player
 
 func _ready() -> void:
 	var timer := Timer.new()
@@ -32,11 +41,47 @@ func _ready() -> void:
 	# 3 is "enemy", no easy way to get this programatically
 	set_collision_layer_value(3, true)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if health <= 0:
 		return
 
-	move_and_slide()
+	if face_hugging == null and jump_area.has_overlapping_bodies():
+		maybe_jump(delta)
+	else:
+		jump_charge = move_toward(jump_charge, 0.0, delta)
+
+	if not face_hugging:
+		move_and_slide()
+
+func maybe_jump(delta: float) -> void:
+	var player := jump_area.get_overlapping_bodies()[0] as Player
+	if player.face_hugger:
+		# already got one
+		return
+
+	jump_charge = move_toward(jump_charge, 1.0, delta / JUMP_SECS)
+
+	if jump_charge < 1.0:
+		return
+
+	prints(self, "jumping on player")
+
+	player.drop()
+
+	# reparent to the player camera
+	face_hugging = player
+	face_hugging.face_hugger = self
+	reparent(face_hugging.camera)
+	var tween := get_tree().create_tween()
+
+	# move our position to the camera, but a little forward
+	tween.set_parallel()
+	tween.tween_property(self, "position", Vector3.FORWARD * 0.5, JUMP_ANIM_SECS)
+	tween.tween_property(self, "rotation", Vector3(PI / -2.0, 0.0, 0.0), JUMP_ANIM_SECS)
+
+	# just don't collide while jumping
+	collision_layer = 0
+	collision_mask = 0
 
 func move(timer: Timer) -> void:
 	if health <= 0:
