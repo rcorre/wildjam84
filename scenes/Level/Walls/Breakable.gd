@@ -6,7 +6,7 @@ class_name Breakable extends RigidBody3D
 ## How many seconds until the shards shrink.
 @export_range(0.0, 30.0) var shrink_delay := 2.0
 ## How long the animation lasts before the shard is removed.
-@export_range(0.0, 30.0) var animation_length := 5.0
+@export_range(0.0, 30.0) var animation_length := 3.0
 
 var health := 100.0
 
