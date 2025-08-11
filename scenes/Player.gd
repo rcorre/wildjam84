@@ -127,11 +127,19 @@ func _physics_process(delta: float) -> void:
 
 	apply_panic(delta)
 
-	if face_hugger and shake >= 1.0:
-		prints("Shook off", face_hugger)
-		face_hugger.hit(global_position, 1000)
-		face_hugger = null
-		shake = 0.0
+	if face_hugger:
+		if shake >= 1.0:
+			prints("Shook off", face_hugger)
+			face_hugger.hit(global_position, 1000)
+			face_hugger = null
+			shake = 0.0
+		else:
+			var rate := delta * PANIC_RATE * 1.25
+			_apply_panic(rate)
+
+func _apply_panic(rate: float) -> void:
+	panic = move_toward(panic, 1.0, rate)
+	panic_sound.volume_db = lerp(-80.0, 20.0, panic)
 
 func apply_panic(delta: float) -> void:
 	var visible_bugs: Array[Node3D]
@@ -157,6 +165,4 @@ func apply_panic(delta: float) -> void:
 	var quantity_factor := sqrt(visible_bugs.size())
 
 	var rate := delta * PANIC_RATE * proximity_factor * quantity_factor
-	panic = move_toward(panic, 1.0, rate)
-
-	panic_sound.volume_db = lerp(-80.0, 20.0, panic)
+	_apply_panic(rate)
