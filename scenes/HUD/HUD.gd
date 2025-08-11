@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 	crosshair_radius = lerp(crosshair_radius, target_radius, delta * 12.0)
 	queue_redraw()
 
-	shake_warning.visible = player.face_hugger != null
+	shake_warning.visible = player.face_hugger != null and not game_over.visible
 
 func _draw() -> void:
 	var center := size / 2.0
