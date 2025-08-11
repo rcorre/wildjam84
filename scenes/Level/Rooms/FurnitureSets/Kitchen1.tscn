@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cfgn12hm245fi"]
+[gd_scene load_steps=16 format=3 uid="uid://cfgn12hm245fi"]
 
 [ext_resource type="PackedScene" uid="uid://megycmjct6jc" path="res://assets/models/furniture/kitchenBar.glb" id="1_66y1k"]
 [ext_resource type="PackedScene" uid="uid://bsiu3v0aj6ajd" path="res://assets/models/furniture/kitchenBlender.glb" id="3_v0glf"]
@@ -16,22 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ba6gkfm1k2l5t" path="res://assets/models/furniture/trashcan.glb" id="16_ocn80"]
 [ext_resource type="PackedScene" uid="uid://b1mqen7dkg1oj" path="res://assets/models/furniture/bench.glb" id="20_0u20l"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_57uer"]
-size = Vector2(100, 100)
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_y2s7y"]
-
 [node name="Kitchen1" type="Node3D"]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-
-[node name="FloorMesh" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("PlaneMesh_57uer")
-skeleton = NodePath("../..")
-
-[node name="FloorShape" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_y2s7y")
 
 [node name="kitchenBar" parent="." instance=ExtResource("1_66y1k")]
 transform = Transform3D(-1.21299e-07, 0, 1.5, 0, 1.5, 0, -2.775, 0, -6.55671e-08, 2.1676, 0.445171, 1.03129)
