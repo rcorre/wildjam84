@@ -82,6 +82,7 @@ func maybe_jump(delta: float) -> void:
 	# just don't collide while jumping
 	collision_layer = 0
 	collision_mask = 0
+	set_collision_layer_value(3, true)
 
 func move(timer: Timer) -> void:
 	if health <= 0:
