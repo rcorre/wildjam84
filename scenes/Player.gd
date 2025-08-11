@@ -114,20 +114,32 @@ func _physics_process(delta: float) -> void:
 		# move object toward your hands
 		held_object.global_transform = held_object.global_transform.interpolate_with(point, delta * GRAB_SNAP)
 
-	var nearby_bugs := bug_detector.get_overlapping_bodies()
-	if nearby_bugs.size() == 0:
+	apply_panic(delta)
+
+func apply_panic(delta: float) -> void:
+	var visible_bugs: Array[Node3D]
+	for body in bug_detector.get_overlapping_bodies():
+		var bug := body as Bug
+		if not bug:
+			push_warning("non bug in bug area: ", body)
+			continue
+		if bug.visibility_notifier.is_on_screen():
+			visible_bugs.push_back(bug)
+
+	if visible_bugs.size() == 0:
 		panic = move_toward(panic, 0.0, delta * PANIC_RECOVERY_RATE)
-	else:
-		# more panic the closer you are to the bug
-		var closest_distance := INF
-		for bug in nearby_bugs:
-			closest_distance = min((bug.position - self.position).length(), closest_distance)
-		var proximity_factor := lerpf(0.5, 2, 1 - (closest_distance / bug_detector_radius))
+		return
 
-		# Use sqrt, so two bugs is more panic, but not twice as much
-		var quantity_factor := sqrt(nearby_bugs.size())
+	# more panic the closer you are to the bug
+	var closest_distance := INF
+	for bug in visible_bugs:
+		closest_distance = min((bug.position - self.position).length(), closest_distance)
+	var proximity_factor := lerpf(0.5, 2, 1 - (closest_distance / bug_detector_radius))
 
-		var rate := delta * PANIC_RATE * proximity_factor * quantity_factor
-		panic = move_toward(panic, 1.0, rate)
+	# Use sqrt, so two bugs is more panic, but not twice as much
+	var quantity_factor := sqrt(visible_bugs.size())
+
+	var rate := delta * PANIC_RATE * proximity_factor * quantity_factor
+	panic = move_toward(panic, 1.0, rate)
 
 	panic_sound.volume_db = lerp(-80.0, 20.0, panic)

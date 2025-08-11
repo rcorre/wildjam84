@@ -100,3 +100,6 @@ initial_velocity_max = 8.0
 damping_min = 1.0
 damping_max = 1.0
 scale_amount_curve = SubResource("Curve_bitvr")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." index="7"]
+aabb = AABB(-0.188965, 0.0520205, -0.353229, 0.37793, 0.251428, 0.479896)

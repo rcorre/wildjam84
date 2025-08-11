@@ -1,4 +1,7 @@
 extends CharacterBody3D
+class_name Bug
+
+@onready var visibility_notifier: VisibleOnScreenNotifier3D = $VisibleOnScreenNotifier3D
 
 @export var health := 50
 @export var speed := 2.0
