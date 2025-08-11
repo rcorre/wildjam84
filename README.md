@@ -21,6 +21,11 @@ The following textures were used as-is or modified from [Poly Haven](https://pol
 
 - Beige Wall 001
 
+## FreePik
+The following textures were used as-is or modified from [FreePik](https://www.freepik.com)
+
+- damaged-grunge-texture-background.jpg
+
 ## Godot Destruction Plugin
 Some code was copied from the [Godot Destruction Plugin](https://github.com/Jummit/godot-destruction-plugin/)
 

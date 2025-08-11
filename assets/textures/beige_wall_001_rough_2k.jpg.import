@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://geewcw70qias"
-path.s3tc="res://.godot/imported/beige_wall_001_rough_1k.jpg-e148411a5fdfd348b7b6dd15dce3edc7.s3tc.ctex"
-path.etc2="res://.godot/imported/beige_wall_001_rough_1k.jpg-e148411a5fdfd348b7b6dd15dce3edc7.etc2.ctex"
+uid="uid://bgbbhor1ynaic"
+path.s3tc="res://.godot/imported/beige_wall_001_rough_2k.jpg-a0db865f5af37bc5929df4b1095c15c5.s3tc.ctex"
+path.etc2="res://.godot/imported/beige_wall_001_rough_2k.jpg-a0db865f5af37bc5929df4b1095c15c5.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/beige_wall_001_rough_1k.jpg"
-dest_files=["res://.godot/imported/beige_wall_001_rough_1k.jpg-e148411a5fdfd348b7b6dd15dce3edc7.s3tc.ctex", "res://.godot/imported/beige_wall_001_rough_1k.jpg-e148411a5fdfd348b7b6dd15dce3edc7.etc2.ctex"]
+source_file="res://assets/textures/beige_wall_001_rough_2k.jpg"
+dest_files=["res://.godot/imported/beige_wall_001_rough_2k.jpg-a0db865f5af37bc5929df4b1095c15c5.s3tc.ctex", "res://.godot/imported/beige_wall_001_rough_2k.jpg-a0db865f5af37bc5929df4b1095c15c5.etc2.ctex"]
 
 [params]
 
@@ -33,4 +33,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

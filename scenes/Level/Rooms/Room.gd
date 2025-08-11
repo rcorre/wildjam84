@@ -1,6 +1,6 @@
 class_name Room extends Node3D
 
-const WALL_MATERIAL := preload("res://assets/textures/beige_wall_001_rough_1k.jpg")
+const WALL_MATERIAL := preload("res://assets/textures/beige_wall_001_rough_2k.jpg")
 
 signal on_room_breach(room_id, direction)
 
