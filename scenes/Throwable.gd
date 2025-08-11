@@ -18,8 +18,7 @@ const HIT_SOUNDS := {
 @export var item_material: ItemMaterial
 
 var hit_player: AudioStreamPlayer3D
-
-var is_throwing := false
+var hit_count := 0.0
 
 func _ready() -> void:
 	body_entered.connect(self._on_body_entered)
@@ -74,7 +73,7 @@ func grab() -> void:
 
 func throw(force: Vector3) -> void:
 	prints("throwing", self)
-	is_throwing = true
+	self.hit_count = 0
 	self.freeze = false
 	self.apply_central_impulse(force)
 	_override_material(null)
@@ -85,19 +84,14 @@ func throw(force: Vector3) -> void:
 
 func drop() -> void:
 	prints("dropping", self)
-	is_throwing = false
 	self.freeze = false
 	_override_material(null)
 
 func _on_body_entered(body: Node) -> void:
-	# don't break stuff on bounces
-	if not is_throwing:
-		return
-	is_throwing = false
-
+	hit_count += 1
 	hit_player.play()
 
 	if body.has_method("hit"):
-		var damage := linear_velocity.length() * mass * DAMAGE_MULTIPLIER
+		var damage := linear_velocity.length() * mass * DAMAGE_MULTIPLIER * (1 / hit_count)
 		prints(self, "hit", body, "for", damage)
 		body.call("hit", self.position, damage)

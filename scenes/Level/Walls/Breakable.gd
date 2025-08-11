@@ -8,7 +8,7 @@ class_name Breakable extends RigidBody3D
 ## How long the animation lasts before the shard is removed.
 @export_range(0.0, 30.0) var animation_length := 5.0
 
-var health := 50
+var health := 100.0
 
 func _notify_collection_of_break() -> void:
 	# this should be a signal but I was finding it cumbersome to accomplish what I'm trying to do
@@ -58,7 +58,7 @@ func hit(from: Vector3, damage: int) -> void:
 		return
 
 	# todo: add some kind of visual cracking effect for damage, also general textures
-	health -= damage
+	health -= min(99, damage)
 
 	if health <= 0:
 		# complete nonsense force calculation
