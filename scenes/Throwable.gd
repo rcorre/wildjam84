@@ -70,6 +70,8 @@ func grab() -> void:
 	# this disables rigid physics so we can move the object like it's kinematic
 	freeze = true
 	_override_material(HELD_ITEM_MATERIAL)
+	set_collision_mask_value(1, false)
+	set_collision_layer_value(1, false)
 
 func throw(force: Vector3) -> void:
 	prints("throwing", self)
@@ -77,6 +79,8 @@ func throw(force: Vector3) -> void:
 	self.freeze = false
 	self.apply_central_impulse(force)
 	_override_material(null)
+	set_collision_mask_value(1, true)
+	set_collision_layer_value(1, true)
 
 	# Detect collisions more accurately when thrown
 	continuous_cd = true
@@ -86,6 +90,8 @@ func drop() -> void:
 	prints("dropping", self)
 	self.freeze = false
 	_override_material(null)
+	set_collision_mask_value(1, true)
+	set_collision_layer_value(1, true)
 
 func _on_body_entered(body: Node) -> void:
 	hit_count += 1
