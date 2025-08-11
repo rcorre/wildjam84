@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjm3fhg3ivebn"]
+[gd_scene load_steps=10 format=3 uid="uid://cjm3fhg3ivebn"]
 
 [ext_resource type="Script" uid="uid://bgvqg3tbrarih" path="res://scenes/Level/Rooms/Room.gd" id="1_ftteg"]
 [ext_resource type="PackedScene" uid="uid://lare0nuf4gky" path="res://scenes/Level/Walls/BreakableWall1.tscn" id="2_xgo5k"]
@@ -8,8 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cfgn12hm245fi" path="res://scenes/Level/Rooms/FurnitureSets/Kitchen.tscn" id="6_4mnbc"]
 [ext_resource type="PackedScene" uid="uid://c1b2hoorv03px" path="res://scenes/Level/Rooms/FurnitureSets/LivingRoom.tscn" id="7_j2tat"]
 [ext_resource type="PackedScene" uid="uid://dayawcma35yft" path="res://scenes/Level/Rooms/FurnitureSets/Barracks.tscn" id="8_3vc61"]
+[ext_resource type="PackedScene" uid="uid://h0gq3ipe30fs" path="res://scenes/Level/Rooms/FurnitureSets/GameJammerCave.tscn" id="9_x3p5o"]
 
 [node name="Room" type="Node3D"]
 script = ExtResource("1_ftteg")
 walls = Array[PackedScene]([ExtResource("2_xgo5k"), ExtResource("3_u1muq")])
-furniture_sets = Array[PackedScene]([ExtResource("4_u1muq"), ExtResource("5_12eac"), ExtResource("6_4mnbc"), ExtResource("7_j2tat"), ExtResource("8_3vc61")])
+furniture_sets = Array[PackedScene]([ExtResource("4_u1muq"), ExtResource("5_12eac"), ExtResource("6_4mnbc"), ExtResource("7_j2tat"), ExtResource("8_3vc61"), ExtResource("9_x3p5o")])
