@@ -1,6 +1,9 @@
 extends CharacterBody3D
 class_name Bug
 
+# Chance to enter slomo on killing a bug
+const SLOMO_CHANCE := 0.2
+
 # Time you can stand near a bug till it jumps on you
 const JUMP_SECS := 3.0
 
@@ -109,3 +112,8 @@ func hit(_from: Vector3, damage: int) -> void:
 		collision_layer = 0
 		collision_mask = 0
 		mesh.visible = false
+		if randf() <= SLOMO_CHANCE:
+			Engine.time_scale = 0.1
+			var tween := get_tree().create_tween()
+			# note: the 0.1 delay actually equals 1s because we reduced the time scale
+			tween.tween_property(Engine, "time_scale", 1.0, 0.5).set_delay(0.1)
