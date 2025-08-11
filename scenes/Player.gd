@@ -125,8 +125,6 @@ func _physics_process(delta: float) -> void:
 		# move object toward your hands
 		held_object.global_transform = held_object.global_transform.interpolate_with(point, delta * GRAB_SNAP)
 
-	apply_panic(delta)
-
 	if face_hugger:
 		if shake >= 1.0:
 			prints("Shook off", face_hugger)
@@ -136,9 +134,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			var rate := delta * PANIC_RATE * 1.25
 			_apply_panic(rate)
+	else:
+		apply_panic(delta)
 
-func _apply_panic(rate: float) -> void:
-	panic = move_toward(panic, 1.0, rate)
+func _apply_panic(rate: float, target : float = 1.0) -> void:
+	panic = move_toward(panic, target, rate)
 	panic_sound.volume_db = lerp(-80.0, 20.0, panic)
 
 func apply_panic(delta: float) -> void:
@@ -152,7 +152,8 @@ func apply_panic(delta: float) -> void:
 			visible_bugs.push_back(bug)
 
 	if visible_bugs.size() == 0:
-		panic = move_toward(panic, 0.0, delta * PANIC_RECOVERY_RATE)
+		# panic = move_toward(panic, 0.0, delta * PANIC_RECOVERY_RATE)
+		_apply_panic(delta * PANIC_RECOVERY_RATE, 0.0)
 		return
 
 	# more panic the closer you are to the bug
