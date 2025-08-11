@@ -118,7 +118,6 @@ jobs:
     needs: [export-mac, export-linux, export-windows, export-web] 
     env:
       ITCHIO_USERNAME: rcorre
-      # ITCHIO_GAME: wildjam84
       ITCHIO_GAME: creeter-yeeter
       BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}  
     runs-on: ubuntu-22.04
