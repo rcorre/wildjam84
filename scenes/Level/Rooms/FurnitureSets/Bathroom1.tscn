@@ -31,8 +31,14 @@ transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 
 [node name="lampSquareFloor" parent="." instance=ExtResource("7_t211k")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3.28815, 0.445171, 5.31436)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="lampSquareFloor"]
+transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.134071, 0.663986, 0.0579767)
+
 [node name="lampSquareFloor2" parent="." instance=ExtResource("7_t211k")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.63573, 0.445171, 2.62538)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lampSquareFloor2"]
+transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, -0.131022, 0.637159, 0.0663347)
 
 [node name="toaster" parent="." instance=ExtResource("9_x8jvc")]
 transform = Transform3D(1.28291, 0, -0.777264, 0, 1.5, 0, 0.777264, 0, 1.28291, -0.349203, 1.68905, -5.06101)
