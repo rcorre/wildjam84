@@ -6,3 +6,8 @@ signal on_wall_break(name)
 
 func on_break() -> void:
 	on_wall_break.emit(self.name)
+
+func set_wall_color(material: StandardMaterial3D) -> void:
+	var children := get_children()
+	for child in children:
+		(child as Breakable).set_color(material)

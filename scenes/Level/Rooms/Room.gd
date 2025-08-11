@@ -1,5 +1,7 @@
 class_name Room extends Node3D
 
+const WALL_MATERIAL := preload("res://assets/textures/beige_wall_001_rough_1k.jpg")
+
 signal on_room_breach(room_id, direction)
 
 @export var walls : Array[PackedScene]
@@ -27,7 +29,7 @@ func _create_random_wall() -> BreakableCollection:
 	var wall := walls[index].instantiate() as BreakableCollection
 	return wall
 
-func _build_that_wall(direction: String) -> void:
+func _build_that_wall(direction: String, material: StandardMaterial3D) -> void:
 	var offset := wall_offsets[direction] as Vector4
 	var position_offset := Vector3(offset.x, offset.y, offset.z)
 	var rotation_offset := offset.w
@@ -35,6 +37,7 @@ func _build_that_wall(direction: String) -> void:
 	var wall := _create_random_wall()
 	wall.name = direction
 	wall.on_wall_break.connect(_on_wall_break)
+	wall.set_wall_color(material)
 
 	self.add_child(wall)
 
@@ -64,14 +67,23 @@ func _ready() -> void:
 	self.translate(self.room_offset)
 	self.name = "room%d" % id
 
+	var wall_color = Color.from_rgba8(
+		randi_range(50, 255),
+		randi_range(50, 255),
+		randi_range(50, 255),
+	)
+	var material := StandardMaterial3D.new()
+	material.albedo_color = wall_color
+	material.albedo_texture = WALL_MATERIAL
+
 	if build_north:
-		_build_that_wall(Constants.DIRECTION.NORTH)
+		_build_that_wall(Constants.DIRECTION.NORTH, material)
 	if build_east:
-		_build_that_wall(Constants.DIRECTION.EAST)
+		_build_that_wall(Constants.DIRECTION.EAST, material)
 	if build_south:
-		_build_that_wall(Constants.DIRECTION.SOUTH)
+		_build_that_wall(Constants.DIRECTION.SOUTH, material)
 	if build_west:
-		_build_that_wall(Constants.DIRECTION.WEST)
+		_build_that_wall(Constants.DIRECTION.WEST, material)
 	
 	_build_furniture_set()
 

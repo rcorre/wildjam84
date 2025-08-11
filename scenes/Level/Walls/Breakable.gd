@@ -63,3 +63,6 @@ func hit(from: Vector3, damage: int) -> void:
 	if health <= 0:
 		# complete nonsense force calculation
 		self._break(from * lerpf(0.5, 2.0, damage / 100.0))
+
+func set_color(material: StandardMaterial3D) -> void:
+	($WallFragmentMesh as MeshInstance3D).set_surface_override_material(0, material)
