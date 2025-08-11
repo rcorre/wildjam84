@@ -1,8 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://ksrgiopp2i6f"]
+[gd_scene load_steps=10 format=3 uid="uid://ksrgiopp2i6f"]
 
 [ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_elqb8"]
-[ext_resource type="PackedScene" uid="uid://3vu05p63g5im" path="res://assets/models/furniture/table.glb" id="3_vcsgt"]
-[ext_resource type="PackedScene" uid="uid://djr5j7jkl6ipd" path="res://assets/models/furniture/lampRoundFloor.glb" id="4_c01mt"]
 [ext_resource type="PackedScene" uid="uid://dmv485f177oai" path="res://scenes/Bugs/Spider.tscn" id="4_rarhs"]
 [ext_resource type="Script" uid="uid://v7r44van6ys4" path="res://scenes/Level/LevelController.gd" id="8_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://cjm3fhg3ivebn" path="res://scenes/Level/Rooms/Room.tscn" id="9_lhr70"]
@@ -51,14 +49,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.989
 
 [node name="Spider3" parent="Bugs" instance=ExtResource("4_rarhs")]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 0, 1, -1, 4.37114e-08, -4.37114e-08, 5.69049, 1, 4.4359)
-
-[node name="Props" type="Node3D" parent="."]
-
-[node name="table" parent="Props" instance=ExtResource("3_vcsgt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.25654)
-
-[node name="lampRoundFloor" parent="Props" instance=ExtResource("4_c01mt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01831, 0.324595, 2.77214)
 
 [node name="LevelController" type="Node3D" parent="."]
 script = ExtResource("8_q8u5g")

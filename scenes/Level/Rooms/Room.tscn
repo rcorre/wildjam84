@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjm3fhg3ivebn"]
+[gd_scene load_steps=5 format=3 uid="uid://cjm3fhg3ivebn"]
 
 [ext_resource type="Script" uid="uid://bgvqg3tbrarih" path="res://scenes/Level/Rooms/Room.gd" id="1_ftteg"]
 [ext_resource type="PackedScene" uid="uid://lare0nuf4gky" path="res://scenes/Level/Walls/BreakableWall1.tscn" id="2_xgo5k"]
 [ext_resource type="PackedScene" uid="uid://dll4msolpmjc7" path="res://scenes/Level/Walls/BreakableWall2.tscn" id="3_u1muq"]
+[ext_resource type="PackedScene" uid="uid://dq32mrx7dfa67" path="res://scenes/Level/Rooms/FurnitureSets/Bedroom1.tscn" id="4_u1muq"]
 
 [node name="Room" type="Node3D"]
 script = ExtResource("1_ftteg")
 walls = Array[PackedScene]([ExtResource("2_xgo5k"), ExtResource("3_u1muq")])
+furniture_sets = Array[PackedScene]([ExtResource("4_u1muq")])

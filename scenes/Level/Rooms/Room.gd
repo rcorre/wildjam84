@@ -3,7 +3,6 @@ class_name Room extends Node3D
 signal on_room_breach(room_id, direction)
 
 @export var walls : Array[PackedScene]
-
 @export var furniture_sets : Array[PackedScene]
 
 var wall_offsets = {
@@ -44,6 +43,21 @@ func _build_that_wall(direction: String) -> void:
 	if (_coin_flip()):
 		wall.rotate(position_offset.normalized(), PI)
 
+func _create_random_furniture_set() -> Node3D:
+	var index := randi_range(0, furniture_sets.size() - 1)
+	var furniture_set := furniture_sets[index].instantiate() as Node3D
+	return furniture_set
+
+func _build_furniture_set() -> void:
+	var furniture_set := _create_random_furniture_set()
+	furniture_set.name = "Furniture"
+
+	self.add_child(furniture_set)
+	var furniture_rotation := randi_range(0, 3) * (PI / 2)
+	furniture_set.rotate(Vector3.UP, furniture_rotation)
+	furniture_set.translate(Vector3.DOWN * 3)
+	
+
 func _ready() -> void:
 	assert(walls.size() > 0)
 
@@ -58,6 +72,8 @@ func _ready() -> void:
 		_build_that_wall(Constants.DIRECTION.SOUTH)
 	if build_west:
 		_build_that_wall(Constants.DIRECTION.WEST)
+	
+	_build_furniture_set()
 
 func _on_wall_break(broken_wall_name: String) -> void:
 	on_room_breach.emit(id, broken_wall_name)
