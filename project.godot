@@ -31,6 +31,8 @@ gdscript/warnings/assert_always_false=0
 
 [editor]
 
+movie_writer/mjpeg_quality=0.5
+movie_writer/movie_file="/tmp/movie.avi"
 naming/scene_name_casing=1
 naming/script_name_casing=1
 

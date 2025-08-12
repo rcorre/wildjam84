@@ -73,6 +73,9 @@ func throw() -> void:
 	assert(held_object, "Cannot throw if not holding")
 	var force: float = lerp(0.0, MAX_THROW_FORCE, throw_charge)
 	prints("throwing", held_object, "with force", force)
+	# temporarily exclude self-collisions as we throw
+	held_object.add_collision_exception_with(self)
+	get_tree().create_timer(1.0).timeout.connect(held_object.remove_collision_exception_with.bind(self))
 	held_object.throw(-camera.global_transform.basis.z * force)
 	held_object = null
 	throw_charge = 0

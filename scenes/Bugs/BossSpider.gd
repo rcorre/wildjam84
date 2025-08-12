@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name BossSpider
 
-@export var health := 500
+@export var health := 50
 @export var speed := 2.0
 
 # time between movements
@@ -17,7 +17,6 @@ class_name BossSpider
 @onready var splat_sound: AudioStreamPlayer3D = $SplatSound
 @onready var splat_particles: CPUParticles3D = $SplatParticles
 @onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var jump_area: Area3D = $JumpArea
 
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
 
