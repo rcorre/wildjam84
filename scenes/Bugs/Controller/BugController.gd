@@ -13,6 +13,33 @@ const DIFFICULTY_LEVELS = [
 		"max_spawn_frequency": 10.0,
 		"max_concurrent_bugs": 3,
 	},
+	{
+		"bugs": [
+			{
+				"name": "Spider",
+				"chance": 100,
+			},
+		],
+		"min_spawn_frequency": 3.0,
+		"max_spawn_frequency": 7.0,
+		"max_concurrent_bugs": 5,
+	},
+	# # todo: get more bug models
+	# {
+	# 	"bugs": [
+	# 		{
+	# 			"name": "Spider",
+	# 			"chance": 50,
+	# 		},
+	# 		{
+	# 			"name": "Spider",
+	# 			"chance": 50,
+	# 		},
+	# 	],
+	# 	"min_spawn_frequency": 3.0,
+	# 	"max_spawn_frequency": 7.0,
+	# 	"max_concurrent_bugs": 5,
+	# },
 ]
 
 const ROOM_SIDES = {
@@ -114,5 +141,5 @@ func spawn(timer: Timer) -> void:
 func with_args(
 	level: int,
 ) -> BugController:
-	difficulty_level = clamp(level, 0, DIFFICULTY_LEVELS.size())
+	difficulty_level = clamp(level, 0, DIFFICULTY_LEVELS.size() - 1)
 	return self
