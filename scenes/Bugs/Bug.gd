@@ -10,6 +10,8 @@ const JUMP_SECS := 3.0
 # How fast the jump animation is
 const JUMP_ANIM_SECS := 0.25
 
+signal on_bug_death(bug: Bug)
+
 @onready var visibility_notifier: VisibleOnScreenNotifier3D = $VisibleOnScreenNotifier3D
 
 @export var health := 50
@@ -106,7 +108,7 @@ func hit(_from: Vector3, damage: int) -> void:
 		return
 	health -= damage
 	if health <= 0:
-		get_tree().create_timer(3.0).timeout.connect(queue_free)
+		on_bug_death.emit(self)
 		splat_sound.play()
 		splat_particles.emitting = true
 		collision_layer = 0

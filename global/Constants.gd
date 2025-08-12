@@ -5,4 +5,6 @@ const DIRECTION = {
 	"EAST": "EAST",
 	"WEST": "WEST",
 	"SOUTH": "SOUTH",
+	"UP": "UP",
+	"DOWN": "DOWN",
 }

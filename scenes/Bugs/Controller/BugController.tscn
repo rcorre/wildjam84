@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmuj4v85vq2os"]
+
+[ext_resource type="Script" uid="uid://rcv2hs2w8v32" path="res://scenes/Bugs/Controller/BugController.gd" id="1_8mp4u"]
+[ext_resource type="PackedScene" uid="uid://dmv485f177oai" path="res://scenes/Bugs/Spider.tscn" id="2_kk0mv"]
+
+[node name="BugController" type="Node3D"]
+script = ExtResource("1_8mp4u")
+Spider = ExtResource("2_kk0mv")

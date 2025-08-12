@@ -6,6 +6,7 @@ signal on_room_breach(room_id, direction)
 
 @export var walls : Array[PackedScene]
 @export var furniture_sets : Array[PackedScene]
+@export var bug_controller : PackedScene
 
 var wall_offsets = {
 	Constants.DIRECTION.NORTH: Vector4(6, 0, 0, PI / 2),
@@ -20,6 +21,7 @@ var build_north : bool
 var build_east : bool
 var build_south : bool
 var build_west : bool
+var mobs_difficulty_level : int
 
 func _coin_flip() -> bool:
 	return randi_range(0, 1) == 1
@@ -59,7 +61,10 @@ func _build_furniture_set() -> void:
 	var furniture_rotation := randi_range(0, 3) * (PI / 2)
 	furniture_set.rotate(Vector3.UP, furniture_rotation)
 	furniture_set.translate(Vector3.DOWN * 3)
-	
+
+func _build_bug_controller() -> void:
+	var bc := (bug_controller.instantiate() as BugController).with_args(mobs_difficulty_level)
+	self.add_child(bc)
 
 func _ready() -> void:
 	assert(walls.size() > 0)
@@ -68,9 +73,9 @@ func _ready() -> void:
 	self.name = "room%d" % id
 
 	var wall_color = Color.from_rgba8(
-		randi_range(50, 255),
-		randi_range(50, 255),
-		randi_range(50, 255),
+		randi_range(50, 200),
+		randi_range(50, 200),
+		randi_range(50, 200),
 	)
 	var material := StandardMaterial3D.new()
 	material.albedo_color = wall_color
@@ -86,6 +91,7 @@ func _ready() -> void:
 		_build_that_wall(Constants.DIRECTION.WEST, material)
 	
 	_build_furniture_set()
+	_build_bug_controller()
 
 func _on_wall_break(broken_wall_name: String) -> void:
 	on_room_breach.emit(id, broken_wall_name)
@@ -96,13 +102,14 @@ func with_args(
   build_north_wall := true,
   build_east_wall := true,
   build_south_wall := true,
-  build_west_wall := true
+  build_west_wall := true,
+	room_difficulty_level := 0,
 ) -> Room:
-	# todo: difficulty level or something, room can take over bug generation
 	self.id = room_id
 	self.room_offset = position_offset
 	self.build_north = build_north_wall
 	self.build_east = build_east_wall
 	self.build_south = build_south_wall
 	self.build_west = build_west_wall
+	self.mobs_difficulty_level = room_difficulty_level
 	return self

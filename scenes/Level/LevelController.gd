@@ -25,6 +25,7 @@ func _create_room_node(
 		build_east,
 		build_south,
 		build_west,
+		0, # id - 1, # todo: scale based on distance from center, also add new difficulty levels
 	)
 	self.add_child(new_room)
 	new_room.translate(Vector3.UP * 3)
