@@ -1,34 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmv485f177oai"]
+[gd_scene load_steps=9 format=3 uid="uid://cgnb0yeedrgic"]
 
-[ext_resource type="PackedScene" uid="uid://cjttwapnf87ix" path="res://assets/models/Spider.glb" id="1_hhqfg"]
-[ext_resource type="Script" uid="uid://bsx4vw80jdvnk" path="res://scenes/Bugs/Bug.gd" id="2_54sod"]
-[ext_resource type="AudioStream" uid="uid://bw4rruf5dkba" path="res://assets/sounds/splat.wav" id="3_sdwer"]
-[ext_resource type="AudioStream" uid="uid://cvvekbvqp1efp" path="res://assets/sounds/spider_walk.wav" id="4_dwmdf"]
+[ext_resource type="PackedScene" uid="uid://cjttwapnf87ix" path="res://assets/models/Spider.glb" id="1_1uyxt"]
+[ext_resource type="Script" uid="uid://r31d4uxatmpp" path="res://scenes/Bugs/BossSpider.gd" id="2_402v5"]
+[ext_resource type="AudioStream" uid="uid://bw4rruf5dkba" path="res://assets/sounds/splat.wav" id="3_7lryp"]
+[ext_resource type="AudioStream" uid="uid://cvvekbvqp1efp" path="res://assets/sounds/spider_walk.wav" id="4_txosg"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dwmdf"]
-size = Vector3(0.264404, 1, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_1uyxt"]
+size = Vector3(3.30273, 2.3277, 4.17505)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwmdf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lryp"]
 albedo_color = Color(0.485565, 0.789398, 0.263196, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_aybe7"]
+[sub_resource type="SphereMesh" id="SphereMesh_txosg"]
 radius = 0.1
 height = 0.2
 radial_segments = 16
 rings = 8
 
-[sub_resource type="Curve" id="Curve_bitvr"]
+[sub_resource type="Curve" id="Curve_qgo83"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_dwmdf"]
-radius = 5.0
-
-[node name="Spider" instance=ExtResource("1_hhqfg")]
-floor_stop_on_slope = false
-floor_block_on_wall = false
-floor_max_angle = 3.14159
-script = ExtResource("2_54sod")
+[node name="Spider" instance=ExtResource("1_1uyxt")]
+script = ExtResource("2_402v5")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/1/position = Vector3(0.289725, 0.00203593, 0.391904)
@@ -66,52 +60,43 @@ bones/25/rotation = Quaternion(0.313085, -0.00841872, 0.0827485, 0.946076)
 bones/26/position = Vector3(0, 0.14, 0)
 bones/26/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 
+[node name="Mesh" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
 [node name="AnimationPlayer" parent="." index="1"]
 root_motion_track = NodePath("Armature/Skeleton3D:Root")
 root_motion_local = false
-speed_scale = 8.0
+speed_scale = 2.0
 
-[node name="SplatSound" type="AudioStreamPlayer3D" parent="." index="2"]
-stream = ExtResource("3_sdwer")
-pitch_scale = 1.5
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07651, -1.19934)
+shape = SubResource("BoxShape3D_1uyxt")
+
+[node name="SplatSound" type="AudioStreamPlayer3D" parent="." index="3"]
+stream = ExtResource("3_7lryp")
+volume_db = 20.0
+pitch_scale = 0.5
+
+[node name="WalkSound" type="AudioStreamPlayer3D" parent="." index="4"]
+stream = ExtResource("4_txosg")
+volume_db = 50.0
+pitch_scale = 0.5
 bus = &"Sound"
 
-[node name="WalkSound" type="AudioStreamPlayer3D" parent="." index="3"]
-stream = ExtResource("4_dwmdf")
-volume_db = 30.0
-pitch_scale = 1.5
-bus = &"Sound"
-
-[node name="WallRaycast" type="RayCast3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.116806, 0)
-target_position = Vector3(0, 0, 0.6)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="5"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0180664, 0.129051, 0)
-shape = SubResource("BoxShape3D_dwmdf")
-
-[node name="SplatParticles" type="CPUParticles3D" parent="." index="6"]
-material_override = SubResource("StandardMaterial3D_dwmdf")
+[node name="SplatParticles" type="CPUParticles3D" parent="." index="5"]
+material_override = SubResource("StandardMaterial3D_7lryp")
 emitting = false
-amount = 64
+amount = 256
 lifetime = 0.5
 one_shot = true
-explosiveness = 0.7
-mesh = SubResource("SphereMesh_aybe7")
+explosiveness = 1.0
+mesh = SubResource("SphereMesh_txosg")
 direction = Vector3(0, 1, 0)
 spread = 98.26
-initial_velocity_min = 3.0
-initial_velocity_max = 8.0
-damping_min = 1.0
-damping_max = 1.0
-scale_amount_curve = SubResource("Curve_bitvr")
-
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." index="7"]
-aabb = AABB(-0.188965, 0.0520205, -0.353229, 0.37793, 0.251428, 0.479896)
-
-[node name="JumpArea" type="Area3D" parent="." index="8"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JumpArea" index="0"]
-shape = SubResource("SphereShape3D_dwmdf")
+initial_velocity_min = 6.0
+initial_velocity_max = 24.0
+damping_min = 0.4
+damping_max = 0.5
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_qgo83")

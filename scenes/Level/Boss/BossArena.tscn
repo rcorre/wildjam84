@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://ge0fdu8004n4"]
+
+[ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_mfo1x"]
+[ext_resource type="PackedScene" uid="uid://cgnb0yeedrgic" path="res://scenes/Bugs/BossSpider.tscn" id="2_f66k5"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_f66k5"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wi5nc"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a274q"]
+albedo_color = Color(0.318008, 0.318008, 0.318008, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mfo1x"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_rvslj"]
+sky_material = SubResource("ProceduralSkyMaterial_mfo1x")
+
+[sub_resource type="Environment" id="Environment_f66k5"]
+background_mode = 2
+sky = SubResource("Sky_rvslj")
+tonemap_mode = 2
+
+[node name="BossArena" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_f66k5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_wi5nc")
+surface_material_override/0 = SubResource("StandardMaterial3D_a274q")
+
+[node name="Player" parent="." instance=ExtResource("1_mfo1x")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f66k5")
+
+[node name="Spider" parent="." instance=ExtResource("2_f66k5")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 18)
