@@ -13,6 +13,7 @@ const ROOM_SIDES = {
 
 @export var Spider : PackedScene
 
+var player : Player
 var difficulty_level: int
 var bugs : Array[Bug] = []
 
@@ -86,7 +87,7 @@ func spawn(timer: Timer) -> void:
 	if bugs.size() >= config.max_concurrent_bugs:
 		return
 	
-	var next_bug := _pick_bug(config.bugs).instantiate() as Bug
+	var next_bug := (_pick_bug(config.bugs).instantiate() as Bug).with_args(player, config.chase_factor)
 	bugs.append(next_bug)
 	next_bug.on_bug_death.connect(_on_bug_death)
 	
@@ -100,6 +101,8 @@ func spawn(timer: Timer) -> void:
 
 func with_args(
 	level: int,
+	player_ref: Player,
 ) -> BugController:
 	difficulty_level = clamp(level, 0, DIFFICULTY_LEVELS.size() - 1)
+	player = player_ref
 	return self

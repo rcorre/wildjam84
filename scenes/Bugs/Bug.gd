@@ -36,6 +36,9 @@ var current_direction: Vector3 = Vector3.ZERO
 var jump_charge := 0.0
 var face_hugging: Player
 
+var player : Player
+var chase_factor : float = 0
+
 var last_floor_normal := Vector3.ZERO
 var last_turn := -1.0
 
@@ -99,12 +102,19 @@ func maybe_jump(delta: float) -> void:
 	collision_mask = 0
 	set_collision_layer_value(3, true)
 
+func _get_move_rotation() -> float:
+	if player:
+		# seems to work when I tested with one spider but it's hard to notice much difference in the chaos of many
+		var angle_to_player := basis.z.signed_angle_to(Basis.looking_at(player.position, up_direction).z, up_direction) + PI
+		return (randf_range(0, PI * 2) + (chase_factor * angle_to_player)) / (chase_factor + 1)
+	return randf_range(0, PI * 2)
+
 func move(timer: Timer) -> void:
 	if health <= 0:
 		return
 	timer.start(randf_range(min_move_secs, max_move_secs))
 	if randf() < move_chance:
-		rotate_object_local(Vector3.UP, randf_range(0, PI * 2))
+		rotate_object_local(up_direction, _get_move_rotation())
 		velocity = speed * basis.z
 		anim.play("Walk")
 		walk_sound.playing = true
@@ -129,3 +139,11 @@ func hit(_from: Vector3, damage: int) -> void:
 			var tween := get_tree().create_tween()
 			# note: the 0.1 delay actually equals 1s because we reduced the time scale
 			tween.tween_property(Engine, "time_scale", 1.0, 0.5).set_delay(0.1)
+
+func with_args(
+	player_ref: Player,
+	chase_factor: float,
+) -> Bug:
+	self.player = player_ref
+	self.chase_factor = chase_factor
+	return self

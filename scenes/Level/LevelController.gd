@@ -22,6 +22,7 @@ func _create_room_node(
 	var new_room := (self.room.instantiate() as Room).with_args(
 		id,
 		position_offset,
+		player,
 		build_north,
 		build_east,
 		build_south,
