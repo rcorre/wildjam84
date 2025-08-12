@@ -36,6 +36,9 @@ var current_direction: Vector3 = Vector3.ZERO
 var jump_charge := 0.0
 var face_hugging: Player
 
+var last_floor_normal := Vector3.ZERO
+var last_turn := -1.0
+
 func _ready() -> void:
 	var timer := Timer.new()
 	add_child(timer)
@@ -55,8 +58,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		jump_charge = move_toward(jump_charge, 0.0, delta)
 
+	if last_turn != -1:
+		last_turn += delta
+
 	if not face_hugging:
-		move_and_slide()
+		var collision := move_and_collide(basis.z * delta * speed)
+		if collision and (last_turn == -1 or last_turn > 2):
+			last_turn = 0
+			basis = Basis.looking_at(collision.get_normal(0).cross(up_direction), collision.get_normal(0))
+		# move_and_slide()
 
 func maybe_jump(delta: float) -> void:
 	var player := jump_area.get_overlapping_bodies()[0] as Player

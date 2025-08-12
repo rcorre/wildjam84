@@ -152,7 +152,6 @@ func apply_panic(delta: float) -> void:
 			visible_bugs.push_back(bug)
 
 	if visible_bugs.size() == 0:
-		# panic = move_toward(panic, 0.0, delta * PANIC_RECOVERY_RATE)
 		_apply_panic(delta * PANIC_RECOVERY_RATE, 0.0)
 		return
 

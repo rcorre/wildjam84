@@ -11,19 +11,19 @@ const DIFFICULTY_LEVELS = [
 		],
 		"min_spawn_frequency": 5.0,
 		"max_spawn_frequency": 10.0,
-		"max_concurrent_bugs": 3,
+		"max_concurrent_bugs": 2,
 	},
-	{
-		"bugs": [
-			{
-				"name": "Spider",
-				"chance": 100,
-			},
-		],
-		"min_spawn_frequency": 3.0,
-		"max_spawn_frequency": 7.0,
-		"max_concurrent_bugs": 5,
-	},
+	# {
+	# 	"bugs": [
+	# 		{
+	# 			"name": "Spider",
+	# 			"chance": 100,
+	# 		},
+	# 	],
+	# 	"min_spawn_frequency": 3.0,
+	# 	"max_spawn_frequency": 7.0,
+	# 	"max_concurrent_bugs": 6,
+	# },
 	# # todo: get more bug models
 	# {
 	# 	"bugs": [
@@ -133,9 +133,9 @@ func spawn(timer: Timer) -> void:
 	add_child(next_bug)
 	_place_on_bounds(
 		next_bug,
-		Vector2(-5.9, 5.9),
-		Vector2(-2.9, 2.9),
-		Vector2(-5.9, 5.9),
+		Vector2(-5.75, 5.75),
+		Vector2(-2.75, 2.75),
+		Vector2(-5.75, 5.75),
 	)
 
 func with_args(
