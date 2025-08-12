@@ -59,6 +59,7 @@ skeleton = NodePath("../..")
 [node name="CeilingShape" type="CollisionShape3D" parent="CeilingStatidBody3D"]
 shape = SubResource("WorldBoundaryShape3D_0bbpv")
 
-[node name="LevelController" type="Node3D" parent="."]
+[node name="LevelController" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("8_q8u5g")
 room = ExtResource("9_lhr70")
+player = NodePath("../Player")

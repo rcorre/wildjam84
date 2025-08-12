@@ -1,46 +1,6 @@
 class_name BugController extends Node3D
 
-const DIFFICULTY_LEVELS = [
-	{
-		# It's assumed that the chances will always total to 100
-		"bugs": [
-			{
-				"name": "Spider",
-				"chance": 100,
-			},
-		],
-		"min_spawn_frequency": 5.0,
-		"max_spawn_frequency": 10.0,
-		"max_concurrent_bugs": 2,
-	},
-	# {
-	# 	"bugs": [
-	# 		{
-	# 			"name": "Spider",
-	# 			"chance": 100,
-	# 		},
-	# 	],
-	# 	"min_spawn_frequency": 3.0,
-	# 	"max_spawn_frequency": 7.0,
-	# 	"max_concurrent_bugs": 6,
-	# },
-	# # todo: get more bug models
-	# {
-	# 	"bugs": [
-	# 		{
-	# 			"name": "Spider",
-	# 			"chance": 50,
-	# 		},
-	# 		{
-	# 			"name": "Spider",
-	# 			"chance": 50,
-	# 		},
-	# 	],
-	# 	"min_spawn_frequency": 3.0,
-	# 	"max_spawn_frequency": 7.0,
-	# 	"max_concurrent_bugs": 5,
-	# },
-]
+const DIFFICULTY_LEVELS = Constants.DIFFICULTY_LEVELS
 
 const ROOM_SIDES = {
 	1: Constants.DIRECTION.NORTH,
@@ -133,9 +93,9 @@ func spawn(timer: Timer) -> void:
 	add_child(next_bug)
 	_place_on_bounds(
 		next_bug,
-		Vector2(-5.75, 5.75),
-		Vector2(-2.75, 2.75),
-		Vector2(-5.75, 5.75),
+		Vector2(-5.7, 5.7),
+		Vector2(-2.7, 2.7),
+		Vector2(-5.7, 5.7),
 	)
 
 func with_args(

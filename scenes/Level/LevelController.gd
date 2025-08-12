@@ -1,12 +1,13 @@
 class_name LevelController extends Node3D
 
-const MAP_SIZE := 32
 const ROOM_OFFSET := 12
 
 @export var room : PackedScene
+@export var player : Player
 
 var level_map : LevelMap
-var center : int = MAP_SIZE / 2
+var map_size := (Constants.DIFFICULTY_LEVELS.size() * 2) - 1
+var center : int = map_size / 2
 var room_count := 0
 
 func _create_room_node(
@@ -25,7 +26,7 @@ func _create_room_node(
 		build_east,
 		build_south,
 		build_west,
-		id - 1, # todo: scale based on distance from center, also add new difficulty levels
+		level_map.distance_from_center_by_id(id),
 	)
 	self.add_child(new_room)
 	new_room.translate(Vector3.UP * 3)
@@ -44,6 +45,7 @@ func _create_room(x: int, z: int):
 
 	room_count += 1
 	var id := room_count
+	level_map.add(x, z, id)
 
 	_create_room_node(
 		id,
@@ -53,7 +55,6 @@ func _create_room(x: int, z: int):
 		build_south,
 		build_west,
 	)
-	level_map.add(x, z, id)
 
 func _on_room_breached(room_id: int, direction: String):
 	var room_location := level_map.get_coordinates(room_id)
@@ -70,7 +71,7 @@ func _on_room_breached(room_id: int, direction: String):
 	_create_room(x, z)
 
 func _ready() -> void:
-	level_map = LevelMap.new().init(MAP_SIZE)
+	level_map = LevelMap.new().init(map_size)
 	_create_room(center, center)
 
 
@@ -90,10 +91,18 @@ class LevelMap:
 			for z in range(self.size):
 				map[x].append(0)
 		return self
+	
+	func distance_from_center(from_x: int, from_z: int) -> int:
+		var center := size / 2
+		return max(abs(from_x - center), abs(from_z - center))
+
+	func distance_from_center_by_id(from_id: int) -> int:
+		var from := id_to_map[from_id] as Vector2i
+		return distance_from_center(from.x, from.y)
 
 	func add(x: int, z: int, id: int) -> void:
 		map[x][z] = id
-		id_to_map[id] = Vector2(x, z)
+		id_to_map[id] = Vector2i(x, z)
 	
 	func get_coordinates(id: int) -> Vector2i:
 		return id_to_map[id]
