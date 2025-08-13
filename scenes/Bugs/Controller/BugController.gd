@@ -24,7 +24,7 @@ func _ready() -> void:
 	add_child(timer)
 	timer.one_shot = true
 	timer.timeout.connect(spawn.bind(timer))
-	spawn(timer)
+	spawn(timer, true)
 
 func _on_try_again(new_player: Player) -> void:
 	self.player = new_player
@@ -86,24 +86,29 @@ func _place_on_bounds(bug: Bug, x_bounds: Vector2, y_bounds: Vector2, z_bounds: 
 	
 	bug.position = Vector3(final_x, final_y, final_z)
 
-func spawn(timer: Timer) -> void:
+func spawn(timer: Timer, max_out := false) -> void:
 	var config : Dictionary = DIFFICULTY_LEVELS[difficulty_level]
 	timer.start(randf_range(config.min_spawn_frequency as float, config.max_spawn_frequency as float))
 	
 	if bugs.size() >= config.max_concurrent_bugs:
 		return
 	
-	var next_bug := (_pick_bug(config.bugs).instantiate() as Bug).with_args(player, config.chase_factor)
-	bugs.append(next_bug)
-	next_bug.on_bug_death.connect(_on_bug_death)
+	var bugs_left := 1 if not max_out else config.max_concurrent_bugs - bugs.size() as int
 	
-	add_child(next_bug)
-	_place_on_bounds(
-		next_bug,
-		Vector2(-5.7, 5.7),
-		Vector2(-2.7, 2.7),
-		Vector2(-5.7, 5.7),
-	)
+	while bugs_left > 0:
+		bugs_left -= 1
+	
+		var next_bug := (_pick_bug(config.bugs).instantiate() as Bug).with_args(player, config.chase_factor)
+		bugs.append(next_bug)
+		next_bug.on_bug_death.connect(_on_bug_death)
+		
+		add_child(next_bug)
+		_place_on_bounds(
+			next_bug,
+			Vector2(-5.7, 5.7),
+			Vector2(-2.7, 2.7),
+			Vector2(-5.7, 5.7),
+		)
 
 func with_args(
 	level: int,
