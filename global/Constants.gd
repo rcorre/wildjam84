@@ -40,7 +40,7 @@ const DIFFICULTY_LEVELS = [
 		"min_spawn_frequency": 6.0,
 		"max_spawn_frequency": 11.0,
 		"max_concurrent_bugs": 4,
-		"chase_factor": 0.5,
+		"chase_factor": 1,
 		"wall_color": Color.PALE_GREEN,
 	},
 	{
@@ -61,7 +61,7 @@ const DIFFICULTY_LEVELS = [
 		"min_spawn_frequency": 6.0,
 		"max_spawn_frequency": 10.0,
 		"max_concurrent_bugs": 4,
-		"chase_factor": 1,
+		"chase_factor": 3,
 		"wall_color": Color.GOLD,
 	},
 		{
@@ -74,7 +74,7 @@ const DIFFICULTY_LEVELS = [
 		"min_spawn_frequency": 6.0,
 		"max_spawn_frequency": 8.0,
 		"max_concurrent_bugs": 5,
-		"chase_factor": 3,
+		"chase_factor": 5,
 		"wall_color": Color.DARK_ORANGE,
 	},
 		{
@@ -87,7 +87,7 @@ const DIFFICULTY_LEVELS = [
 		"min_spawn_frequency": 5.0,
 		"max_spawn_frequency": 7.0,
 		"max_concurrent_bugs": 6,
-		"chase_factor": 5,
+		"chase_factor": 10,
 		"wall_color": Color.WEB_MAROON,
 	},
 ]
