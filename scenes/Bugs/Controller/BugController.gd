@@ -1,46 +1,6 @@
 class_name BugController extends Node3D
 
-const DIFFICULTY_LEVELS = [
-	{
-		# It's assumed that the chances will always total to 100
-		"bugs": [
-			{
-				"name": "Spider",
-				"chance": 100,
-			},
-		],
-		"min_spawn_frequency": 5.0,
-		"max_spawn_frequency": 10.0,
-		"max_concurrent_bugs": 2,
-	},
-	# {
-	# 	"bugs": [
-	# 		{
-	# 			"name": "Spider",
-	# 			"chance": 100,
-	# 		},
-	# 	],
-	# 	"min_spawn_frequency": 3.0,
-	# 	"max_spawn_frequency": 7.0,
-	# 	"max_concurrent_bugs": 6,
-	# },
-	# # todo: get more bug models
-	# {
-	# 	"bugs": [
-	# 		{
-	# 			"name": "Spider",
-	# 			"chance": 50,
-	# 		},
-	# 		{
-	# 			"name": "Spider",
-	# 			"chance": 50,
-	# 		},
-	# 	],
-	# 	"min_spawn_frequency": 3.0,
-	# 	"max_spawn_frequency": 7.0,
-	# 	"max_concurrent_bugs": 5,
-	# },
-]
+const DIFFICULTY_LEVELS = Constants.DIFFICULTY_LEVELS
 
 const ROOM_SIDES = {
 	1: Constants.DIRECTION.NORTH,
@@ -51,17 +11,23 @@ const ROOM_SIDES = {
 	6: Constants.DIRECTION.DOWN
 }
 
-@export var Spider : PackedScene
+@export var spider_scene : PackedScene
+@export var butterfly_scene : PackedScene
 
+var player : Player
 var difficulty_level: int
 var bugs : Array[Bug] = []
 
 func _ready() -> void:
+	Constants.on_try_again.connect(_on_try_again)
 	var timer := Timer.new()
 	add_child(timer)
 	timer.one_shot = true
 	timer.timeout.connect(spawn.bind(timer))
-	spawn(timer)
+	spawn(timer, true)
+
+func _on_try_again(new_player: Player) -> void:
+	self.player = new_player
 
 func _on_bug_death(bug: Bug) -> void:
 	var index := bugs.find(bug)
@@ -70,8 +36,9 @@ func _on_bug_death(bug: Bug) -> void:
 
 func _get_bug_scene(bug_name: String) -> PackedScene:
 	match bug_name:
-		"Spider": return Spider
-		_: return Spider
+		"Spider": return spider_scene
+		"Butterfly": return butterfly_scene
+		_: return spider_scene
 
 func _pick_bug(options: Array) -> PackedScene:
 	var rand_val := randi_range(1, 100)
@@ -119,27 +86,34 @@ func _place_on_bounds(bug: Bug, x_bounds: Vector2, y_bounds: Vector2, z_bounds: 
 	
 	bug.position = Vector3(final_x, final_y, final_z)
 
-func spawn(timer: Timer) -> void:
+func spawn(timer: Timer, max_out := false) -> void:
 	var config : Dictionary = DIFFICULTY_LEVELS[difficulty_level]
 	timer.start(randf_range(config.min_spawn_frequency as float, config.max_spawn_frequency as float))
 	
 	if bugs.size() >= config.max_concurrent_bugs:
 		return
 	
-	var next_bug := _pick_bug(config.bugs).instantiate() as Bug
-	bugs.append(next_bug)
-	next_bug.on_bug_death.connect(_on_bug_death)
+	var bugs_left := 1 if not max_out else config.max_concurrent_bugs - bugs.size() as int
 	
-	add_child(next_bug)
-	_place_on_bounds(
-		next_bug,
-		Vector2(-5.75, 5.75),
-		Vector2(-2.75, 2.75),
-		Vector2(-5.75, 5.75),
-	)
+	while bugs_left > 0:
+		bugs_left -= 1
+	
+		var next_bug := (_pick_bug(config.bugs).instantiate() as Bug).with_args(player, config.chase_factor)
+		bugs.append(next_bug)
+		next_bug.on_bug_death.connect(_on_bug_death)
+		
+		add_child(next_bug)
+		_place_on_bounds(
+			next_bug,
+			Vector2(-5.7, 5.7),
+			Vector2(-2.7, 2.7),
+			Vector2(-5.7, 5.7),
+		)
 
 func with_args(
 	level: int,
+	player_ref: Player,
 ) -> BugController:
 	difficulty_level = clamp(level, 0, DIFFICULTY_LEVELS.size() - 1)
+	player = player_ref
 	return self

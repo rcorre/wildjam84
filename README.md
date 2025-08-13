@@ -38,3 +38,11 @@ Some code was copied from the [Godot Destruction Plugin](https://github.com/Jumm
 ## game-icons.net
 
 - [Mouse Icon](https://game-icons.net/1x1/delapouite/mouse.html)
+
+## stylo0
+
+- [Animals Asset Pack](https://styloo.itch.io/animals)
+
+## Envato
+
+- [Flapping creates flight for various winged insects and birds](https://elements.envato.com/flapping-creates-flight-for-various-winged-insects-8TSJ8C8)

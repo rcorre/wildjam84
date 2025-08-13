@@ -17,6 +17,7 @@ var wall_offsets = {
 
 var id : int
 var room_offset : Vector3
+var player : Player
 var build_north : bool
 var build_east : bool
 var build_south : bool
@@ -63,20 +64,21 @@ func _build_furniture_set() -> void:
 	furniture_set.translate(Vector3.DOWN * 3)
 
 func _build_bug_controller() -> void:
-	var bc := (bug_controller.instantiate() as BugController).with_args(mobs_difficulty_level)
+	var bc := (bug_controller.instantiate() as BugController).with_args(mobs_difficulty_level, player)
 	self.add_child(bc)
+
+func _on_try_again(new_player: Player) -> void:
+	self.player = new_player
 
 func _ready() -> void:
 	assert(walls.size() > 0)
 
+	Constants.on_try_again.connect(_on_try_again)
+
 	self.translate(self.room_offset)
 	self.name = "room%d" % id
 
-	var wall_color = Color.from_rgba8(
-		randi_range(50, 200),
-		randi_range(50, 200),
-		randi_range(50, 200),
-	)
+	var wall_color = Constants.DIFFICULTY_LEVELS[mobs_difficulty_level].wall_color
 	var material := StandardMaterial3D.new()
 	material.albedo_color = wall_color
 	material.albedo_texture = WALL_MATERIAL
@@ -99,6 +101,7 @@ func _on_wall_break(broken_wall_name: String) -> void:
 func with_args(
 	room_id: int,
 	position_offset: Vector3,
+	player_ref: Player,
   build_north_wall := true,
   build_east_wall := true,
   build_south_wall := true,
@@ -107,6 +110,7 @@ func with_args(
 ) -> Room:
 	self.id = room_id
 	self.room_offset = position_offset
+	self.player = player_ref
 	self.build_north = build_north_wall
 	self.build_east = build_east_wall
 	self.build_south = build_south_wall

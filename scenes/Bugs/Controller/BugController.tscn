@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmuj4v85vq2os"]
+[gd_scene load_steps=4 format=3 uid="uid://bmuj4v85vq2os"]
 
 [ext_resource type="Script" uid="uid://rcv2hs2w8v32" path="res://scenes/Bugs/Controller/BugController.gd" id="1_8mp4u"]
-[ext_resource type="PackedScene" uid="uid://dmv485f177oai" path="res://scenes/Bugs/Spider.tscn" id="2_kk0mv"]
+[ext_resource type="PackedScene" uid="uid://dmv485f177oai" path="res://scenes/Bugs/Spider/Spider.tscn" id="2_kk0mv"]
+[ext_resource type="PackedScene" uid="uid://gvhpg148ek8a" path="res://scenes/Bugs/Butterfly/Butterfly.tscn" id="3_skq4w"]
 
 [node name="BugController" type="Node3D"]
 script = ExtResource("1_8mp4u")
-Spider = ExtResource("2_kk0mv")
+spider_scene = ExtResource("2_kk0mv")
+butterfly_scene = ExtResource("3_skq4w")
