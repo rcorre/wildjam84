@@ -27,12 +27,13 @@ const MAX_THROW_SECS := 2.0
 @onready var grab_ray: RayCast3D = $Camera3D/RayCast3D
 @onready var grab_point: Node3D = $Camera3D/GrabPoint
 @onready var bug_detector: Area3D = $BugDetector
-# I'm sorry
+# I'm sorry.
+# don't know why, but the radius is set to 5 but it's getting hits as far as 15.x meters
 @onready var bug_detector_radius: float = (
 	(
 		bug_detector.get_node("CollisionShape3D") as CollisionShape3D
 	).shape as SphereShape3D
-).radius
+).radius * 3
 @onready var panic_sound: AudioStreamPlayer3D = $PanicSound
 
 var look: Vector2
@@ -159,7 +160,7 @@ func apply_panic(delta: float) -> void:
 	var closest_distance := INF
 	for bug in visible_bugs:
 		closest_distance = min((bug.position - self.position).length(), closest_distance)
-	var proximity_factor := lerpf(0.5, 2, 1 - (closest_distance / bug_detector_radius))
+	var proximity_factor := lerpf(0.5, 2, clampf(1 - (closest_distance / bug_detector_radius), 0, 1))
 
 	# Use sqrt, so two bugs is more panic, but not twice as much
 	var quantity_factor := sqrt(visible_bugs.size())

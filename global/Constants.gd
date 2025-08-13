@@ -14,25 +14,29 @@ const DIFFICULTY_LEVELS = [
 		# It's assumed that the chances will always total to 100
 		"bugs": [
 			{
-				"name": "Spider",
+				"name": "Butterfly",
 				"chance": 100,
 			},
 		],
-		"min_spawn_frequency": 10.0,
-		"max_spawn_frequency": 15.0,
-		"max_concurrent_bugs": 2,
+		"min_spawn_frequency": 6.0,
+		"max_spawn_frequency": 12.0,
+		"max_concurrent_bugs": 4,
 		"chase_factor": 0,
 		"wall_color": Color.WEB_GREEN,
 	},
 	{
 		"bugs": [
 			{
+				"name": "Butterfly",
+				"chance": 30,
+			},
+			{
 				"name": "Spider",
-				"chance": 100,
+				"chance": 70,
 			},
 		],
-		"min_spawn_frequency": 7.0,
-		"max_spawn_frequency": 12.0,
+		"min_spawn_frequency": 6.0,
+		"max_spawn_frequency": 11.0,
 		"max_concurrent_bugs": 3,
 		"chase_factor": 0.5,
 		"wall_color": Color.PALE_GREEN,

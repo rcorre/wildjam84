@@ -11,7 +11,8 @@ const ROOM_SIDES = {
 	6: Constants.DIRECTION.DOWN
 }
 
-@export var Spider : PackedScene
+@export var spider_scene : PackedScene
+@export var butterfly_scene : PackedScene
 
 var player : Player
 var difficulty_level: int
@@ -31,8 +32,9 @@ func _on_bug_death(bug: Bug) -> void:
 
 func _get_bug_scene(bug_name: String) -> PackedScene:
 	match bug_name:
-		"Spider": return Spider
-		_: return Spider
+		"Spider": return spider_scene
+		"Butterfly": return butterfly_scene
+		_: return spider_scene
 
 func _pick_bug(options: Array) -> PackedScene:
 	var rand_val := randi_range(1, 100)

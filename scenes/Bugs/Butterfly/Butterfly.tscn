@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://gvhpg148ek8a"]
+
+[ext_resource type="PackedScene" uid="uid://kvlkac7m23s0" path="res://assets/models/Butterfly.glb" id="1_de5c5"]
+[ext_resource type="Script" uid="uid://b8h0ifu83xibr" path="res://scenes/Bugs/Butterfly/Butterfly.gd" id="2_47vs3"]
+[ext_resource type="AudioStream" uid="uid://bw4rruf5dkba" path="res://assets/sounds/splat.wav" id="3_jvhbi"]
+[ext_resource type="AudioStream" uid="uid://dqj14kxs03mxs" path="res://assets/sounds/wing_flap.mp3" id="4_jvhbi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ybh7j"]
+size = Vector3(0.227417, 0.531982, 0.460388)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77qx4"]
+albedo_color = Color(0.485565, 0.789398, 0.263196, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rgddv"]
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Curve" id="Curve_ceh6o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Butterfly" instance=ExtResource("1_de5c5")]
+floor_stop_on_slope = false
+floor_block_on_wall = false
+floor_max_angle = 3.14159
+script = ExtResource("2_47vs3")
+health = 25
+max_move_secs = 3.0
+move_chance = 0.75
+
+[node name="Skeleton3D" parent="butterfly_root" index="0"]
+bones/3/rotation = Quaternion(-0.0229996, 0.00129381, 0.346822, 0.937648)
+bones/6/rotation = Quaternion(-0.0229996, -0.0012938, -0.346822, 0.937648)
+bones/8/rotation = Quaternion(-0.0146719, -0.00143225, -0.0789218, 0.996772)
+bones/10/rotation = Quaternion(-0.014672, 0.00143237, 0.0789218, 0.996772)
+
+[node name="SplatSound" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("3_jvhbi")
+pitch_scale = 1.5
+
+[node name="WalkSound" type="AudioStreamPlayer3D" parent="." index="3"]
+stream = ExtResource("4_jvhbi")
+volume_db = 10.0
+max_distance = 20.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="4"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.00109862, 0.110557, 0.0226135)
+shape = SubResource("BoxShape3D_ybh7j")
+
+[node name="SplatParticles" type="CPUParticles3D" parent="." index="5"]
+material_override = SubResource("StandardMaterial3D_77qx4")
+emitting = false
+amount = 64
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.7
+mesh = SubResource("SphereMesh_rgddv")
+direction = Vector3(0, 1, 0)
+spread = 98.26
+initial_velocity_min = 3.0
+initial_velocity_max = 8.0
+damping_min = 1.0
+damping_max = 1.0
+scale_amount_curve = SubResource("Curve_ceh6o")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.145862, 0)
+aabb = AABB(-0.295265, 0.112478, -0.353229, 0.590531, 0.130513, 0.479896)
