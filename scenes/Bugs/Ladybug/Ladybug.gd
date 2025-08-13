@@ -1,19 +1,11 @@
 class_name Ladybug extends Bug
 
-# Time you can stand near a bug till it jumps on you
-const JUMP_SECS := 10.0
-
-# How fast the jump animation is
-const JUMP_ANIM_SECS := 0.5
-
 var last_floor_normal := Vector3.ZERO
 var last_turn := -1.0
 
 func _on_ready() -> void:
 	self.move_animation_name = "walk"
 	self.idle_animation_name = "walk"
-	self.jump_secs = JUMP_SECS
-	self.jump_anim_secs = JUMP_ANIM_SECS
 	self.mesh = $ANIMALS/Insects/Ladybug/alt1
 
 func _on_physics_process(delta: float) -> void:

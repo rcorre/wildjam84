@@ -29,6 +29,9 @@ floor_stop_on_slope = false
 floor_block_on_wall = false
 floor_max_angle = 3.14159
 script = ExtResource("2_bwpam")
+health = 100
+jump_seconds = 2.5
+jump_animation_seconds = 0.25
 
 [node name="AnimationPlayer" parent="." index="1"]
 root_motion_track = NodePath("Armature/Skeleton3D:Root")

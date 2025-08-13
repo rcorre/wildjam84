@@ -43,6 +43,14 @@ Some code was copied from the [Godot Destruction Plugin](https://github.com/Jumm
 
 - [Animals Asset Pack](https://styloo.itch.io/animals)
 
+## davidoreilly
+
+- [Everything Library 01 - ANIMALS](https://davidoreilly.itch.io/everything-library-animals)
+
+## mantisda.itch.io
+
+- [Mantis Hatchery Battle Creatures Pack](https://mantisda.itch.io/mantis-hatchery-battle-creatures)
+
 ## Envato
 
 - [Flapping creates flight for various winged insects and birds](https://elements.envato.com/flapping-creates-flight-for-various-winged-insects-8TSJ8C8)

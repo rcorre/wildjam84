@@ -18,6 +18,8 @@ signal on_bug_death(bug: Bug)
 # chance to move vs standing still
 @export var move_chance := 0.5
 
+@export var jump_seconds : float
+@export var jump_animation_seconds : float
 
 @onready var walk_sound: AudioStreamPlayer3D = $WalkSound
 @onready var splat_sound: AudioStreamPlayer3D = $SplatSound
@@ -35,8 +37,6 @@ var face_hugging: Player
 var mesh: Node3D
 var move_animation_name : String
 var idle_animation_name : String
-var jump_secs : float
-var jump_anim_secs : float
 
 func _on_ready() -> void:
 	pass
@@ -77,7 +77,7 @@ func move(timer: Timer) -> void:
 	if health <= 0:
 		return
 	timer.start(randf_range(min_move_secs, max_move_secs))
-	if randf() < move_chance:
+	if randf() > move_chance:
 		_rotate_for_move()
 		velocity = speed * basis.z
 		anim.play(move_animation_name)
@@ -93,7 +93,7 @@ func maybe_jump(delta: float) -> void:
 		# already got one
 		return
 
-	jump_charge = move_toward(jump_charge, 1.0, delta / jump_secs)
+	jump_charge = move_toward(jump_charge, 1.0, delta / jump_seconds)
 
 	if jump_charge < 1.0:
 		return
@@ -110,8 +110,8 @@ func maybe_jump(delta: float) -> void:
 
 	# move our position to the camera, but a little forward
 	tween.set_parallel()
-	tween.tween_property(self, "position", Vector3.FORWARD * 0.5, jump_anim_secs)
-	tween.tween_property(self, "rotation", Vector3(PI / -2.0, 0.0, 0.0), jump_anim_secs)
+	tween.tween_property(self, "position", Vector3.FORWARD * 0.5, jump_animation_seconds)
+	tween.tween_property(self, "rotation", Vector3(PI / -2.0, 0.0, 0.0), jump_animation_seconds)
 
 	# just don't collide while jumping
 	collision_layer = 0

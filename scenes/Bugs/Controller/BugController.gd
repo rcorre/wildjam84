@@ -14,6 +14,7 @@ const ROOM_SIDES = {
 @export var spider_scene : PackedScene
 @export var butterfly_scene : PackedScene
 @export var ladybug_scene : PackedScene
+@export var ant_scene : PackedScene
 
 var player : Player
 var difficulty_level: int
@@ -40,6 +41,7 @@ func _get_bug_scene(bug_name: String) -> PackedScene:
 		"Spider": return spider_scene
 		"Butterfly": return butterfly_scene
 		"Ladybug": return ladybug_scene
+		"Ant": return ant_scene
 		_: return spider_scene
 
 func _pick_bug(options: Array) -> PackedScene:

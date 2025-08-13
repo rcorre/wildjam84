@@ -24,6 +24,21 @@ point_count = 2
 [sub_resource type="SphereShape3D" id="SphereShape3D_oj73j"]
 radius = 5.0
 
+[sub_resource type="Animation" id="Animation_aah6g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ANIMALS/Insects/Ladybug:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_1c2y8"]
 resource_name = "walk"
 loop_mode = 1
@@ -40,21 +55,6 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.139626), Vector3(0, 0, -0.139626), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_aah6g"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ANIMALS/Insects/Ladybug:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s1iki"]
 _data = {
 &"RESET": SubResource("Animation_aah6g"),
@@ -63,9 +63,10 @@ _data = {
 
 [node name="Ladybug" instance=ExtResource("1_kxhcm")]
 script = ExtResource("2_2ptnu")
-health = 25
 speed = 1.0
-move_chance = 0.25
+move_chance = 0.33
+jump_seconds = 5.0
+jump_animation_seconds = 0.25
 
 [node name="Ladybug" parent="ANIMALS/Insects" index="0"]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
