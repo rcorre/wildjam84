@@ -3,12 +3,13 @@ class_name LevelController extends Node3D
 const ROOM_OFFSET := 12
 
 @export var room : PackedScene
-@export var player : Player
 
 var level_map : LevelMap
 var map_size := (Constants.DIFFICULTY_LEVELS.size() * 2) - 1
 var center : int = map_size / 2
 var room_count := 0
+
+@onready var player : Player = self.get_parent().get_node("Player")
 
 func _create_room_node(
 	id: int,
@@ -57,7 +58,7 @@ func _create_room(x: int, z: int):
 		build_west,
 	)
 
-func _on_room_breached(room_id: int, direction: String):
+func _on_room_breached(room_id: int, direction: String) -> void:
 	var room_location := level_map.get_coordinates(room_id)
 	var x := room_location.x
 	var z := room_location.y
@@ -71,7 +72,11 @@ func _on_room_breached(room_id: int, direction: String):
 		z -= 1
 	_create_room(x, z)
 
+func _on_try_again(new_player: Player) -> void:
+	self.player = new_player
+
 func _ready() -> void:
+	Constants.on_try_again.connect(_on_try_again)
 	level_map = LevelMap.new().init(map_size)
 	_create_room(center, center)
 

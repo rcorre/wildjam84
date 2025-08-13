@@ -19,11 +19,15 @@ var difficulty_level: int
 var bugs : Array[Bug] = []
 
 func _ready() -> void:
+	Constants.on_try_again.connect(_on_try_again)
 	var timer := Timer.new()
 	add_child(timer)
 	timer.one_shot = true
 	timer.timeout.connect(spawn.bind(timer))
 	spawn(timer)
+
+func _on_try_again(new_player: Player) -> void:
+	self.player = new_player
 
 func _on_bug_death(bug: Bug) -> void:
 	var index := bugs.find(bug)

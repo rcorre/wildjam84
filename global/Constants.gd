@@ -1,5 +1,7 @@
 extends Node
 
+signal on_try_again(new_player: Player)
+
 const DIRECTION = {
 	"NORTH": "NORTH",
 	"EAST": "EAST",

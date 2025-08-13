@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://gvhpg148ek8a"]
+[gd_scene load_steps=10 format=3 uid="uid://gvhpg148ek8a"]
 
 [ext_resource type="PackedScene" uid="uid://kvlkac7m23s0" path="res://assets/models/Butterfly.glb" id="1_de5c5"]
 [ext_resource type="Script" uid="uid://b8h0ifu83xibr" path="res://scenes/Bugs/Butterfly/Butterfly.gd" id="2_47vs3"]
@@ -20,6 +20,9 @@ rings = 8
 [sub_resource type="Curve" id="Curve_ceh6o"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jvhbi"]
+radius = 5.0
 
 [node name="Butterfly" instance=ExtResource("1_de5c5")]
 floor_stop_on_slope = false
@@ -68,3 +71,10 @@ scale_amount_curve = SubResource("Curve_ceh6o")
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.145862, 0)
 aabb = AABB(-0.295265, 0.112478, -0.353229, 0.590531, 0.130513, 0.479896)
+
+[node name="JumpArea" type="Area3D" parent="." index="7"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="JumpArea" index="0"]
+shape = SubResource("SphereShape3D_jvhbi")

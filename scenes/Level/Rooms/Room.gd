@@ -67,8 +67,13 @@ func _build_bug_controller() -> void:
 	var bc := (bug_controller.instantiate() as BugController).with_args(mobs_difficulty_level, player)
 	self.add_child(bc)
 
+func _on_try_again(new_player: Player) -> void:
+	self.player = new_player
+
 func _ready() -> void:
 	assert(walls.size() > 0)
+
+	Constants.on_try_again.connect(_on_try_again)
 
 	self.translate(self.room_offset)
 	self.name = "room%d" % id
