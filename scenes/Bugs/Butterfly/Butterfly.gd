@@ -10,7 +10,7 @@ const ALL_DIRECTIONS = [
 ]
 
 # Time you can stand near a bug till it jumps on you
-const JUMP_SECS := 7.0
+const JUMP_SECS := 5.0
 
 # How fast the jump animation is
 const JUMP_ANIM_SECS := 0.5
