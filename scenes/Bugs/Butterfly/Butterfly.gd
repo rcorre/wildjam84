@@ -10,10 +10,10 @@ const ALL_DIRECTIONS = [
 ]
 
 # Time you can stand near a bug till it jumps on you
-const JUMP_SECS := 5.0
+const JUMP_SECS := 7.0
 
 # How fast the jump animation is
-const JUMP_ANIM_SECS := 0.75
+const JUMP_ANIM_SECS := 0.5
 
 func _on_ready() -> void:
 	self.move_animation_name = "fly"

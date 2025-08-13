@@ -28,9 +28,6 @@ signal on_bug_death(bug: Bug)
 var player : Player
 var chase_factor : float = 0
 
-var last_floor_normal := Vector3.ZERO
-var last_turn := -1.0
-
 var jump_charge := 0.0
 var face_hugging: Player
 
