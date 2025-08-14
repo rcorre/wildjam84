@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://ksrgiopp2i6f"]
+[gd_scene load_steps=13 format=3 uid="uid://ksrgiopp2i6f"]
 
 [ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_elqb8"]
 [ext_resource type="Texture2D" uid="uid://dpg7qd2lxrkoa" path="res://assets/models/walls/BreakableWall1_beige_wall_001_rough_1k.jpg" id="2_rarhs"]
+[ext_resource type="AudioStream" uid="uid://d18ffmfb557g0" path="res://assets/sounds/music/Flies.ogg" id="5_vcsgt"]
 [ext_resource type="Script" uid="uid://v7r44van6ys4" path="res://scenes/Level/LevelController.gd" id="8_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://cjm3fhg3ivebn" path="res://scenes/Level/Rooms/Room.tscn" id="9_lhr70"]
 
@@ -67,3 +68,9 @@ shape = SubResource("WorldBoundaryShape3D_0bbpv")
 [node name="LevelController" type="Node3D" parent="."]
 script = ExtResource("8_q8u5g")
 room = ExtResource("9_lhr70")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_vcsgt")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"

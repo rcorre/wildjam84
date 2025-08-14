@@ -20,8 +20,8 @@ const GRAB_SNAP := 8.0
 # Amount of shaking required to throw off bug
 const SHAKE_REQUIRED := 40.0
 
-const MAX_THROW_FORCE := 500.0
-const MAX_THROW_SECS := 2.0
+const MAX_THROW_FORCE := 150.0
+const MAX_THROW_SECS := 0.5
 
 @onready var camera: Camera3D = $Camera3D
 @onready var grab_ray: RayCast3D = $Camera3D/RayCast3D
@@ -72,7 +72,11 @@ func grab() -> void:
 
 func throw() -> void:
 	assert(held_object, "Cannot throw if not holding")
-	var force: float = lerp(0.0, MAX_THROW_FORCE, throw_charge)
+
+	# heavier objects can be thrown with more force, but not proportionally more
+	var max_throw_force := MAX_THROW_FORCE * sqrt(held_object.mass)
+	var force: float = lerp(0.0, max_throw_force, throw_charge)
+
 	prints("throwing", held_object, "with force", force)
 	# temporarily exclude self-collisions as we throw
 	held_object.add_collision_exception_with(self)
@@ -103,10 +107,9 @@ func _physics_process(delta: float) -> void:
 	elif held_object and Input.is_action_pressed("drop"):
 		drop()
 	elif held_object and Input.is_action_pressed("grab"):
-		throw_charge = min(
-			1.0,
-			throw_charge + lerpf((delta / MAX_THROW_SECS) / 8, (delta / MAX_THROW_SECS) * 2, 1 - throw_charge),
-		)
+		# heavier objects take a bit longer to charge
+		var throw_rate := delta / (MAX_THROW_SECS * sqrt(held_object.mass))
+		throw_charge = lerpf(throw_charge, 1.0, throw_rate)
 	elif held_object and Input.is_action_just_released("grab") and throw_charge > 0.0:
 		throw()
 
