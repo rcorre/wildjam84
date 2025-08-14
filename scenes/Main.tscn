@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://ksrgiopp2i6f"]
+[gd_scene load_steps=12 format=3 uid="uid://ksrgiopp2i6f"]
 
 [ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_elqb8"]
+[ext_resource type="Texture2D" uid="uid://dpg7qd2lxrkoa" path="res://assets/models/walls/BreakableWall1_beige_wall_001_rough_1k.jpg" id="2_rarhs"]
 [ext_resource type="Script" uid="uid://v7r44van6ys4" path="res://scenes/Level/LevelController.gd" id="8_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://cjm3fhg3ivebn" path="res://scenes/Level/Rooms/Room.tscn" id="9_lhr70"]
 
@@ -19,11 +20,14 @@ ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.3
 tonemap_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bbpv"]
-albedo_color = Color(0.901822, 0.872633, 0.793984, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcsgt"]
+resource_name = "Material"
+cull_mode = 2
+albedo_texture = ExtResource("2_rarhs")
+roughness = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_elqb8"]
-material = SubResource("StandardMaterial3D_0bbpv")
+material = SubResource("StandardMaterial3D_vcsgt")
 size = Vector2(100, 100)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_qnwvq"]
@@ -55,6 +59,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 6, 0)
 transform = Transform3D(-1, 7.64274e-15, 8.74228e-08, 0, -1, 8.74228e-08, 8.74228e-08, 8.74228e-08, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_elqb8")
 skeleton = NodePath("../..")
+metadata/_edit_lock_ = true
 
 [node name="CeilingShape" type="CollisionShape3D" parent="CeilingStatidBody3D"]
 shape = SubResource("WorldBoundaryShape3D_0bbpv")
