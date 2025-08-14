@@ -2,14 +2,18 @@ extends Control
 
 @onready var player: Player
 
+@onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var tunnel_vision: Control = $TunnelVision
 @onready var game_over: Control = $GameOver
 @onready var shake_warning: Control = $ShakeWarning
+@onready var level_up_panel: Control = $LevelUpPanel
 
 var crosshair_radius := 1.0
 
 func _ready() -> void:
 	player = get_parent()
+	player.leveled_up.connect(_on_level_up)
+	player.level_up_completed.connect(_on_level_up_completed)
 	assert(player, "HUD cannot find player")
 
 func _process(delta: float) -> void:
@@ -36,3 +40,19 @@ func _draw() -> void:
 
 	var charge: float = max(player.throw_charge, player.shake)
 	draw_arc(center, 16.0, 0, 2 * PI * charge, 128, Color.GREEN.lerp(Color.RED, charge), 4.0, true)
+
+func _on_level_up() -> void:
+	anim.play("level_up")
+	await anim.animation_finished
+	# Engine.time_scale = 0.0
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _on_level_up_completed() -> void:
+	anim.play_backwards("level_up")
+	await anim.animation_finished
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+	# we entered slowmo when the level up started, exit it
+	# note: the 0.1 delay actually equals 1s because we reduced the time scale
+	var tween := get_tree().create_tween()
+	tween.tween_property(Engine, "time_scale", 1.0, 0.5).set_delay(0.1)

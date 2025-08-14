@@ -56,7 +56,7 @@ func _ready() -> void:
 func _on_try_again(new_player: Player) -> void:
 	self.player = new_player
 
-func _on_physics_process(delta: float) -> void:
+func _on_physics_process(_delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -129,12 +129,7 @@ func hit(_from: Vector3, damage: int) -> void:
 		collision_layer = 0
 		collision_mask = 0
 		mesh.visible = false
-		if randf() <= SLOMO_CHANCE:
-			# todo slowmo sound effect
-			Engine.time_scale = 0.1
-			var tween := get_tree().create_tween()
-			# note: the 0.1 delay actually equals 1s because we reduced the time scale
-			tween.tween_property(Engine, "time_scale", 1.0, 0.5).set_delay(0.1)
+		player.gain_xp()
 
 func with_args(
 	player_ref: Player,

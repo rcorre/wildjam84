@@ -23,6 +23,9 @@ const SHAKE_REQUIRED := 40.0
 const MAX_THROW_FORCE := 150.0
 const MAX_THROW_SECS := 0.5
 
+signal leveled_up
+signal level_up_completed
+
 @onready var camera: Camera3D = $Camera3D
 @onready var grab_ray: RayCast3D = $Camera3D/RayCast3D
 @onready var grab_point: Node3D = $Camera3D/GrabPoint
@@ -36,6 +39,12 @@ const MAX_THROW_SECS := 0.5
 ).radius * 3
 @onready var panic_sound: AudioStreamPlayer3D = $PanicSound
 
+# stats
+var xp := 0
+var strength := 0
+var courage := 0
+var telekinesis := 0
+
 var look: Vector2
 var held_object: Throwable
 var throw_charge := 0.0
@@ -47,9 +56,11 @@ var face_hugger: Bug
 # at 1, successfully shook off bug
 var shake := 0.0
 
+func _enter_tree() -> void:
+	add_to_group("player")
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	add_to_group("player")
 
 func _unhandled_input(ev: InputEvent):
 	var mouse := ev as InputEventMouseMotion
@@ -173,3 +184,47 @@ func apply_panic(delta: float) -> void:
 
 	var rate := delta * PANIC_RATE * proximity_factor * quantity_factor
 	_apply_panic(rate)
+
+func level() -> int:
+	return strength + courage + telekinesis
+
+func required_xp() -> int:
+	return level() + 1
+
+func gain_xp() -> void:
+	xp += 1
+	if xp > required_xp():
+		print("leveling up")
+		# todo slowmo sound effect
+		Engine.time_scale = 0.1
+		leveled_up.emit()
+		# stop looking with mouse
+		set_process_unhandled_input(false)
+
+func get_stat(stat: Constants.Stat) -> int:
+	match stat:
+		Constants.Stat.Strength:
+			return strength
+		Constants.Stat.Courage:
+			return courage
+		Constants.Stat.Telekinesis:
+			return telekinesis
+	assert(false, "stat not handled")
+	return 0
+
+func level_stat(stat: Constants.Stat) -> void:
+	print("leveled up")
+	match stat:
+		Constants.Stat.Strength:
+			strength += 1
+		Constants.Stat.Courage:
+			courage += 1
+		Constants.Stat.Telekinesis:
+			telekinesis += 1
+		_:
+			assert(false, "unhandled stat: " + str(stat))
+
+	level_up_completed.emit()
+
+	# start looking with mouse again
+	set_process_unhandled_input(true)

@@ -41,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 	look_at(player.global_position, Vector3.UP, true)
 	move_and_slide()
 
-func move(timer: Timer) -> void:
+func move(_timer: Timer) -> void:
 	if health <= 0:
 		return
 	if randf() < move_chance:

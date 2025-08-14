@@ -1,6 +1,14 @@
 extends Node
 
+@warning_ignore_start("unused_signal")
+
 signal on_try_again(new_player: Player)
+
+enum Stat {
+	Strength,
+	Courage,
+	Telekinesis,
+}
 
 const DIRECTION = {
 	"NORTH": "NORTH",
