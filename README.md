@@ -33,6 +33,8 @@ Some code was copied from the [Godot Destruction Plugin](https://github.com/Jumm
 
 - [Kenney Furniture Kit](https://kenney.nl/assets/furniture-kit) (CC0)
 - [Kenney Car Kit](https://kenney.nl/assets/car-kit) (CC0)
+- [Kenney Suburban (Suburban)](https://kenney.nl/assets/city-kit-suburban) (CC0)
+- [Kenney City Kit (Roads)](https://kenney.nl/assets/city-kit-roads) (CC0)
 
 
 ## game-icons.net

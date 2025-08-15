@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name BossSpider
 
+const PROJECTILE_SCENE := preload("res://scenes/Bugs/BossSpider/Projectile.tscn")
+
 @export var health := 50
 @export var speed := 2.0
 
@@ -27,9 +29,8 @@ var face_hugging: Player
 func _ready() -> void:
 	var timer := Timer.new()
 	add_child(timer)
-	timer.one_shot = true
-	timer.timeout.connect(move.bind(timer))
-	move(timer)
+	timer.timeout.connect(attack)
+	timer.start(3.0)
 
 	# 3 is "enemy", no easy way to get this programatically
 	set_collision_layer_value(3, true)
@@ -41,17 +42,19 @@ func _physics_process(_delta: float) -> void:
 	look_at(player.global_position, Vector3.UP, true)
 	move_and_slide()
 
-func move(_timer: Timer) -> void:
+func attack() -> void:
 	if health <= 0:
 		return
-	if randf() < move_chance:
-		velocity = speed * basis.z.rotated(Vector3.UP, randf_range(0, PI * 2))
-		anim.play("Walk")
-		walk_sound.playing = true
-	else:
-		velocity = Vector3.ZERO
-		anim.play("Idle")
-		walk_sound.playing = false
+	var projectile := PROJECTILE_SCENE.instantiate() as Node3D
+	get_parent().add_child(projectile)
+	projectile.global_position = global_position
+	var target := player.global_position
+	var halfway := global_position + ((target - global_position) / 2.0) + Vector3.UP * 16.0
+	var tween := get_tree().create_tween()
+	tween.set_ease(Tween.EASE_OUT_IN)
+	tween.tween_property(projectile, "global_position", halfway, 1.0)
+	tween.tween_property(projectile, "global_position", target, 1.0)
+	tween.finished.connect(projectile.queue_free)
 
 func hit(_from: Vector3, damage: int) -> void:
 	if health <= 0:

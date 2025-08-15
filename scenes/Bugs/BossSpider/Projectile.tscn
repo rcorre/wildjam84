@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://yah7bvmb0irr"]
+
+[ext_resource type="Script" uid="uid://bvj0isd3d51by" path="res://scenes/Bugs/BossSpider/Projectile.gd" id="1_q30x6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fkwl3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q30x6"]
+albedo_color = Color(0.485565, 0.789398, 0.263196, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_itq6w"]
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Curve" id="Curve_05vcy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Projectile" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_q30x6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_fkwl3")
+
+[node name="Particles" type="CPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_q30x6")
+amount = 128
+lifetime = 0.5
+mesh = SubResource("SphereMesh_itq6w")
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 180.0
+damping_min = 1.0
+damping_max = 1.0
+scale_amount_curve = SubResource("Curve_05vcy")

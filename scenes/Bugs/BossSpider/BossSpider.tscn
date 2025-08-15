@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cgnb0yeedrgic"]
 
 [ext_resource type="PackedScene" uid="uid://cjttwapnf87ix" path="res://assets/models/Spider.glb" id="1_1uyxt"]
-[ext_resource type="Script" uid="uid://r31d4uxatmpp" path="res://scenes/Bugs/BossSpider.gd" id="2_402v5"]
+[ext_resource type="Script" uid="uid://r31d4uxatmpp" path="res://scenes/Bugs/BossSpider/BossSpider.gd" id="2_402v5"]
 [ext_resource type="AudioStream" uid="uid://bw4rruf5dkba" path="res://assets/sounds/splat.wav" id="3_7lryp"]
 [ext_resource type="AudioStream" uid="uid://cvvekbvqp1efp" path="res://assets/sounds/spider_walk.wav" id="4_txosg"]
 
@@ -66,6 +66,7 @@ transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 [node name="AnimationPlayer" parent="." index="1"]
 root_motion_track = NodePath("Armature/Skeleton3D:Root")
 root_motion_local = false
+autoplay = "Idle"
 speed_scale = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]

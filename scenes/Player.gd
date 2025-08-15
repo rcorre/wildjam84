@@ -155,9 +155,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		apply_panic(delta)
 
+	panic_sound.volume_db = lerp(-80.0, 20.0, panic)
+
 func _apply_panic(rate: float, target : float = 1.0) -> void:
 	panic = move_toward(panic, target, rate)
-	panic_sound.volume_db = lerp(-80.0, 20.0, panic)
 
 func apply_panic(delta: float) -> void:
 	var visible_bugs: Array[Node3D]
