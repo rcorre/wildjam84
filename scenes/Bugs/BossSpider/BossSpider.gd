@@ -3,7 +3,7 @@ class_name BossSpider
 
 const PROJECTILE_SCENE := preload("res://scenes/Bugs/BossSpider/Projectile.tscn")
 
-@export var health := 50
+@export var health := 5000
 @export var speed := 2.0
 
 # time between movements
@@ -19,6 +19,7 @@ const PROJECTILE_SCENE := preload("res://scenes/Bugs/BossSpider/Projectile.tscn"
 @onready var splat_sound: AudioStreamPlayer3D = $SplatSound
 @onready var splat_particles: CPUParticles3D = $SplatParticles
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var hurt_anim: AnimationPlayer = $HurtAnimation
 
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
 
@@ -59,6 +60,7 @@ func attack() -> void:
 func hit(_from: Vector3, damage: int) -> void:
 	if health <= 0:
 		return
+	hurt_anim.play("hurt")
 	health -= damage
 	if health <= 0:
 		get_tree().create_timer(3.0).timeout.connect(queue_free)
@@ -71,3 +73,5 @@ func hit(_from: Vector3, damage: int) -> void:
 		var tween := get_tree().create_tween()
 		# note: the 0.1 delay actually equals 1s because we reduced the time scale
 		tween.tween_property(Engine, "time_scale", 1.0, 1.0).set_delay(0.2)
+		await tween.finished
+		Constants.game_won.emit()

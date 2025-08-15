@@ -3,6 +3,7 @@ extends Node
 @warning_ignore_start("unused_signal")
 
 signal on_try_again(new_player: Player)
+signal game_won
 
 enum Stat {
 	Strength,

@@ -1,6 +1,5 @@
 extends Button
 
-
 func _pressed() -> void:
 	# Delete current player, add a new one
 	# This assumes the player should start at 0,0

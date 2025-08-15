@@ -5,6 +5,7 @@ extends Control
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var tunnel_vision: Control = $TunnelVision
 @onready var game_over: Control = $GameOver
+@onready var game_won: Control = $GameWon
 @onready var shake_warning: Control = $ShakeWarning
 @onready var level_up_panel: Control = $LevelUpPanel
 
@@ -15,6 +16,12 @@ func _ready() -> void:
 	player.leveled_up.connect(_on_level_up)
 	player.level_up_completed.connect(_on_level_up_completed)
 	assert(player, "HUD cannot find player")
+	Constants.game_won.connect(_on_game_won)
+
+func _on_game_won() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().create_tween().tween_property(game_won, "modulate:a", 1.0, 1.0)
+	game_won.visible = true
 
 func _process(delta: float) -> void:
 	tunnel_vision.modulate.a = player.panic
