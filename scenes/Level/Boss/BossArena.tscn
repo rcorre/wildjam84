@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ge0fdu8004n4"]
+[gd_scene load_steps=31 format=3 uid="uid://ge0fdu8004n4"]
 
 [ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_mfo1x"]
 [ext_resource type="PackedScene" uid="uid://cgnb0yeedrgic" path="res://scenes/Bugs/BossSpider/BossSpider.tscn" id="2_f66k5"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://d1gn2avold2oe" path="res://assets/models/roads/road-end.glb" id="10_64p2a"]
 [ext_resource type="PackedScene" uid="uid://c5vvd7r243dqh" path="res://assets/models/roads/road-straight.glb" id="10_tqrru"]
 [ext_resource type="PackedScene" uid="uid://cnmyp77g0i5b" path="res://assets/models/roads/light-curved.glb" id="11_qeo8b"]
-[ext_resource type="PackedScene" uid="uid://crdx4sj03xtlt" path="res://assets/models/suburban/building-type-a.glb" id="12_qeo8b"]
 [ext_resource type="PackedScene" uid="uid://c2njf8lk4mtog" path="res://assets/models/suburban/building-type-b.glb" id="13_ttan8"]
 [ext_resource type="Script" uid="uid://cvcjxjs71kcd3" path="res://scenes/Level/StaticCollider.gd" id="13_ybdbp"]
 [ext_resource type="PackedScene" uid="uid://cctu1usirdqa" path="res://assets/models/suburban/building-type-c.glb" id="14_wfkv4"]
@@ -111,198 +110,198 @@ _data = {
 
 [node name="BossArena" type="Node3D"]
 
-[node name="Boundaries" type="StaticBody3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_wfkv4")
+autoplay = true
+bus = &"Music"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundaries"]
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -25)
+
+[node name="Boundaries" type="StaticBody3D" parent="Node3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Boundaries"]
 shape = SubResource("WorldBoundaryShape3D_f66k5")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Boundaries"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Node3D/Boundaries"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4995, 0, 38)
 shape = SubResource("BoxShape3D_ybdbp")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Boundaries"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Node3D/Boundaries"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4995, 0, -27)
 shape = SubResource("BoxShape3D_ybdbp")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Boundaries"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Node3D/Boundaries"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 14.4995, 0, 8)
 shape = SubResource("BoxShape3D_ybdbp")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="Boundaries"]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Node3D/Boundaries"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13.5005, 0, 8)
 shape = SubResource("BoxShape3D_ybdbp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
 mesh = SubResource("PlaneMesh_wi5nc")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_a274q")
 
-[node name="Player" parent="." instance=ExtResource("1_mfo1x")]
+[node name="Player" parent="Node3D" instance=ExtResource("1_mfo1x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
 environment = SubResource("Environment_f66k5")
 
-[node name="Spider" parent="." instance=ExtResource("2_f66k5")]
+[node name="Spider" parent="Node3D" instance=ExtResource("2_f66k5")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 18)
 
-[node name="Props" type="Node3D" parent="."]
+[node name="Props" type="Node3D" parent="Node3D"]
 
-[node name="police" parent="Props" instance=ExtResource("3_wi5nc")]
+[node name="police" parent="Node3D/Props" instance=ExtResource("3_wi5nc")]
 transform = Transform3D(0.707539, 0, -0.706675, 0, 1, 0, 0.706675, 0, 0.707539, 3.17526, 0.0181668, 2.7876)
 item_size = 3
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Props/police"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/Props/police"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.319972, 1.31963, 0)
 light_color = Color(0, 0.299389, 1, 1)
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Props/police"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="Node3D/Props/police"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38851, 1.31963, 0)
 light_color = Color(1, 0.004179, 0, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Props/police"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D/Props/police"]
 libraries = {
 &"": SubResource("AnimationLibrary_mpr7u")
 }
 autoplay = "lights"
 
-[node name="sedan" parent="Props" instance=ExtResource("4_m2jae")]
+[node name="sedan" parent="Node3D/Props" instance=ExtResource("4_m2jae")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4739, 0, -11.4445)
 item_size = 3
 
-[node name="suv" parent="Props" instance=ExtResource("5_344ei")]
+[node name="suv" parent="Node3D/Props" instance=ExtResource("5_344ei")]
 transform = Transform3D(-0.485222, 0, -0.874391, 0, 1, 0, 0.874391, 0, -0.485222, 13.4712, 0, -9.16356)
 item_size = 3
 
-[node name="box" parent="Props" instance=ExtResource("6_yjbcw")]
+[node name="box" parent="Node3D/Props" instance=ExtResource("6_yjbcw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -3)
 item_size = 3
 
-[node name="box4" parent="Props" instance=ExtResource("6_yjbcw")]
+[node name="box4" parent="Node3D/Props" instance=ExtResource("6_yjbcw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 3)
 item_size = 3
 
-[node name="box2" parent="Props" instance=ExtResource("6_yjbcw")]
+[node name="box2" parent="Node3D/Props" instance=ExtResource("6_yjbcw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
 item_size = 1
 
-[node name="box3" parent="Props" instance=ExtResource("6_yjbcw")]
+[node name="box3" parent="Node3D/Props" instance=ExtResource("6_yjbcw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
 item_size = 1
 
-[node name="firetruck" parent="Props" instance=ExtResource("7_tqrru")]
+[node name="firetruck" parent="Node3D/Props" instance=ExtResource("7_tqrru")]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -3.23555, 0, -4.95067)
 item_size = 3
 
-[node name="trashcan" parent="Props" instance=ExtResource("8_64p2a")]
+[node name="trashcan" parent="Node3D/Props" instance=ExtResource("8_64p2a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.39327, 0.29678, 9.7192)
 
-[node name="trashcan2" parent="Props" instance=ExtResource("8_64p2a")]
+[node name="trashcan2" parent="Node3D/Props" instance=ExtResource("8_64p2a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.39327, 0.29678, -2.2808)
 
-[node name="trashcan3" parent="Props" instance=ExtResource("8_64p2a")]
+[node name="trashcan3" parent="Node3D/Props" instance=ExtResource("8_64p2a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60673, 0.29678, -2.2808)
 
-[node name="trashcan4" parent="Props" instance=ExtResource("8_64p2a")]
+[node name="trashcan4" parent="Node3D/Props" instance=ExtResource("8_64p2a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60673, 0.29678, 9.7192)
 
-[node name="Roads" type="Node3D" parent="."]
+[node name="Roads" type="Node3D" parent="Node3D"]
 
-[node name="road-straight2" parent="Roads" instance=ExtResource("10_tqrru")]
+[node name="road-straight2" parent="Node3D/Roads" instance=ExtResource("10_tqrru")]
 transform = Transform3D(-4.37114e-07, 0, -10, 0, 10, 0, 10, 0, -4.37114e-07, 0, 0, 0)
 
-[node name="road-straight3" parent="Roads" instance=ExtResource("10_tqrru")]
+[node name="road-straight3" parent="Node3D/Roads" instance=ExtResource("10_tqrru")]
 transform = Transform3D(-4.37114e-07, 0, -10, 0, 10, 0, 10, 0, -4.37114e-07, 0, 0, 10)
 
-[node name="road-straight8" parent="Roads" instance=ExtResource("10_tqrru")]
+[node name="road-straight8" parent="Node3D/Roads" instance=ExtResource("10_tqrru")]
 transform = Transform3D(-4.37114e-07, 0, -10, 0, 10, 0, 10, 0, -4.37114e-07, 0, 0, 20)
 
-[node name="road-end2" parent="Roads" instance=ExtResource("10_64p2a")]
+[node name="road-end2" parent="Node3D/Roads" instance=ExtResource("10_64p2a")]
 transform = Transform3D(-4.37114e-07, 0, -10, 0, 10, 0, 10, 0, -4.37114e-07, 0, 0, -10)
 
-[node name="Terrain" type="Node3D" parent="."]
+[node name="Terrain" type="Node3D" parent="Node3D"]
 
-[node name="light-curved2" parent="Terrain" instance=ExtResource("11_qeo8b")]
+[node name="light-curved2" parent="Node3D/Terrain" instance=ExtResource("11_qeo8b")]
 transform = Transform3D(3.53553, 0, 3.53553, 0, 5, 0, -3.53553, 0, 3.53553, 6, 0, -4)
 script = ExtResource("13_ybdbp")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Terrain/light-curved2"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/Terrain/light-curved2"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0152237, 0.628115, -0.134222)
 light_energy = 10.0
 
-[node name="light-curved3" parent="Terrain" instance=ExtResource("11_qeo8b")]
+[node name="light-curved3" parent="Node3D/Terrain" instance=ExtResource("11_qeo8b")]
 transform = Transform3D(3.53553, 0, -3.53553, 0, 5, 0, 3.53553, 0, 3.53553, -6.3, 0, -4)
 script = ExtResource("13_ybdbp")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Terrain/light-curved3"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/Terrain/light-curved3"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0152237, 0.628115, -0.134222)
 light_energy = 10.0
 
-[node name="light-curved4" parent="Terrain" instance=ExtResource("11_qeo8b")]
+[node name="light-curved4" parent="Node3D/Terrain" instance=ExtResource("11_qeo8b")]
 transform = Transform3D(0, 0, -5, 0, 5, 0, 5, 0, 0, -6.3, 0, 8)
 script = ExtResource("13_ybdbp")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Terrain/light-curved4"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/Terrain/light-curved4"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0152237, 0.628115, -0.134222)
 light_energy = 10.0
 
-[node name="light-curved6" parent="Terrain" instance=ExtResource("11_qeo8b")]
+[node name="light-curved6" parent="Node3D/Terrain" instance=ExtResource("11_qeo8b")]
 transform = Transform3D(0, 0, -5, 0, 5, 0, 5, 0, 0, -30.3, 0, -4)
 script = ExtResource("13_ybdbp")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Terrain/light-curved6"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/Terrain/light-curved6"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0152237, 0.628115, -0.134222)
 light_energy = 10.0
 
-[node name="light-curved7" parent="Terrain" instance=ExtResource("11_qeo8b")]
+[node name="light-curved7" parent="Node3D/Terrain" instance=ExtResource("11_qeo8b")]
 transform = Transform3D(0, 0, -5, 0, 5, 0, 5, 0, 0, 23.3, 0, -4)
 script = ExtResource("13_ybdbp")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Terrain/light-curved7"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/Terrain/light-curved7"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0152237, 0.628115, -0.134222)
 light_energy = 10.0
 
-[node name="light-curved5" parent="Terrain" instance=ExtResource("11_qeo8b")]
+[node name="light-curved5" parent="Node3D/Terrain" instance=ExtResource("11_qeo8b")]
 transform = Transform3D(-4.37114e-07, 0, 5, 0, 5, 0, -5, 0, -4.37114e-07, 6.1, 0, 8)
 script = ExtResource("13_ybdbp")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Terrain/light-curved5"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/Terrain/light-curved5"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0152237, 0.628115, -0.134222)
 light_energy = 10.0
 omni_range = 100.0
 
-[node name="building-type-a2" parent="Terrain" instance=ExtResource("12_qeo8b")]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, -19.8056)
-script = ExtResource("13_ybdbp")
-
-[node name="building-type-b2" parent="Terrain" instance=ExtResource("13_ttan8")]
+[node name="building-type-b2" parent="Node3D/Terrain" instance=ExtResource("13_ttan8")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0.995953, 0.0178165, 31.0138)
 script = ExtResource("13_ybdbp")
 
-[node name="building-type-c2" parent="Terrain" instance=ExtResource("14_wfkv4")]
+[node name="building-type-c2" parent="Node3D/Terrain" instance=ExtResource("14_wfkv4")]
 transform = Transform3D(-3.49691e-07, 0, 8, 0, 8, 0, -8, 0, -3.49691e-07, -13, 0, 9)
 script = ExtResource("13_ybdbp")
 
-[node name="building-type-d2" parent="Terrain" instance=ExtResource("15_ybdbp")]
+[node name="building-type-d2" parent="Node3D/Terrain" instance=ExtResource("15_ybdbp")]
 transform = Transform3D(-3.49691e-07, 0, -8, 0, 8, 0, 8, 0, -3.49691e-07, -11, 0, -8)
 script = ExtResource("13_ybdbp")
 
-[node name="building-type-e2" parent="Terrain" instance=ExtResource("16_5pbad")]
+[node name="building-type-e2" parent="Node3D/Terrain" instance=ExtResource("16_5pbad")]
 transform = Transform3D(-3.49691e-07, 0, 8, 0, 8, 0, -8, 0, -3.49691e-07, 12, 0, 5)
 script = ExtResource("13_ybdbp")
 
-[node name="building-type-h3" parent="Terrain" instance=ExtResource("19_41dno")]
+[node name="building-type-h3" parent="Node3D/Terrain" instance=ExtResource("19_41dno")]
 transform = Transform3D(1.04907e-06, 0, 8, 0, 8, 0, -8, 0, 1.04907e-06, 10, 0, -11)
 script = ExtResource("13_ybdbp")
 
-[node name="building-type-i2" parent="Terrain" instance=ExtResource("20_15moq")]
+[node name="building-type-i2" parent="Node3D/Terrain" instance=ExtResource("20_15moq")]
 transform = Transform3D(-3.49691e-07, 0, 8, 0, 8, 0, -8, 0, -3.49691e-07, 12, 0, 22)
 script = ExtResource("13_ybdbp")
 
-[node name="building-type-l2" parent="Terrain" instance=ExtResource("23_0koa6")]
+[node name="building-type-l2" parent="Node3D/Terrain" instance=ExtResource("23_0koa6")]
 transform = Transform3D(-3.49691e-07, 0, -8, 0, 8, 0, 8, 0, -3.49691e-07, -12, 0, 21)
 script = ExtResource("13_ybdbp")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("24_wfkv4")
-autoplay = true
-bus = &"Music"

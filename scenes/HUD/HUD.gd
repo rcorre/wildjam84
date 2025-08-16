@@ -62,4 +62,4 @@ func _on_level_up_completed() -> void:
 	# we entered slowmo when the level up started, exit it
 	# note: the 0.1 delay actually equals 1s because we reduced the time scale
 	var tween := get_tree().create_tween()
-	tween.tween_property(Engine, "time_scale", 1.0, 0.5).set_delay(0.1)
+	tween.tween_property(Engine, "time_scale", 1.0, 0.2).set_delay(0.05)

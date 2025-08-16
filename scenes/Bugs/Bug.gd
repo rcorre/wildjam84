@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 	if face_hugging == null and jump_area.has_overlapping_bodies():
 		maybe_jump(delta)
 	else:
-		jump_charge = move_toward(jump_charge, 0.0, delta)
+		jump_charge = move_toward(jump_charge, 0.0, delta / 2.0)
 
 	_on_physics_process(delta)
 
@@ -91,6 +91,7 @@ func maybe_jump(delta: float) -> void:
 	var player := jump_area.get_overlapping_bodies()[0] as Player
 	if player.face_hugger:
 		# already got one
+		jump_charge = 0
 		return
 
 	jump_charge = move_toward(jump_charge, 1.0, delta / jump_seconds)

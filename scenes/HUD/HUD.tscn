@@ -59,6 +59,9 @@ tracks/2/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_gsk3d"]
+resource_name = "game_won"
+
 [sub_resource type="Animation" id="Animation_wa322"]
 resource_name = "level_up"
 tracks/0/type = "value"
@@ -97,9 +100,6 @@ tracks/2/keys = {
 "update": 1,
 "values": [false, true, true]
 }
-
-[sub_resource type="Animation" id="Animation_gsk3d"]
-resource_name = "game_won"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gsk3d"]
 _data = {

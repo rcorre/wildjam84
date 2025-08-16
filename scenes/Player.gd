@@ -195,6 +195,7 @@ func required_xp() -> int:
 func gain_xp() -> void:
 	xp += 1
 	if xp > required_xp():
+		xp = 0
 		print("leveling up")
 		# todo slowmo sound effect
 		Engine.time_scale = 0.1
