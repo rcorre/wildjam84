@@ -87,6 +87,7 @@ _data = {
 
 [node name="Spider" instance=ExtResource("1_1uyxt")]
 script = ExtResource("2_402v5")
+metadata/_edit_group_ = true
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/1/position = Vector3(0.289725, 0.00203593, 0.391904)

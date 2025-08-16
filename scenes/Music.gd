@@ -5,7 +5,7 @@ const NORMAL_MUSIC := preload("res://assets/sounds/music/Flies.ogg")
 
 func _ready() -> void:
 	Constants.boss_area_entered.connect(_on_boss_area_entered)
-	Constants.on_try_again.emit(_on_try_again)
+	Constants.on_try_again.connect(_on_try_again)
 
 func _on_boss_area_entered():
 	stream = BOSS_MUSIC
