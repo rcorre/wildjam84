@@ -18,7 +18,7 @@ const PANIC_RATE := 0.15
 const GRAB_SNAP := 8.0
 
 # Amount of shaking required to throw off bug
-const SHAKE_REQUIRED := 40.0
+const SHAKE_REQUIRED := 30.0
 
 const MAX_THROW_FORCE := 150.0
 const MAX_THROW_SECS := 0.5
@@ -66,6 +66,8 @@ func _ready() -> void:
 func _unhandled_input(ev: InputEvent):
 	if panic >= 1.0:
 		return
+	# try to recapture mouse if it exited HTML
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	var mouse := ev as InputEventMouseMotion
 	if mouse:
 		var motion := mouse.relative * MOUSE_SENSITIVITY
@@ -73,7 +75,7 @@ func _unhandled_input(ev: InputEvent):
 		look.x = wrapf(look.x, -PI, PI)
 		look.y = clamp(look.y, -PI / 2.0, PI / 2.0)
 		if face_hugger:
-			var factor = 4.0 if Settings.gameplay_easy_quicktime else 1.0
+			var factor = 3.0 if Settings.gameplay_easy_quicktime else 1.0
 			shake += factor * motion.length() / SHAKE_REQUIRED
 
 func grab() -> void:
