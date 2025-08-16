@@ -63,6 +63,8 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(ev: InputEvent):
+	if panic >= 1.0:
+		return
 	var mouse := ev as InputEventMouseMotion
 	if mouse:
 		var motion := mouse.relative * MOUSE_SENSITIVITY

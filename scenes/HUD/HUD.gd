@@ -51,12 +51,13 @@ func _draw() -> void:
 func _on_level_up() -> void:
 	anim.play("level_up")
 	await anim.animation_finished
-	# Engine.time_scale = 0.0
+	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_level_up_completed() -> void:
 	anim.play_backwards("level_up")
 	await anim.animation_finished
+	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	# we entered slowmo when the level up started, exit it

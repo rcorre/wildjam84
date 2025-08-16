@@ -389,4 +389,4 @@ root_node = NodePath("../LevelUpPanel")
 libraries = {
 &"": SubResource("AnimationLibrary_gsk3d")
 }
-speed_scale = 6.0
+speed_scale = 12.0
