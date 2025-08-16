@@ -1,6 +1,5 @@
-[gd_scene load_steps=31 format=3 uid="uid://ge0fdu8004n4"]
+[gd_scene load_steps=30 format=3 uid="uid://ge0fdu8004n4"]
 
-[ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_mfo1x"]
 [ext_resource type="PackedScene" uid="uid://cgnb0yeedrgic" path="res://scenes/Bugs/BossSpider/BossSpider.tscn" id="2_f66k5"]
 [ext_resource type="PackedScene" uid="uid://c1l7huuqs1ft0" path="res://assets/models/vehicles/police.glb" id="3_wi5nc"]
 [ext_resource type="PackedScene" uid="uid://ciwwsn0bh66oh" path="res://assets/models/vehicles/sedan.glb" id="4_m2jae"]
@@ -17,11 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://cyq2r7i3tdlba" path="res://assets/models/suburban/building-type-d.glb" id="15_ybdbp"]
 [ext_resource type="PackedScene" uid="uid://cphi13eppjl2d" path="res://assets/models/suburban/building-type-e.glb" id="16_5pbad"]
 [ext_resource type="PackedScene" uid="uid://bcgja86hcwop0" path="res://assets/models/suburban/building-type-h.glb" id="19_41dno"]
+[ext_resource type="Script" uid="uid://bnolp373jx3fo" path="res://scenes/Level/Boss/BossArea.gd" id="20_4yv5f"]
 [ext_resource type="PackedScene" uid="uid://ngij1gyklnkl" path="res://assets/models/suburban/building-type-i.glb" id="20_15moq"]
 [ext_resource type="PackedScene" uid="uid://c0chplawwsajg" path="res://assets/models/suburban/building-type-l.glb" id="23_0koa6"]
-[ext_resource type="AudioStream" uid="uid://fd0tmbpqprjt" path="res://assets/sounds/music/ShootTheGap.ogg" id="24_wfkv4"]
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_f66k5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ybdbp"]
 size = Vector3(100, 100, 1)
@@ -108,44 +105,32 @@ _data = {
 &"lights": SubResource("Animation_a274q")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_iuy8h"]
+size = Vector3(34.1421, 10, 40.1)
+
 [node name="BossArena" type="Node3D"]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("24_wfkv4")
-autoplay = true
-bus = &"Music"
-
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -25)
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 16)
 
 [node name="Boundaries" type="StaticBody3D" parent="Node3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Boundaries"]
-shape = SubResource("WorldBoundaryShape3D_f66k5")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Node3D/Boundaries"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4995, 0, 38)
 shape = SubResource("BoxShape3D_ybdbp")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Node3D/Boundaries"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4995, 0, -27)
-shape = SubResource("BoxShape3D_ybdbp")
-
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Node3D/Boundaries"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 14.4995, 0, 8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 14.4995, 0, 35.291)
 shape = SubResource("BoxShape3D_ybdbp")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Node3D/Boundaries"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13.5005, 0, 8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13.5005, 0, 35.291)
 shape = SubResource("BoxShape3D_ybdbp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
 mesh = SubResource("PlaneMesh_wi5nc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_a274q")
-
-[node name="Player" parent="Node3D" instance=ExtResource("1_mfo1x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
 environment = SubResource("Environment_f66k5")
@@ -305,3 +290,12 @@ script = ExtResource("13_ybdbp")
 [node name="building-type-l2" parent="Node3D/Terrain" instance=ExtResource("23_0koa6")]
 transform = Transform3D(-3.49691e-07, 0, -8, 0, 8, 0, 8, 0, -3.49691e-07, -12, 0, 21)
 script = ExtResource("13_ybdbp")
+
+[node name="BossArea" type="Area3D" parent="Node3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_4yv5f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/BossArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55103, 0, 4.45)
+shape = SubResource("BoxShape3D_iuy8h")

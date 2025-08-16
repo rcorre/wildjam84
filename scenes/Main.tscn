@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://ksrgiopp2i6f"]
+[gd_scene load_steps=10 format=3 uid="uid://ksrgiopp2i6f"]
 
 [ext_resource type="PackedScene" uid="uid://dt8d8bapujifn" path="res://scenes/Player.tscn" id="1_elqb8"]
-[ext_resource type="Texture2D" uid="uid://dpg7qd2lxrkoa" path="res://assets/models/walls/BreakableWall1_beige_wall_001_rough_1k.jpg" id="2_rarhs"]
+[ext_resource type="Script" uid="uid://hal0s38m7xq0" path="res://scenes/Music.gd" id="5_c01mt"]
 [ext_resource type="AudioStream" uid="uid://d18ffmfb557g0" path="res://assets/sounds/music/Flies.ogg" id="5_vcsgt"]
 [ext_resource type="Script" uid="uid://v7r44van6ys4" path="res://scenes/Level/LevelController.gd" id="8_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://cjm3fhg3ivebn" path="res://scenes/Level/Rooms/Room.tscn" id="9_lhr70"]
@@ -21,20 +21,7 @@ ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.3
 tonemap_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcsgt"]
-resource_name = "Material"
-cull_mode = 2
-albedo_texture = ExtResource("2_rarhs")
-roughness = 0.5
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_elqb8"]
-material = SubResource("StandardMaterial3D_vcsgt")
-size = Vector2(100, 100)
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_qnwvq"]
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0bbpv"]
-plane = Plane(0, -1, 0, 0)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rarhs"]
 
 [node name="Main" type="Node3D"]
 
@@ -43,34 +30,18 @@ environment = SubResource("Environment_0bbpv")
 
 [node name="Player" parent="." instance=ExtResource("1_elqb8")]
 
-[node name="FloorStaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-
-[node name="FloorMesh" type="MeshInstance3D" parent="FloorStaticBody3D"]
-mesh = SubResource("PlaneMesh_elqb8")
-skeleton = NodePath("../..")
-
-[node name="FloorShape" type="CollisionShape3D" parent="FloorStaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_qnwvq")
-
-[node name="CeilingStatidBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 6, 0)
-
-[node name="CeilingMesh" type="MeshInstance3D" parent="CeilingStatidBody3D"]
-transform = Transform3D(-1, 7.64274e-15, 8.74228e-08, 0, -1, 8.74228e-08, 8.74228e-08, 8.74228e-08, 1, 0, 0, 0)
-mesh = SubResource("PlaneMesh_elqb8")
-skeleton = NodePath("../..")
-metadata/_edit_lock_ = true
-
-[node name="CeilingShape" type="CollisionShape3D" parent="CeilingStatidBody3D"]
-shape = SubResource("WorldBoundaryShape3D_0bbpv")
-
 [node name="LevelController" type="Node3D" parent="."]
 script = ExtResource("8_q8u5g")
 room = ExtResource("9_lhr70")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_vcsgt")
 volume_db = -15.0
 autoplay = true
 bus = &"Music"
+script = ExtResource("5_c01mt")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_rarhs")

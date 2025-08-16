@@ -4,6 +4,7 @@ extends Node
 
 signal on_try_again(new_player: Player)
 signal game_won
+signal boss_area_entered
 
 enum Stat {
 	Strength,

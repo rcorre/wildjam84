@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjm3fhg3ivebn"]
+[gd_scene load_steps=15 format=3 uid="uid://cjm3fhg3ivebn"]
 
 [ext_resource type="Script" uid="uid://bgvqg3tbrarih" path="res://scenes/Level/Rooms/Room.gd" id="1_ftteg"]
 [ext_resource type="PackedScene" uid="uid://lare0nuf4gky" path="res://scenes/Level/Walls/BreakableWall1.tscn" id="2_xgo5k"]
@@ -10,9 +10,39 @@
 [ext_resource type="PackedScene" uid="uid://dayawcma35yft" path="res://scenes/Level/Rooms/FurnitureSets/Barracks.tscn" id="8_3vc61"]
 [ext_resource type="PackedScene" uid="uid://h0gq3ipe30fs" path="res://scenes/Level/Rooms/FurnitureSets/GameJammerCave.tscn" id="9_x3p5o"]
 [ext_resource type="PackedScene" uid="uid://bmuj4v85vq2os" path="res://scenes/Bugs/Controller/BugController.tscn" id="10_i5fjv"]
+[ext_resource type="Texture2D" uid="uid://dpg7qd2lxrkoa" path="res://assets/models/walls/BreakableWall1_beige_wall_001_rough_1k.jpg" id="11_ghtav"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcsgt"]
+resource_name = "Material"
+cull_mode = 2
+albedo_texture = ExtResource("11_ghtav")
+roughness = 0.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oouj5"]
+material = SubResource("StandardMaterial3D_vcsgt")
+size = Vector2(12, 12)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_54ggq"]
+plane = Plane(0, -1, 0, 0)
 
 [node name="Room" type="Node3D"]
 script = ExtResource("1_ftteg")
 walls = Array[PackedScene]([ExtResource("2_xgo5k"), ExtResource("3_u1muq")])
 furniture_sets = Array[PackedScene]([ExtResource("4_u1muq"), ExtResource("5_12eac"), ExtResource("6_4mnbc"), ExtResource("7_j2tat"), ExtResource("8_3vc61"), ExtResource("9_x3p5o")])
 bug_controller = ExtResource("10_i5fjv")
+
+[node name="CeilingStatidBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="CeilingMesh" type="MeshInstance3D" parent="CeilingStatidBody3D"]
+transform = Transform3D(-1, 7.64274e-15, 8.74228e-08, 0, -1, 8.74228e-08, 8.74228e-08, 8.74228e-08, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_oouj5")
+skeleton = NodePath("../..")
+metadata/_edit_lock_ = true
+
+[node name="CeilingShape" type="CollisionShape3D" parent="CeilingStatidBody3D"]
+shape = SubResource("WorldBoundaryShape3D_54ggq")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
+mesh = SubResource("PlaneMesh_oouj5")
