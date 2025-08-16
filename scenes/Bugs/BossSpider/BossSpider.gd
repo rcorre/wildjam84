@@ -23,33 +23,40 @@ const PROJECTILE_SCENE := preload("res://scenes/Bugs/BossSpider/Projectile.tscn"
 
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
 
-var current_direction: Vector3 = Vector3.ZERO
-var jump_charge := 0.0
-var face_hugging: Player
+@onready var timer := Timer.new()
 
 func _ready() -> void:
-	var timer := Timer.new()
-	add_child(timer)
-	timer.timeout.connect(attack)
-	timer.start(3.0)
-
 	# 3 is "enemy", no easy way to get this programatically
 	set_collision_layer_value(3, true)
+	Constants.on_try_again.connect(_on_try_again)
+	Constants.boss_area_entered.connect(_on_boss_area_entered)
+	add_child(timer)
+	timer.timeout.connect(attack)
+
+func _on_boss_area_entered() -> void:
+	timer.start(3.0)
+
+func _on_try_again(new_player: Player) -> void:
+	self.player = new_player
+	timer.stop()
 
 func _physics_process(_delta: float) -> void:
 	if health <= 0:
 		return
 
-	look_at(player.global_position, Vector3.UP, true)
+	if is_instance_valid(player):
+		look_at(player.global_position, Vector3.UP, true)
 	move_and_slide()
 
 func attack() -> void:
 	if health <= 0:
 		return
+	if not is_instance_valid(player):
+		return
+	var target := player.global_position
 	var projectile := PROJECTILE_SCENE.instantiate() as Node3D
 	get_parent().add_child(projectile)
 	projectile.global_position = global_position
-	var target := player.global_position
 	var halfway := global_position + ((target - global_position) / 2.0) + Vector3.UP * 16.0
 	var tween := get_tree().create_tween()
 	tween.set_ease(Tween.EASE_OUT_IN)

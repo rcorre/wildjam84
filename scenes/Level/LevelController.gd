@@ -6,9 +6,10 @@ const BOSS_SCENE := preload("res://scenes/Level/Boss/BossArena.tscn")
 @export var room : PackedScene
 
 var level_map : LevelMap
-var map_size := (Constants.DIFFICULTY_LEVELS.size() * 2) - 3 # UNDO
+var map_size := (Constants.DIFFICULTY_LEVELS.size() * 2) - 1
 var center : int = map_size / 2
 var room_count := 0
+var boss_scenes := {}
 
 @onready var player : Player = self.get_parent().get_node("Player")
 
@@ -40,12 +41,27 @@ func _create_room(x: int, z: int):
 	prints("create room", x, z)
 	var position_offset := Vector3((x - center) * ROOM_OFFSET, 0, (z - center) * ROOM_OFFSET)
 
-	# if not level_map.can_exist(x, z) or level_map.exists(x, z):
-	if x != 3 or z != 3:
+	if not level_map.can_exist(x, z):
+		if x in boss_scenes and z in boss_scenes[x]:
+			print("boss scene already exists at %dx%d" % [x, z])
+			return
+
 		print("instantiating boss scene")
 		var scene := BOSS_SCENE.instantiate() as Node3D
+		boss_scenes.get_or_add(x, {}).get_or_add(z, scene)
 		self.add_child(scene)
 		scene.global_position = position_offset
+		if z == map_size:
+			pass # no rotation
+		elif z < 0:
+			scene.rotation.y = PI
+		elif x == map_size:
+			scene.rotation.y = PI / 2.0
+		elif x < 0:
+			scene.rotation.y = -PI / 2.0
+		return
+
+	if level_map.exists(x, z):
 		return
 
 	var build_north := not level_map.has_north_neighbor(x, z)
@@ -87,7 +103,7 @@ func _ready() -> void:
 	Constants.on_try_again.connect(_on_try_again)
 	level_map = LevelMap.new().init(map_size)
 	_create_room(center, center)
-
+	Constants.on_try_again.connect(_on_try_again)
 
 class LevelMap:
 	# +x is north

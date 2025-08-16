@@ -20,7 +20,7 @@ func _notify_collection_of_break() -> void:
 	var parent = self.get_parent()
 	while parent and not is_instance_of(parent, BreakableCollection):
 		parent = parent.get_parent()
-	if parent: 
+	if parent:
 		(parent as BreakableCollection).on_break()
 
 func _break(impulse: Vector3) -> void:
