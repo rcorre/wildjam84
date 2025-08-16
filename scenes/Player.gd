@@ -63,11 +63,15 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	grab_ray.target_position = Vector3.BACK * -2 * (telekinesis + 1)
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_MOUSE_ENTER:
+		if is_processing_unhandled_input():
+			# try to recapture mouse if it exited in HTML
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 func _unhandled_input(ev: InputEvent):
 	if panic >= 1.0:
 		return
-	# try to recapture mouse if it exited HTML
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	var mouse := ev as InputEventMouseMotion
 	if mouse:
 		var motion := mouse.relative * MOUSE_SENSITIVITY
