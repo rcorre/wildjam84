@@ -35,6 +35,7 @@ script = ExtResource("8_q8u5g")
 room = ExtResource("9_lhr70")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("5_vcsgt")
 volume_db = -15.0
 autoplay = true

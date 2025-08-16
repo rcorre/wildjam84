@@ -182,8 +182,7 @@ var audio_master_volume := real("audio", "master_volume", 100, [0, 100])
 var audio_sound_volume := real("audio", "sound_volume", 100, [0, 100])
 var audio_music_volume := real("audio", "music_volume", 100, [0, 100])
 
-var net_default_port := integer("net", "default_port", 44387, [0, 65536])
-var net_default_address := text("net", "default_address", "127.0.0.1")
+var gameplay_easy_quicktime := boolean("gameplay", "easy_quicktime")
 
 func _ready():
 	audio_device.changed.connect(_on_audio_device_changed)

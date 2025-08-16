@@ -61,6 +61,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	grab_ray.target_position = Vector3.BACK * -2 * (telekinesis + 1)
 
 func _unhandled_input(ev: InputEvent):
 	if panic >= 1.0:
@@ -72,7 +73,8 @@ func _unhandled_input(ev: InputEvent):
 		look.x = wrapf(look.x, -PI, PI)
 		look.y = clamp(look.y, -PI / 2.0, PI / 2.0)
 		if face_hugger:
-			shake += motion.length() / SHAKE_REQUIRED
+			var factor = 4.0 if Settings.gameplay_easy_quicktime else 1.0
+			shake += factor * motion.length() / SHAKE_REQUIRED
 
 func grab() -> void:
 	assert(not held_object, "Cannot grab if holding")
@@ -88,6 +90,7 @@ func throw() -> void:
 
 	# heavier objects can be thrown with more force, but not proportionally more
 	var max_throw_force := MAX_THROW_FORCE * sqrt(held_object.mass)
+	max_throw_force *= (1.0 + strength * 0.3)
 	var force: float = lerp(0.0, max_throw_force, throw_charge)
 
 	prints("throwing", held_object, "with force", force)
@@ -122,6 +125,7 @@ func _physics_process(delta: float) -> void:
 	elif held_object and Input.is_action_pressed("grab"):
 		# heavier objects take a bit longer to charge
 		var throw_rate := delta / (MAX_THROW_SECS * sqrt(held_object.mass))
+		throw_rate *= (1.0 + strength * 0.3)
 		throw_charge = lerpf(throw_charge, 1.0, throw_rate)
 	elif held_object and Input.is_action_just_released("grab") and throw_charge > 0.0:
 		throw()
@@ -186,6 +190,7 @@ func apply_panic(delta: float) -> void:
 	var quantity_factor := sqrt(visible_bugs.size())
 
 	var rate := delta * PANIC_RATE * proximity_factor * quantity_factor
+	rate *= (1.0 - 0.2 * courage)
 	_apply_panic(rate)
 
 func level() -> int:
@@ -195,6 +200,8 @@ func required_xp() -> int:
 	return level() + 1
 
 func gain_xp() -> void:
+	if level() >= 9:
+		return
 	xp += 1
 	if xp > required_xp():
 		xp = 0
@@ -225,6 +232,7 @@ func level_stat(stat: Constants.Stat) -> void:
 			courage += 1
 		Constants.Stat.Telekinesis:
 			telekinesis += 1
+			grab_ray.target_position = Vector3.BACK * -2 * (telekinesis + 1)
 		_:
 			assert(false, "unhandled stat: " + str(stat))
 
