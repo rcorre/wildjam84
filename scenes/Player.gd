@@ -72,6 +72,9 @@ func _notification(what: int) -> void:
 func _unhandled_input(ev: InputEvent):
 	if panic >= 1.0:
 		return
+	if ev is InputEventMouseButton:
+		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	var mouse := ev as InputEventMouseMotion
 	if mouse:
 		prints("mouse motion", mouse.screen_relative, " ", mouse.relative)
