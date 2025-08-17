@@ -103,7 +103,6 @@ func _ready() -> void:
 	Constants.on_try_again.connect(_on_try_again)
 	level_map = LevelMap.new().init(map_size)
 	_create_room(center, center)
-	Constants.on_try_again.connect(_on_try_again)
 
 class LevelMap:
 	# +x is north

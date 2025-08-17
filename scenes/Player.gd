@@ -74,7 +74,7 @@ func _unhandled_input(ev: InputEvent):
 		return
 	var mouse := ev as InputEventMouseMotion
 	if mouse:
-		var motion := mouse.relative * MOUSE_SENSITIVITY
+		var motion := mouse.screen_relative * MOUSE_SENSITIVITY
 		look -= motion
 		look.x = wrapf(look.x, -PI, PI)
 		look.y = clamp(look.y, -PI / 2.0, PI / 2.0)
