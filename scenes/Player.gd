@@ -210,7 +210,7 @@ func level() -> int:
 	return strength + courage + telekinesis
 
 func required_xp() -> int:
-	return level() + 1
+	return level() + 2
 
 func gain_xp() -> void:
 	if level() >= 9:
