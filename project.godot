@@ -28,6 +28,7 @@ gdscript/warnings/unsafe_method_access=true
 gdscript/warnings/unsafe_call_argument=true
 gdscript/warnings/return_value_discarded=false
 gdscript/warnings/assert_always_false=0
+gdscript/warnings/integer_division=0
 
 [display]
 
