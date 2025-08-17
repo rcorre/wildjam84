@@ -29,6 +29,10 @@ gdscript/warnings/unsafe_call_argument=true
 gdscript/warnings/return_value_discarded=false
 gdscript/warnings/assert_always_false=0
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor]
 
 movie_writer/mjpeg_quality=0.5
