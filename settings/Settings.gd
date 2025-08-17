@@ -183,6 +183,8 @@ var audio_sound_volume := real("audio", "sound_volume", 100, [0, 100])
 var audio_music_volume := real("audio", "music_volume", 100, [0, 100])
 
 var gameplay_easy_quicktime := boolean("gameplay", "easy_quicktime")
+var input_mouse_sensitivity_x := real("input", "mouse_sensitivity_x", 1.0, [0.1, 10.0])
+var input_mouse_sensitivity_y := real("input", "mouse_sensitivity_y", 1.0, [0.1, 10.0])
 
 func _ready():
 	audio_device.changed.connect(_on_audio_device_changed)

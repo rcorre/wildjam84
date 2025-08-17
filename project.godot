@@ -34,6 +34,7 @@ gdscript/warnings/integer_division=0
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/warnings/integer_division=1
 
 [editor]
 
